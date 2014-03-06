@@ -1,0 +1,199 @@
+/** Add css rules here for your application. */
+
+
+/** Example rules used by the template application (remove for your app) */
+
+
+body{padding:0px; margin:0px; background:#f8fbfb url(./images/mainbg.jpg) top repeat-x !important;}
+
+
+#wrapper{width:950px; margin:0px auto;}
+
+h1 {
+  font-size: 2em;
+  font-weight: bold;
+  color: #777777;
+  margin: 40px 0px 70px;
+  text-align: center;
+}
+
+.getStartedButton {
+  
+  
+   
+  background:none; border:none; cursor:pointer;border-radius:5px; 
+   color:#FFF; background:url(./images/nav-bg.jpg) top repeat-x;font:normal 16px MyriadProRegular; 
+   width: 103px;height: 30px;  margin-left: 395px;
+}
+
+}
+
+/** Most GWT widgets already have a style name defined */
+.gwt-DialogBox {
+  width: 400px;
+}
+
+.dialogVPanel {
+  margin: 5px;
+}
+
+.serverResponseLabelError {
+  color: red;
+}
+
+/** Set ids using widget.getElement().setId("idOfElement") */
+#closeButton {
+  margin: 15px 6px 6px;
+}
+
+
+/***************************************/
+
+
+*{padding:0px; margin:0px;}
+@font-face {
+    font-family: 'MyriadProRegular';
+    src: url('./fonts/myriadpro-regular.eot');
+    src: url('./fonts/myriadpro-regular.eot') format('embedded-opentype'),
+         url('./fonts/myriadpro-regular.woff') format('woff'),
+         url('./fonts/myriadpro-regular.ttf') format('truetype'),
+         url('./fonts/myriadpro-regular.svg#MyriadProRegular') format('svg');
+}
+a:link{ text-decoration:none;}
+a:focus{outline:none;}
+.clear{clear:both;}
+#wrapper{width:950px; margin:0px auto;}
+#header{width:950px; height:100px;}
+#header h1{ width:155px; height:23px;text-indent:-999px; margin-top:50px; float:left;}
+#header h1 a{ width:155px; height:23px; background:url(./images/logo.png) top no-repeat; display:block;}
+.menu{width:450px; float:left; border:1px solid #f2f2f2; margin:58px  0px 0px 80px;}
+.menu ul{ padding:0px; margin:0px; list-style:none;}
+.menu ul li{ padding:0px; margin:0px; list-style:none;}
+/* .menu ul li span{ background:url(./images/nav-left.png) top left no-repeat; width:8px; height:42px;} */
+.menu ul li a{ padding:0px 15px; margin:0px; list-style:none; float:left; font:normal 16px/39px MyriadProRegular; text-decoration:none; background:url(./images/nav-bg.jpg) top repeat-x; margin-left:3px; color:#fff;border-top-left-radius:5px;border-top-right-radius:5px;}
+.menu ul li a:hover{ color:#ffe4db;}
+.right-box{ width:250px; display:block; float:right; margin-top:20px;}
+.search{ background:url(./images/search-bg.png) top no-repeat; width:173px; display:block;}
+.search input[type="input"]{ margin-left:6px; width:143px; background:none; border:none; font:italic 12px MyriadProRegular; color:#dfdfdf; height:28px; }
+.search input[type="button"]{ background:none; border:none; background:url(./images/search-btn.png) top no-repeat; width:12px; height:20px; cursor:pointer;}
+.top-links{ height:27px;}
+.top-links ul{padding:0px; margin:0px 0px 0px 0px; list-style:none;}
+.top-links ul li{padding:0px; margin:0px; float:left; }
+.top-links ul li a{font:normal 14px MyriadProRegular; color:#000; padding:0px 10px;border-right:1px solid #000;}
+.top-links ul li.active a{ color:#e95325;}
+.top-links ul li.last a{border:none;}
+
+.advanced-search a{ font:normal 10px verdana; color:#000; padding-top:10px;  margin-left:10px; text-decoration:underline; }
+.advanced-search a:hover{ text-decoration:none;}
+.col-left h2{ font:bold 22px MyriadProRegular; color:#000; padding-top:30px;}
+.col-left{ float:left;width:700px !important; margin-left:-145px; }
+.col-right{ width:220px; float:right; padding-top:80px;}
+.content{ width:950px; margin-bottom:40px;}
+.box{ width:670px; background:#e5eef3 url(./images/wrap-bg.jpg) top repeat-x; /* height:600px;  */margin-top:20px; border-radius:10px;-moz-border-radius:10px;-webkit-border-radius:10px;box-shadow: 1px 1px 10px 3px #e0e2e1;padding:40px 0px 25px 30px;}
+.steps ul{  margin:0px; list-style:none; padding-bottom:20px;}
+.steps ul li{ padding:0px; margin:0px; list-style:none; display:inline-block;}
+.steps ul li a{ padding:0px; margin:0px 10px; font:normal 20px MyriadProRegular; color:#000;}
+.steps ul li a span{ background:#b2b2b2 url(./images/steps-bg.png) top no-repeat; text-align:center; padding:6px 8px 5px 9px;color:#FFF;}
+.steps ul li.active a span{ background:#e95325 url(./images/steps-bg.png) top no-repeat; text-align:center; padding:2px 8px 5px 9px; color:#FFF;}
+.fields div{ width:194px;float:left; padding-top:10px;}
+.form input[type="text"], input[type="email"], input[type="password"]{ width:330px; height:35px; background:#FFF; border:1px solid #d6d6d6; }
+.fields sup{ color:#ff0000;}
+.fields{margin-bottom:15px;}
+.panelspace{ }
+.fieldlabel{font:normal 16px MyriadProRegular; float:left;}
+.started-btn input[type="button"]{ background:none; border:none; cursor:pointer; float:right; padding:10px 0px; border-radius:5px; width:123px; color:#FFF; background:url(./images/nav-bg.jpg) top repeat-x;font:normal 16px MyriadProRegular; margin-right:10px; margin-top:60px;margin-left: 1000px}
+.continue-btn{ margin-right:122px;}
+.continue-btn input[type="button"]{ background:none; border:none; cursor:pointer; float:right; padding:10px 0px; border-radius:5px; width:160px; color:#FFF; background:url(./images/nav-bg.jpg) top repeat-x;font:normal 16px MyriadProRegular; margin-top:40px; margin-right:10px;}
+
+.form{ padding:0px 0px 0px 0px; width: px;}
+.signUpPanel{ padding:20px 0px 0px 10px; width:500 px;}
+
+.captcha{ margin-left:160px;}
+
+#footer{ background:#e0e7eb; min-height:200px;}
+.col-right ul{ padding:0px; margin:0px; list-style:none;}
+.col-right ul li{ padding:0px; margin:0px; list-style:none;font:normal 16px MyriadProRegular; padding-bottom:30px;}
+.col-right ul li.call{ background:url(./images/call-icon.jpg) top left no-repeat; padding-left:50px;}
+.col-right ul li.appointment{ background:url(./images/appoint-icon.jpg) top left no-repeat; padding-left:50px;}
+.col-right ul li.cancel{ background:url(./images/cancel-icon.jpg) top left no-repeat; padding-left:50px;}
+.footer{ width:950px; margin:0px auto; padding-top:30px;}
+.foot-box{ width:160px; float:left; background:url(./images/divider.jpg) top right no-repeat; padding-left:25px; min-height:165px;}
+.first{ padding-left:0px;}
+.foot-box h3{ font:normal 16px MyriadProRegular; color:#000; }
+.foot-box ul{ padding:0px; margin:0px; list-style:none; padding-top:5px; padding-left:5px;}
+.foot-box ul li{ padding:0px; margin:0px; list-style:none; padding-bottom:0px;}
+.foot-box ul li a{ padding:0px; margin:0px; font:normal 12px MyriadProRegular; color:#000; }
+.foot-box ul li a:hover{ text-decoration:underline;}
+.last ul li{ width:36px; float:left; display:block; margin-left:10px;}
+textarea{ width:328px; height:80px;}
+.gwt-TextBox {
+	vertical-align: baseline;
+}
+.invalid {
+  border-color: #ff0000 !important; } 
+  
+  .responselabelerror {
+  color: #ff0000;
+  width : 522px;
+  height:17px;
+  /* margin-left:20 px; */
+  font-size:x-small;  !important; margin-top:-15px;
+  padding-left: 198px;
+}
+.passwordlabel{
+	font-size:xx-small;
+	color:	#6E7F80;
+   width:130px; margin-left:4px;
+	
+}
+.style{
+	color: #ff0000 !important;
+	padding: 0px 0px 0px 0px;
+	margin-right:10px ;
+	margin-left: 10px;
+	
+	
+}
+.stylehorizontalpanel{
+	width: 630px;height: 47px;margin-bottom:15px;
+	    padding: 20px 0px 0px 20px;
+}
+.styletextbox{
+	
+	margin-top:-40px;
+	margin-right: -10px;
+	
+	
+}
+.passwordtextbox{
+	/* width: 50px; */
+	margin-top:-40px;
+	margin-left:46px;
+}
+.styleradiopanel{
+	padding: 0px 10px 0px 0px;
+	
+	width: 320px
+}
+/* .star:after{
+	content:"*"; 
+	display:block;
+	color:  #ff0000 !important;
+  width: 0px; margin-top:-17px;
+} */
+
+.htmlstyle{
+	color:  #ff0000 !important;
+	float: left; /* display:block; */
+	 width:10px; margin-left:1px;
+
+	
+}
+.mandatoryhtmlpanel{
+	float: left;
+	width: 131px;
+}
+.demofieldLabel{
+	font:normal 16px MyriadProRegular;/* width: 120px; */ /* display:block; */ float:left; 
+}
+
