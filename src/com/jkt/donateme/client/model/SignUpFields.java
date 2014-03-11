@@ -1,11 +1,9 @@
 package com.jkt.donateme.client.model;
 
-import java.io.*;
-import java.util.Date;
+import java.io.Serializable;
 
-import javax.validation.constraints.Size;
-
-import com.google.gwt.user.datepicker.client.DatePicker;
+import javax.xml.bind.annotation.XmlRootElement;
+@XmlRootElement(name = "register")
 
 public class SignUpFields implements Serializable {
 
