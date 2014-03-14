@@ -1,4 +1,4 @@
-package com.jkt.donateme.server;
+/*package com.jkt.donateme.server;
 
 import junit.framework.TestCase;
 
@@ -62,3 +62,4 @@ public class TestSignUpServiceImpl extends TestCase {
 	}
 
 }
+*/

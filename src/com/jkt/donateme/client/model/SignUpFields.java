@@ -1,8 +1,12 @@
 package com.jkt.donateme.client.model;
 
-import java.io.Serializable;
+import java.io.*;
+import java.util.Date;
 
+import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
+
+import com.google.gwt.user.datepicker.client.DatePicker;
 @XmlRootElement(name = "register")
 
 public class SignUpFields implements Serializable {
@@ -16,15 +20,15 @@ public class SignUpFields implements Serializable {
 	private String password;
 	private String confirmPassword;
 	private String gender ;
-	//private Date dob ;
+	private String dob ;
 	
-	/*public Date getDob() {
+	public String getDob() {
 		return dob;
 	}
 
-	public void setDob(Date dob) {
+	public void setDob(String dob) {
 		this.dob = dob;
-	}*/
+	}
 
 	public String getGender() {
 		return gender;

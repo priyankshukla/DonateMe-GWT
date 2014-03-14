@@ -1,4 +1,4 @@
-package com.jkt.donateme.client.model;
+/*package com.jkt.donateme.client.model;
 
 import junit.framework.TestCase;
 
@@ -57,3 +57,4 @@ public class TestPatientClient extends TestCase {
 
 	}
 }
+*/

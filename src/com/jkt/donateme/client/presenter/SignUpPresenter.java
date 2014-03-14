@@ -6,13 +6,13 @@ import net.customware.gwt.presenter.client.EventBus;
 import net.customware.gwt.presenter.client.place.PlaceRequest;
 import net.customware.gwt.presenter.client.widget.WidgetDisplay;
 import net.customware.gwt.presenter.client.widget.WidgetPresenter;
-
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.HasClickHandlers;
 import com.google.gwt.event.logical.shared.ValueChangeEvent;
 import com.google.gwt.event.logical.shared.ValueChangeHandler;
+import com.google.gwt.i18n.client.DateTimeFormat;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.HasValue;
 import com.google.gwt.user.client.ui.RadioButton;
@@ -34,6 +34,7 @@ public class SignUpPresenter extends WidgetPresenter<SignUpPresenter.Display> {
 	private String password;
 	private String confirmPassword ;
 	private Date dateOfBirth;
+	private DateTimeFormat dateTimeFormat;
 	private boolean maleGender;
 	private boolean femaleGender;
 	public boolean isFirstname = true;
@@ -233,7 +234,11 @@ public class SignUpPresenter extends WidgetPresenter<SignUpPresenter.Display> {
 			isDob = false;
 		} else {
 			isDob = true;
-			// signUpFields.setDob(dob);
+		 dateTimeFormat = DateTimeFormat.getFormat("dd / MM / yyyy");
+			String dateInString = dateTimeFormat.format(dateOfBirth);
+			
+			 signUpFields.setDob(dateInString);
+			
 		}
 
 		/*
@@ -279,6 +284,7 @@ public class SignUpPresenter extends WidgetPresenter<SignUpPresenter.Display> {
 				&& signUpFields.getLastName() != null
 				&& signUpFields.getEmail() != null
 				&& signUpFields.getGender() != null
+				&& signUpFields.getDob() != null
 				&& signUpFields.getPassword() != null
 				&& signUpFields.getConfirmPassword() != null) {
 			sendToServer();
@@ -362,6 +368,7 @@ public class SignUpPresenter extends WidgetPresenter<SignUpPresenter.Display> {
 	public void clearAllError() {
 		isFirstname = true;
 		isLastname = true;
+		isDob = true;
 		isEmail = true;
 		ispassword = true;
 		isConfirmpassword = true;

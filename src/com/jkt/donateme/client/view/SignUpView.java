@@ -1,5 +1,6 @@
 package com.jkt.donateme.client.view;
 
+import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.HasClickHandlers;
 
 import com.google.gwt.user.client.ui.Button;
@@ -8,13 +9,18 @@ import com.google.gwt.user.client.ui.FormPanel;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.HasValue;
 import com.google.gwt.user.client.ui.HorizontalPanel;
+import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.PasswordTextBox;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.datepicker.client.DateBox;
+import com.jkt.donateme.client.calendar.DatePickerWithYearSelectorNew;
 import com.jkt.donateme.client.presenter.SignUpPresenter.Display;
 import com.google.gwt.user.client.ui.RadioButton;
+import com.google.gwt.i18n.client.DateTimeFormat;
+import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.user.datepicker.client.DateBox.DefaultFormat;
 
 public class SignUpView extends Composite implements Display {
 
@@ -58,6 +64,10 @@ public class SignUpView extends Composite implements Display {
 	private RadioButton mRadioButton;
 	private RadioButton fmRadioButton;
 	private Button getStartedButton;
+	DateTimeFormat dateTimeFormat ;
+	DefaultFormat defaultFormat ;
+	ClickHandler doBImageClickhandler ;
+	DatePickerWithYearSelectorNew datePickerWithYearSelectorNew ;
 	
     
 
@@ -76,6 +86,18 @@ public class SignUpView extends Composite implements Display {
 	 * @return formPanel
 	 */
 	public FormPanel getSignUpView() {
+		
+		/**
+		 * Adds a click Handler to the calendar image .
+		 */
+		doBImageClickhandler = new ClickHandler() {
+			public void onClick(ClickEvent event) {
+			dateBox.showDatePicker();
+			}
+	     };
+		
+		
+		
 		HTML html = new HTML("*");
 		html.setStyleName("htmlstyle");
 		
@@ -93,7 +115,6 @@ public class SignUpView extends Composite implements Display {
 		firstNamePanel = new HorizontalPanel();
 		firstNamePanel.addStyleName("stylehorizontalpanel");
 		signUpFieldsPanel.add(firstNamePanel);
-			
 		firstNameLabel = new Label("First Name");
 		firstNameLabel.addStyleName("fieldlabel");
 	    HTML firstNameHtml = new HTML(firstNameLabel+""+html);
@@ -102,7 +123,6 @@ public class SignUpView extends Composite implements Display {
 		firstNameTextBox = new TextBox();
 		firstNameTextBox.addStyleName("styletextbox");
 		firstNameTextBox.setMaxLength(20);
-		
 		firstNamePanel.add(firstNameTextBox);
 		firstNameErrorLabel = new Label();
 		firstNameErrorLabel.setVisible(false);
@@ -124,21 +144,27 @@ public class SignUpView extends Composite implements Display {
 		lastNameErrorLabel.setVisible(false);
 		signUpFieldsPanel.add(lastNameErrorLabel);
 
-		emailPanel = new HorizontalPanel();
-		emailPanel.addStyleName("stylehorizontalpanel");
-		signUpFieldsPanel.add(emailPanel);
-		emailLabel = new Label("Email");
-		emailLabel.addStyleName("fieldlabel");
-		HTML emailHtml = new HTML(emailLabel+""+html);
-		emailHtml.setStyleName("mandatoryhtmlpanel");
-		emailPanel.add(emailHtml);
-		emailTextBox = new TextBox();
-		emailTextBox.addStyleName("styletextbox");
-		emailTextBox.setMaxLength(50);
-		emailPanel.add(emailTextBox);
-		emailErrorLabel = new Label();
-		emailErrorLabel.setVisible(false);
-		signUpFieldsPanel.add(emailErrorLabel);
+		dOBPanel = new HorizontalPanel();
+		dOBPanel.addStyleName("stylehorizontalpanel");
+		dOBLabel = new Label("Date of Birth");
+		dOBLabel.addStyleName("fieldlabel");
+		HTML dobHtml = new HTML(dOBLabel+""+html);
+		dobHtml.setStyleName("mandatoryhtmlpanel");
+		dOBPanel.add(dobHtml);
+		signUpFieldsPanel.add(dOBPanel);
+		dateTimeFormat = DateTimeFormat.getFormat("dd - MM - yyyy");
+		defaultFormat = new DefaultFormat(dateTimeFormat);
+		datePickerWithYearSelectorNew = new DatePickerWithYearSelectorNew();
+		dateBox = new DateBox(datePickerWithYearSelectorNew,null,defaultFormat);
+		dateBox.addStyleName("styletextbox");
+		dOBPanel.add(dateBox);
+		Image img = new Image("./images/calendar.png");
+		img.addClickHandler(doBImageClickhandler);
+		img.addStyleName("dobcalenderimage");
+		dOBPanel.add(img);
+		dobErrorLabel = new Label();
+		dobErrorLabel.setVisible(false);
+		signUpFieldsPanel.add(dobErrorLabel);
 
 		genderPanel = new HorizontalPanel();
 		genderPanel.addStyleName("stylehorizontalpanel");
@@ -159,22 +185,23 @@ public class SignUpView extends Composite implements Display {
 		genderErrorLabel = new Label();
 		genderErrorLabel.setVisible(false);
 		signUpFieldsPanel.add(genderErrorLabel);
-
-		dOBPanel = new HorizontalPanel();
-		dOBPanel.addStyleName("stylehorizontalpanel");
-		dOBLabel = new Label("Date Of Birth");
-		dOBLabel.addStyleName("fieldlabel");
-		HTML dobHtml = new HTML(dOBLabel+""+html);
-		dobHtml.setStyleName("mandatoryhtmlpanel");
-		dOBPanel.add(dobHtml);
-		signUpFieldsPanel.add(dOBPanel);
-		dateBox = new DateBox();
-		dateBox.addStyleName("styletextbox");
-		dOBPanel.add(dateBox);
-		dobErrorLabel = new Label();
-		dobErrorLabel.setVisible(false);
-		signUpFieldsPanel.add(dobErrorLabel);
-
+		
+		emailPanel = new HorizontalPanel();
+		emailPanel.addStyleName("stylehorizontalpanel");
+		signUpFieldsPanel.add(emailPanel);
+		emailLabel = new Label("Email");
+		emailLabel.addStyleName("fieldlabel");
+		HTML emailHtml = new HTML(emailLabel+""+html);
+		emailHtml.setStyleName("mandatoryhtmlpanel");
+		emailPanel.add(emailHtml);
+		emailTextBox = new TextBox();
+		emailTextBox.addStyleName("styletextbox");
+		emailTextBox.setMaxLength(50);
+		emailPanel.add(emailTextBox);
+		emailErrorLabel = new Label();
+		emailErrorLabel.setVisible(false);
+		signUpFieldsPanel.add(emailErrorLabel);
+				
 		passwordPanel = new HorizontalPanel();
 		passwordPanel.addStyleName("stylehorizontalpanel");
 		signUpFieldsPanel.add(passwordPanel);
@@ -187,15 +214,13 @@ public class SignUpView extends Composite implements Display {
 		passwordTextBox.addStyleName("passwordtextbox");
 		passwordPanel.add(passwordTextBox);
 		passwordSizeLabel = new Label();
-		passwordSizeLabel.setText("Should be 6 to 12 Character");
+		passwordSizeLabel.setText("Should be 6 to 12 character");
 		passwordSizeLabel.addStyleName("passwordlabel");
 		passwordPanel.add(passwordSizeLabel);
 		passwordErrorLabel = new Label();
 		passwordErrorLabel.setVisible(false);
 		signUpFieldsPanel.add(passwordErrorLabel);
 		
-	
-
 		confirmPasswordPanel = new HorizontalPanel();
 		confirmPasswordPanel.addStyleName("stylehorizontalpanel");
 		signUpFieldsPanel.add(confirmPasswordPanel);
@@ -223,8 +248,13 @@ public class SignUpView extends Composite implements Display {
 		signUpFieldsPanel.add(getStartedButtonPanel);
 
 		return formPanel;
+		
+		
+
+	     
 
 	}
+	
 
 	/**
 	 * @return firstNameTextBox Getter HasValue for firstName
