@@ -29,6 +29,8 @@ public class TestDonateMe_GWT extends GWTTestCase {
 				.getDisplay().getfirstNameTextBox());
 		assertNotNull("Value at lastName Textbox is never null", presenter
 				.getDisplay().getlastNameTextBox());
+		assertNotNull("Value at DateBox calendar is never null", presenter
+				.getDisplay().getDob());
 		assertNotNull("Value at Email Textbox is never null", presenter
 				.getDisplay().getEmailTextBox());
 		assertNotNull("Value at Password Textbox is never null", presenter
@@ -52,6 +54,7 @@ public class TestDonateMe_GWT extends GWTTestCase {
 		presenter.bind();
 		presenter.getDisplay().getfirstNameTextBox().setValue("PatientFN");
 		presenter.getDisplay().getlastNameTextBox().setValue("PatientLN");
+		
 		presenter.getDisplay().getEmailTextBox().setValue("patient@jktech.com");
 		presenter.getDisplay().getPasswordTextBox().setValue("password1");
 		presenter.getDisplay().getConfirmPasswordTextBox()
@@ -83,6 +86,7 @@ public class TestDonateMe_GWT extends GWTTestCase {
 		presenter.bind();
 		presenter.getDisplay().getfirstNameTextBox().setValue(null);
 		presenter.getDisplay().getlastNameTextBox().setValue(null);
+		presenter.getDisplay().getDob().setValue(null);
 		presenter.getDisplay().getEmailTextBox().setValue(null);
 		presenter.getDisplay().getPasswordTextBox().setValue(null);
 		presenter.getDisplay().getConfirmPasswordTextBox().setValue(null);
@@ -92,6 +96,8 @@ public class TestDonateMe_GWT extends GWTTestCase {
 				.getFirstName());
 		assertNull("LastName should  be null", presenter.getSignUpFields()
 				.getLastName());
+		assertNull("DateBox calendar should  be null", presenter.getSignUpFields()
+				.getDob());
 		assertNull("Email should  be null", presenter.getSignUpFields()
 				.getEmail());
 		assertNull("Password should  be null", presenter.getSignUpFields()
