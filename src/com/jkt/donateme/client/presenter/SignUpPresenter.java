@@ -10,8 +10,6 @@ import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.HasClickHandlers;
-import com.google.gwt.event.logical.shared.ValueChangeEvent;
-import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.i18n.client.DateTimeFormat;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.HasValue;
@@ -32,7 +30,7 @@ public class SignUpPresenter extends WidgetPresenter<SignUpPresenter.Display> {
 	private String lastName;
 	private String email;
 	private String password;
-	private String confirmPassword ;
+	private String confirmPassword;
 	private Date dateOfBirth;
 	private DateTimeFormat dateTimeFormat;
 	private boolean maleGender;
@@ -50,7 +48,7 @@ public class SignUpPresenter extends WidgetPresenter<SignUpPresenter.Display> {
 	public boolean isLongPassdValidate = true;
 	public boolean isGender = false;
 	public boolean isDob = true;
-	private boolean isFirstTime = true;
+
 	public String gender;
 
 	public interface Display extends WidgetDisplay {
@@ -79,8 +77,8 @@ public class SignUpPresenter extends WidgetPresenter<SignUpPresenter.Display> {
 
 		public void setValidateFormat(boolean isFirstValidate,
 				boolean isLastValidate, boolean isEmailValidate,
-				boolean isShortPasswordValidate, boolean isConfirmpasswordValidate,
-				boolean isLongPassdValidate);
+				boolean isShortPasswordValidate,
+				boolean isConfirmpasswordValidate, boolean isLongPassdValidate);
 
 		public void removeError();
 
@@ -101,37 +99,10 @@ public class SignUpPresenter extends WidgetPresenter<SignUpPresenter.Display> {
 	ClickHandler clickHandler = new ClickHandler() {
 
 		public void onClick(ClickEvent arg0) {
-			isFirstTime = false;
+
 			clearAllError();
 			doValidate();
 		}
-	};
-
-	/**
-	 * Adds ValueChangeHandler To All Text Boxes .
-	 */
-	ValueChangeHandler<String> valueChangeHandler = new ValueChangeHandler<String>() {
-
-		public void onValueChange(ValueChangeEvent<String> arg0) {
-			clearAllError();
-			if (!isFirstTime)
-				doValidate();
-
-		}
-
-	};
-
-	/**
-	 * Adds ValueChangeHandler To Date Box .
-	 */
-	ValueChangeHandler<Date> dateboxhandler = new ValueChangeHandler<Date>() {
-
-		public void onValueChange(ValueChangeEvent<Date> arg0) {
-			clearAllError();
-			if (!isFirstTime)
-				doValidate();
-		}
-
 	};
 
 	/**
@@ -145,40 +116,30 @@ public class SignUpPresenter extends WidgetPresenter<SignUpPresenter.Display> {
 		 */
 		display.getbtnGetStarted().addClickHandler(clickHandler);
 
-		/**
-		 * For Text Boxes .
-		 */
-		display.getfirstNameTextBox().addValueChangeHandler(valueChangeHandler);
-		display.getlastNameTextBox().addValueChangeHandler(valueChangeHandler);
-		display.getEmailTextBox().addValueChangeHandler(valueChangeHandler);
-		display.getDob().addValueChangeHandler(dateboxhandler);
-		display.getPasswordTextBox().addValueChangeHandler(valueChangeHandler);
-		display.getConfirmPasswordTextBox().addValueChangeHandler(valueChangeHandler);
-
 	}
-	
-	public void getfields(){
+
+	public void getfields() {
 		firstName = display.getfirstNameTextBox().getValue();
 		lastName = display.getlastNameTextBox().getValue();
 		email = display.getEmailTextBox().getValue();
 		maleGender = display.getmRadioButton().getValue();
 		femaleGender = display.getfmRadioButton().getValue();
-		dateOfBirth= display.getDob().getValue();
+		dateOfBirth = display.getDob().getValue();
 		password = display.getPasswordTextBox().getValue();
 		confirmPassword = display.getConfirmPasswordTextBox().getValue();
 
 	}
 
 	/**
-	 * It retrieves all the data from the textbox fields.
+	 * It retrieves all the data from the textBox fields.
 	 */
 	public void doValidate() {
 
 		signUpFields = new SignUpFields();
 		validemail = new EmailValidator();
 		getfields();
-		
-		/*
+
+		/**
 		 * validate first name using pattern matches
 		 */
 		if (firstName == null || firstName.isEmpty()) {
@@ -190,8 +151,8 @@ public class SignUpPresenter extends WidgetPresenter<SignUpPresenter.Display> {
 
 		}
 
-		/*
-		 * validate lastname using pattern matches
+		/**
+		 * validate lastName using pattern matches
 		 */
 		if (lastName == null || lastName.isEmpty()) {
 			isLastname = false;
@@ -201,7 +162,7 @@ public class SignUpPresenter extends WidgetPresenter<SignUpPresenter.Display> {
 			signUpFields.setLastName(lastName);
 		}
 
-		/*
+		/**
 		 * validate email-id using pattern matches
 		 */
 		if (email == null || email.isEmpty()) {
@@ -212,39 +173,39 @@ public class SignUpPresenter extends WidgetPresenter<SignUpPresenter.Display> {
 			signUpFields.setEmail(email);
 		}
 
-		/*
+		/**
 		 * validate gender radio button for male or female
 		 */
 		if ((maleGender == false) && (femaleGender == false)) {
 			isGender = false;
-		} else if (maleGender == true) {
+		} else if ((maleGender == true) && (femaleGender == false)) {
 			isGender = true;
 			gender = "Male";
 			signUpFields.setGender(gender);
-		} else if (femaleGender == true) {
+		} else if ((femaleGender == true) && (maleGender == false)) {
 			isGender = true;
 			gender = "female";
 			signUpFields.setGender(gender);
 		}
 
-		/*
-		 * validate date of birth 
+		/**
+		 * validate date of birth
 		 */
 		if (dateOfBirth == null) {
 			isDob = false;
 		} else {
 			isDob = true;
-		 dateTimeFormat = DateTimeFormat.getFormat("dd / MM / yyyy");
+			dateTimeFormat = DateTimeFormat.getFormat("dd / MM / yyyy");
 			String dateInString = dateTimeFormat.format(dateOfBirth);
-			
-			 signUpFields.setDob(dateInString);
-			
+
+			signUpFields.setDob(dateInString);
+
 		}
 
-		/*
+		/**
 		 * validate password i.e between 6 to 12 characters
 		 */
-		
+
 		if (password == null || password.isEmpty()) {
 			ispassword = false;
 		} else if (password.length() < 6) {
@@ -255,10 +216,10 @@ public class SignUpPresenter extends WidgetPresenter<SignUpPresenter.Display> {
 			signUpFields.setPassword(password);
 		}
 
-		/*
-		 * validate confirm password 
+		/**
+		 * validate confirm password
 		 */
-		
+
 		if (confirmPassword == null || confirmPassword.isEmpty()) {
 			isConfirmpassword = false;
 		} else if ((!password.equals(confirmPassword))) {
@@ -267,12 +228,11 @@ public class SignUpPresenter extends WidgetPresenter<SignUpPresenter.Display> {
 			signUpFields.setConfirmPassword(confirmPassword);
 		}
 
-		
 		display.setRedColor(isFirstname, isLastname, isEmail, ispassword,
 				isConfirmpassword, isGender, isDob);
 		display.setValidateFormat(isFirstValidate, isLastValidate,
-				isEmailValidate, isShortPasswordValidate, isConfirmpasswordValidate,
-				isLongPassdValidate);
+				isEmailValidate, isShortPasswordValidate,
+				isConfirmpasswordValidate, isLongPassdValidate);
 
 		validateSendToServer();
 
@@ -294,7 +254,7 @@ public class SignUpPresenter extends WidgetPresenter<SignUpPresenter.Display> {
 	}
 
 	/**
-	 * on the click of getstart button the field values are send to server.
+	 * on the click of getStart button the field values are send to server.
 	 */
 	public void sendToServer() {
 
@@ -357,7 +317,7 @@ public class SignUpPresenter extends WidgetPresenter<SignUpPresenter.Display> {
 
 	/**
 	 * This method directs the click on the get started button to fetch all the
-	 * values of the textbox.
+	 * values of the textBox.
 	 */
 	/*
 	 * public void onClick(ClickEvent arg0) { clearAllError(); getData();
@@ -369,6 +329,7 @@ public class SignUpPresenter extends WidgetPresenter<SignUpPresenter.Display> {
 		isFirstname = true;
 		isLastname = true;
 		isDob = true;
+		isGender = true;
 		isEmail = true;
 		ispassword = true;
 		isConfirmpassword = true;
