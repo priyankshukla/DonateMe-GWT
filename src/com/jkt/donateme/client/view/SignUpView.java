@@ -64,12 +64,10 @@ public class SignUpView extends Composite implements Display {
 	private RadioButton mRadioButton;
 	private RadioButton fmRadioButton;
 	private Button getStartedButton;
-	DateTimeFormat dateTimeFormat ;
-	DefaultFormat defaultFormat ;
-	ClickHandler doBImageClickhandler ;
-	DatePickerWithYearSelectorNew datePickerWithYearSelectorNew ;
-	
-    
+	DateTimeFormat dateTimeFormat;
+	DefaultFormat defaultFormat;
+	ClickHandler doBImageClickhandler;
+	DatePickerWithYearSelectorNew datePickerWithYearSelectorNew;
 
 	/**
 	 * Constructor for the SignUp View That gets the FormPanel.
@@ -86,21 +84,19 @@ public class SignUpView extends Composite implements Display {
 	 * @return formPanel
 	 */
 	public FormPanel getSignUpView() {
-		
+
 		/**
 		 * Adds a click Handler to the calendar image .
 		 */
 		doBImageClickhandler = new ClickHandler() {
 			public void onClick(ClickEvent event) {
-			dateBox.showDatePicker();
+				dateBox.showDatePicker();
 			}
-	     };
-		
-		
-		
+		};
+
 		HTML html = new HTML("*");
 		html.setStyleName("htmlstyle");
-		
+
 		formPanel = new FormPanel();
 
 		formPanel.addStyleName("form");
@@ -109,17 +105,15 @@ public class SignUpView extends Composite implements Display {
 		signUpFieldsPanel.addStyleName("signUpPanel");
 		formPanel.add(signUpFieldsPanel);
 		initWidget(formPanel);
-		
-		
 
 		firstNamePanel = new HorizontalPanel();
 		firstNamePanel.addStyleName("stylehorizontalpanel");
 		signUpFieldsPanel.add(firstNamePanel);
 		firstNameLabel = new Label("First Name");
 		firstNameLabel.addStyleName("fieldlabel");
-	    HTML firstNameHtml = new HTML(firstNameLabel+""+html);
-	    firstNameHtml.setStyleName("mandatoryhtmlpanel");
-	    firstNamePanel.add(firstNameHtml);
+		HTML firstNameHtml = new HTML(firstNameLabel + "" + html);
+		firstNameHtml.setStyleName("mandatoryhtmlpanel");
+		firstNamePanel.add(firstNameHtml);
 		firstNameTextBox = new TextBox();
 		firstNameTextBox.addStyleName("styletextbox");
 		firstNameTextBox.setMaxLength(20);
@@ -133,7 +127,7 @@ public class SignUpView extends Composite implements Display {
 		signUpFieldsPanel.add(lastNamePanel);
 		lastNameLabel = new Label("Last Name");
 		lastNameLabel.addStyleName("fieldlabel");
-		HTML lastNameHtml = new HTML(lastNameLabel+""+html);
+		HTML lastNameHtml = new HTML(lastNameLabel + "" + html);
 		lastNameHtml.setStyleName("mandatoryhtmlpanel");
 		lastNamePanel.add(lastNameHtml);
 		lastNameTextBox = new TextBox();
@@ -148,14 +142,16 @@ public class SignUpView extends Composite implements Display {
 		dOBPanel.addStyleName("stylehorizontalpanel");
 		dOBLabel = new Label("Date of Birth");
 		dOBLabel.addStyleName("fieldlabel");
-		HTML dobHtml = new HTML(dOBLabel+""+html);
+		HTML dobHtml = new HTML(dOBLabel + "" + html);
 		dobHtml.setStyleName("mandatoryhtmlpanel");
 		dOBPanel.add(dobHtml);
 		signUpFieldsPanel.add(dOBPanel);
 		dateTimeFormat = DateTimeFormat.getFormat("dd - MM - yyyy");
 		defaultFormat = new DefaultFormat(dateTimeFormat);
 		datePickerWithYearSelectorNew = new DatePickerWithYearSelectorNew();
-		dateBox = new DateBox(datePickerWithYearSelectorNew,null,defaultFormat);
+		dateBox = new DateBox(datePickerWithYearSelectorNew, null,
+				defaultFormat);
+		dateBox.getTextBox().setReadOnly(true);
 		dateBox.addStyleName("styletextbox");
 		dOBPanel.add(dateBox);
 		Image img = new Image("./images/calendar.png");
@@ -171,7 +167,7 @@ public class SignUpView extends Composite implements Display {
 		signUpFieldsPanel.add(genderPanel);
 		genderLabel = new Label("Gender");
 		genderLabel.addStyleName("fieldlabel");
-		HTML genderHtml = new HTML(genderLabel+""+html);
+		HTML genderHtml = new HTML(genderLabel + "" + html);
 		genderHtml.setStyleName("mandatoryhtmlpanel");
 		genderPanel.add(genderHtml);
 		genderRadioPanel = new HorizontalPanel();
@@ -185,13 +181,13 @@ public class SignUpView extends Composite implements Display {
 		genderErrorLabel = new Label();
 		genderErrorLabel.setVisible(false);
 		signUpFieldsPanel.add(genderErrorLabel);
-		
+
 		emailPanel = new HorizontalPanel();
 		emailPanel.addStyleName("stylehorizontalpanel");
 		signUpFieldsPanel.add(emailPanel);
 		emailLabel = new Label("Email");
 		emailLabel.addStyleName("fieldlabel");
-		HTML emailHtml = new HTML(emailLabel+""+html);
+		HTML emailHtml = new HTML(emailLabel + "" + html);
 		emailHtml.setStyleName("mandatoryhtmlpanel");
 		emailPanel.add(emailHtml);
 		emailTextBox = new TextBox();
@@ -201,13 +197,13 @@ public class SignUpView extends Composite implements Display {
 		emailErrorLabel = new Label();
 		emailErrorLabel.setVisible(false);
 		signUpFieldsPanel.add(emailErrorLabel);
-				
+
 		passwordPanel = new HorizontalPanel();
 		passwordPanel.addStyleName("stylehorizontalpanel");
 		signUpFieldsPanel.add(passwordPanel);
 		passwordLabel = new Label("Password");
 		passwordLabel.addStyleName("fieldlabel");
-		HTML passwordHtml = new HTML(passwordLabel+""+html);
+		HTML passwordHtml = new HTML(passwordLabel + "" + html);
 		passwordHtml.setStyleName("mandatoryhtmlpanel");
 		passwordPanel.add(passwordHtml);
 		passwordTextBox = new PasswordTextBox();
@@ -220,13 +216,13 @@ public class SignUpView extends Composite implements Display {
 		passwordErrorLabel = new Label();
 		passwordErrorLabel.setVisible(false);
 		signUpFieldsPanel.add(passwordErrorLabel);
-		
+
 		confirmPasswordPanel = new HorizontalPanel();
 		confirmPasswordPanel.addStyleName("stylehorizontalpanel");
 		signUpFieldsPanel.add(confirmPasswordPanel);
 		confirmPasswordLabel = new Label("Confirm Password");
 		confirmPasswordLabel.addStyleName("fieldlabel");
-		HTML confirmPasswordHtml = new HTML(confirmPasswordLabel+""+html);
+		HTML confirmPasswordHtml = new HTML(confirmPasswordLabel + "" + html);
 		confirmPasswordHtml.setStyleName("mandatoryhtmlpanel");
 		confirmPasswordPanel.add(confirmPasswordHtml);
 		confirmPasswordTextBox = new PasswordTextBox();
@@ -248,13 +244,8 @@ public class SignUpView extends Composite implements Display {
 		signUpFieldsPanel.add(getStartedButtonPanel);
 
 		return formPanel;
-		
-		
-
-	     
 
 	}
-	
 
 	/**
 	 * @return firstNameTextBox Getter HasValue for firstName

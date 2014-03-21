@@ -24,5 +24,5 @@
 	<classpathentry kind="var" path="M2_REPO/com/sun/jersey/jersey-client/1.4/jersey-client-1.4.jar"/>
 	<classpathentry kind="var" path="M2_REPO/com/sun/jersey/jersey-core/1.4/jersey-core-1.4.jar"/>
 	<classpathentry kind="con" path="com.google.gwt.eclipse.core.GWT_CONTAINER"/>
-	<classpathentry kind="output" path="target/classes"/>
+	<classpathentry kind="output" path="war/WEB-INF/classes"/>
 </classpath>
