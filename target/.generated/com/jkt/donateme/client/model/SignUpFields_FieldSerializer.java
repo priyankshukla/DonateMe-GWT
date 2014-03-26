@@ -7,15 +7,6 @@ import com.google.gwt.user.client.rpc.impl.ReflectionHelper;
 
 @SuppressWarnings("deprecation")
 public class SignUpFields_FieldSerializer implements com.google.gwt.user.client.rpc.impl.TypeHandler {
-  private static native java.lang.String getConfirmPassword(com.jkt.donateme.client.model.SignUpFields instance) /*-{
-    return instance.@com.jkt.donateme.client.model.SignUpFields::confirmPassword;
-  }-*/;
-  
-  private static native void setConfirmPassword(com.jkt.donateme.client.model.SignUpFields instance, java.lang.String value) 
-  /*-{
-    instance.@com.jkt.donateme.client.model.SignUpFields::confirmPassword = value;
-  }-*/;
-  
   private static native java.lang.String getDob(com.jkt.donateme.client.model.SignUpFields instance) /*-{
     return instance.@com.jkt.donateme.client.model.SignUpFields::dob;
   }-*/;
@@ -71,7 +62,6 @@ public class SignUpFields_FieldSerializer implements com.google.gwt.user.client.
   }-*/;
   
   public static void deserialize(SerializationStreamReader streamReader, com.jkt.donateme.client.model.SignUpFields instance) throws SerializationException {
-    setConfirmPassword(instance, streamReader.readString());
     setDob(instance, streamReader.readString());
     setEmail(instance, streamReader.readString());
     setFirstName(instance, streamReader.readString());
@@ -86,7 +76,6 @@ public class SignUpFields_FieldSerializer implements com.google.gwt.user.client.
   }
   
   public static void serialize(SerializationStreamWriter streamWriter, com.jkt.donateme.client.model.SignUpFields instance) throws SerializationException {
-    streamWriter.writeString(getConfirmPassword(instance));
     streamWriter.writeString(getDob(instance));
     streamWriter.writeString(getEmail(instance));
     streamWriter.writeString(getFirstName(instance));

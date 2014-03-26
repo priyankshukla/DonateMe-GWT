@@ -75,10 +75,6 @@ public class TestDonateMe_GWT extends GWTTestCase {
 				presenter.getDisplay().getPasswordTextBox().getValue(),
 				presenter.getSignUpFields().getPassword());
 
-		assertEquals(
-				"Presenter returning Confirm Password is same as expected",
-				presenter.getDisplay().getConfirmPasswordTextBox().getValue(),
-				presenter.getSignUpFields().getConfirmPassword());
 
 	}
 
@@ -102,8 +98,7 @@ public class TestDonateMe_GWT extends GWTTestCase {
 				.getEmail());
 		assertNull("Password should  be null", presenter.getSignUpFields()
 				.getPassword());
-		assertNull("ConfirmPassword should  be null", presenter
-				.getSignUpFields().getConfirmPassword());
+		
 	}
 
 	public void testWhenAllFieldsShouldBeValidate() {
@@ -126,9 +121,7 @@ public class TestDonateMe_GWT extends GWTTestCase {
 
 		assertEquals(presenter.getDisplay().getPasswordTextBox().getValue(),
 				presenter.getSignUpFields().getPassword());
-		assertEquals(presenter.getDisplay().getConfirmPasswordTextBox()
-				.getValue(), presenter.getSignUpFields().getConfirmPassword());
-
+	
 	}
 
 	public void testWhenValuesAreInvalid() {
@@ -154,8 +147,7 @@ public class TestDonateMe_GWT extends GWTTestCase {
 		assertEquals(presenter.getDisplay().getPasswordTextBox().getValue(),
 				presenter.getSignUpFields().getPassword());
 
-		assertEquals(presenter.getDisplay().getConfirmPasswordTextBox()
-				.getValue(), presenter.getSignUpFields().getConfirmPassword());
+		
 	}
 
 	public void testWhenPasswordDoNotMatch() {
@@ -167,9 +159,6 @@ public class TestDonateMe_GWT extends GWTTestCase {
 
 		assertNotSame(presenter.getDisplay().getPasswordTextBox().getValue(),
 				presenter.getSignUpFields().getPassword());
-
-		assertNotSame(presenter.getDisplay().getConfirmPasswordTextBox()
-				.getValue(), presenter.getSignUpFields().getConfirmPassword());
 
 	}
 
@@ -183,8 +172,7 @@ public class TestDonateMe_GWT extends GWTTestCase {
 		assertNotSame(presenter.getDisplay().getPasswordTextBox().getValue(),
 				presenter.getSignUpFields().getPassword());
 
-		assertNotSame(presenter.getDisplay().getConfirmPasswordTextBox()
-				.getValue(), presenter.getSignUpFields().getConfirmPassword());
+	
 
 	}
 
@@ -199,8 +187,7 @@ public class TestDonateMe_GWT extends GWTTestCase {
 
 		assertNotSame(presenter.getDisplay().getPasswordTextBox().getValue(),
 				presenter.getSignUpFields().getPassword());
-		assertNotSame(presenter.getDisplay().getConfirmPasswordTextBox()
-				.getValue(), presenter.getSignUpFields().getConfirmPassword());
+		
 
 	}
 

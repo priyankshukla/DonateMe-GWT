@@ -13,7 +13,7 @@ import com.google.gwt.user.client.rpc.impl.RpcStatsContext;
 
 public class SignUpService_Proxy extends RemoteServiceProxy implements com.jkt.donateme.client.rpc.SignUpServiceAsync {
   private static final String REMOTE_SERVICE_INTERFACE_NAME = "com.jkt.donateme.client.rpc.SignUpService";
-  private static final String SERIALIZATION_POLICY ="DF72AAE47B18D53643889EC538E2098B";
+  private static final String SERIALIZATION_POLICY ="E75231C430328A82319BB952D53E6659";
   private static final com.jkt.donateme.client.rpc.SignUpService_TypeSerializer SERIALIZER = new com.jkt.donateme.client.rpc.SignUpService_TypeSerializer();
   
   public SignUpService_Proxy() {
@@ -27,7 +27,7 @@ public class SignUpService_Proxy extends RemoteServiceProxy implements com.jkt.d
     com.google.gwt.user.client.rpc.impl.RemoteServiceProxy.ServiceHelper helper = new com.google.gwt.user.client.rpc.impl.RemoteServiceProxy.ServiceHelper("SignUpService_Proxy", "signUpServer");
     try {
       SerializationStreamWriter streamWriter = helper.start(REMOTE_SERVICE_INTERFACE_NAME, 1);
-      streamWriter.writeString("com.jkt.donateme.client.model.SignUpFields/2922413469");
+      streamWriter.writeString("com.jkt.donateme.client.model.SignUpFields/774693096");
       streamWriter.writeObject(signUpFields);
       helper.finish(callback, ResponseReader.OBJECT);
     } catch (SerializationException ex) {

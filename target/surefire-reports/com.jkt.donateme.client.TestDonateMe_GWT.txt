@@ -1,4 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: com.jkt.donateme.client.TestDonateMe_GWT
 -------------------------------------------------------------------------------
-Tests run: 12, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 24.58 sec
+Tests run: 12, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 22.8 sec
