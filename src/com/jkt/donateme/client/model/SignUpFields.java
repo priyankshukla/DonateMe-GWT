@@ -17,7 +17,10 @@ public class SignUpFields implements Serializable {
 	private String firstName;
 	private String lastName;
 	private String email;
-	private String password;
+
+	//private String password;
+	private String confirmPassword;
+
 	private String gender ;
 	private String dob ;
 	
