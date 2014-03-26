@@ -224,9 +224,7 @@ public class SignUpPresenter extends WidgetPresenter<SignUpPresenter.Display> {
 			isConfirmpassword = false;
 		} else if ((!password.equals(confirmPassword))) {
 			isConfirmpasswordValidate = false;
-		} else {
-			signUpFields.setConfirmPassword(confirmPassword);
-		}
+		} 
 
 		display.setRedColor(isFirstname, isLastname, isEmail, ispassword,
 				isConfirmpassword, isGender, isDob);
@@ -245,8 +243,7 @@ public class SignUpPresenter extends WidgetPresenter<SignUpPresenter.Display> {
 				&& signUpFields.getEmail() != null
 				&& signUpFields.getGender() != null
 				&& signUpFields.getDob() != null
-				&& signUpFields.getPassword() != null
-				&& signUpFields.getConfirmPassword() != null) {
+				&& signUpFields.getPassword() != null) {
 			sendToServer();
 
 		}

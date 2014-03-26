@@ -18,7 +18,6 @@ public class SignUpFields implements Serializable {
 	private String lastName;
 	private String email;
 	private String password;
-	private String confirmPassword;
 	private String gender ;
 	private String dob ;
 	
@@ -99,19 +98,5 @@ public class SignUpFields implements Serializable {
 		this.password = password;
 	}
 
-	/**
-	 * @return the confirmPassword
-	 */
-	public String getConfirmPassword() {
-		return confirmPassword;
-	}
-
-	/**
-	 * @param confirmPassword
-	 *            the confirmPassword to set
-	 */
-	public void setConfirmPassword(String confirmPassword) {
-		this.confirmPassword = confirmPassword;
-	}
 
 }
