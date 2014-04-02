@@ -6,6 +6,7 @@ import net.customware.gwt.presenter.client.EventBus;
 import net.customware.gwt.presenter.client.place.PlaceRequest;
 import net.customware.gwt.presenter.client.widget.WidgetDisplay;
 import net.customware.gwt.presenter.client.widget.WidgetPresenter;
+
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
@@ -48,7 +49,8 @@ public class SignUpPresenter extends WidgetPresenter<SignUpPresenter.Display> {
 	public boolean isLongPassdValidate = true;
 	public boolean isGender = false;
 	public boolean isDob = true;
-
+	public boolean isDobAfter = false;
+	public Date date;
 	public String gender;
 
 	public interface Display extends WidgetDisplay {
@@ -78,7 +80,8 @@ public class SignUpPresenter extends WidgetPresenter<SignUpPresenter.Display> {
 		public void setValidateFormat(boolean isFirstValidate,
 				boolean isLastValidate, boolean isEmailValidate,
 				boolean isShortPasswordValidate,
-				boolean isConfirmpasswordValidate, boolean isLongPassdValidate);
+				boolean isConfirmpasswordValidate, boolean isLongPassdValidate,
+				boolean isDobAfter);
 
 		public void removeError();
 
@@ -138,7 +141,7 @@ public class SignUpPresenter extends WidgetPresenter<SignUpPresenter.Display> {
 		signUpFields = new SignUpFields();
 		validemail = new EmailValidator();
 		getfields();
-
+		date = new Date();
 		/**
 		 * validate first name using pattern matches
 		 */
@@ -193,11 +196,14 @@ public class SignUpPresenter extends WidgetPresenter<SignUpPresenter.Display> {
 		 */
 		if (dateOfBirth == null) {
 			isDob = false;
-		} else {
+		} else if (dateOfBirth.after(date)) {
+			isDobAfter = true;
+			System.out.println(date.toString());
+		}else {
 			isDob = true;
-			dateTimeFormat = DateTimeFormat.getFormat("dd / MM / yyyy");
+			isDobAfter = false;
+			dateTimeFormat = DateTimeFormat.getFormat("dd - MM - yyyy");
 			String dateInString = dateTimeFormat.format(dateOfBirth);
-
 			signUpFields.setDob(dateInString);
 
 		}
@@ -224,15 +230,13 @@ public class SignUpPresenter extends WidgetPresenter<SignUpPresenter.Display> {
 			isConfirmpassword = false;
 		} else if ((!password.equals(confirmPassword))) {
 			isConfirmpasswordValidate = false;
-		} else {
-			signUpFields.setConfirmPassword(confirmPassword);
-		}
+		} 
 
 		display.setRedColor(isFirstname, isLastname, isEmail, ispassword,
 				isConfirmpassword, isGender, isDob);
 		display.setValidateFormat(isFirstValidate, isLastValidate,
 				isEmailValidate, isShortPasswordValidate,
-				isConfirmpasswordValidate, isLongPassdValidate);
+				isConfirmpasswordValidate, isLongPassdValidate, isDobAfter);
 
 		validateSendToServer();
 
@@ -245,8 +249,7 @@ public class SignUpPresenter extends WidgetPresenter<SignUpPresenter.Display> {
 				&& signUpFields.getEmail() != null
 				&& signUpFields.getGender() != null
 				&& signUpFields.getDob() != null
-				&& signUpFields.getPassword() != null
-				&& signUpFields.getConfirmPassword() != null) {
+				&& signUpFields.getPassword() != null) {
 			sendToServer();
 
 		}
@@ -329,6 +332,7 @@ public class SignUpPresenter extends WidgetPresenter<SignUpPresenter.Display> {
 		isFirstname = true;
 		isLastname = true;
 		isDob = true;
+		isDobAfter = false;
 		isGender = true;
 		isEmail = true;
 		ispassword = true;
