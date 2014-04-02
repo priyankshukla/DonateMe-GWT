@@ -1,5 +1,7 @@
 package com.jkt.donateme.client.view;
 
+import java.util.Date;
+
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.HasClickHandlers;
 
@@ -68,6 +70,7 @@ public class SignUpView extends Composite implements Display {
 	DefaultFormat defaultFormat;
 	ClickHandler doBImageClickhandler;
 	DatePickerWithYearSelectorNew datePickerWithYearSelectorNew;
+	Date date = new Date();
 
 	/**
 	 * Constructor for the SignUp View That gets the FormPanel.
@@ -331,7 +334,7 @@ public class SignUpView extends Composite implements Display {
 		if (!isGender) {
 
 			genderErrorLabel.setVisible(true);
-			genderErrorLabel.setText("Atleast one should be selected");
+			genderErrorLabel.setText("Please select the gender");
 			genderErrorLabel.addStyleName("responselabelerror");
 		}
 		if (!isDob) {
@@ -361,7 +364,7 @@ public class SignUpView extends Composite implements Display {
 	public void setValidateFormat(boolean isFirstValidate,
 			boolean isLastValidate, boolean isEmailValidate,
 			boolean isShortPasswordValidate, boolean isConfirmpasswordValidate,
-			boolean isLongPassdValidate) {
+			boolean isLongPassdValidate, boolean isDobAfter) {
 
 		if (!isFirstValidate) {
 			firstNameTextBox.addStyleName("invalid");
@@ -381,6 +384,14 @@ public class SignUpView extends Composite implements Display {
 			lastNameErrorLabel
 					.setText(" Please enter the Last name in correct format ");
 			lastNameErrorLabel.addStyleName("responselabelerror");
+		}
+
+		if (isDobAfter) {
+
+			dateBox.addStyleName("invalid");
+			dobErrorLabel.setVisible(true);
+			dobErrorLabel.setText("Future date cannot be selected");
+			dobErrorLabel.addStyleName("responselabelerror");
 		}
 
 		if (!isEmailValidate) {
