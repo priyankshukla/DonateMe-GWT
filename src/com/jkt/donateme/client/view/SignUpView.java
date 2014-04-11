@@ -3,8 +3,9 @@ package com.jkt.donateme.client.view;
 import java.util.Date;
 
 import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.HasClickHandlers;
-
+import com.google.gwt.i18n.client.DateTimeFormat;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.FormPanel;
@@ -14,15 +15,13 @@ import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.PasswordTextBox;
+import com.google.gwt.user.client.ui.RadioButton;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.datepicker.client.DateBox;
+import com.google.gwt.user.datepicker.client.DateBox.DefaultFormat;
 import com.jkt.donateme.client.calendar.DatePickerWithYearSelectorNew;
 import com.jkt.donateme.client.presenter.SignUpPresenter.Display;
-import com.google.gwt.user.client.ui.RadioButton;
-import com.google.gwt.i18n.client.DateTimeFormat;
-import com.google.gwt.event.dom.client.ClickHandler;
-import com.google.gwt.user.datepicker.client.DateBox.DefaultFormat;
 
 public class SignUpView extends Composite implements Display {
 
@@ -118,6 +117,9 @@ public class SignUpView extends Composite implements Display {
 		firstNameHtml.setStyleName("mandatoryhtmlpanel");
 		firstNamePanel.add(firstNameHtml);
 		firstNameTextBox = new TextBox();
+
+		firstNameTextBox.setName("firstNameTextBox");
+
 		firstNameTextBox.addStyleName("styletextbox");
 		firstNameTextBox.setMaxLength(20);
 		firstNamePanel.add(firstNameTextBox);
@@ -134,6 +136,7 @@ public class SignUpView extends Composite implements Display {
 		lastNameHtml.setStyleName("mandatoryhtmlpanel");
 		lastNamePanel.add(lastNameHtml);
 		lastNameTextBox = new TextBox();
+		lastNameTextBox.setName("lastNameTextBox");
 		lastNameTextBox.addStyleName("styletextbox");
 		lastNameTextBox.setMaxLength(20);
 		lastNamePanel.add(lastNameTextBox);
@@ -154,6 +157,8 @@ public class SignUpView extends Composite implements Display {
 		datePickerWithYearSelectorNew = new DatePickerWithYearSelectorNew();
 		dateBox = new DateBox(datePickerWithYearSelectorNew, null,
 				defaultFormat);
+
+		dateBox.getTextBox().setName("dateBox");
 		dateBox.getTextBox().setReadOnly(true);
 		dateBox.addStyleName("styletextbox");
 		dOBPanel.add(dateBox);
@@ -194,6 +199,7 @@ public class SignUpView extends Composite implements Display {
 		emailHtml.setStyleName("mandatoryhtmlpanel");
 		emailPanel.add(emailHtml);
 		emailTextBox = new TextBox();
+		emailTextBox.setName("emailTextBox");
 		emailTextBox.addStyleName("styletextbox");
 		emailTextBox.setMaxLength(50);
 		emailPanel.add(emailTextBox);
@@ -210,6 +216,7 @@ public class SignUpView extends Composite implements Display {
 		passwordHtml.setStyleName("mandatoryhtmlpanel");
 		passwordPanel.add(passwordHtml);
 		passwordTextBox = new PasswordTextBox();
+		passwordTextBox.setName("passwordTextBox");
 		passwordTextBox.addStyleName("passwordtextbox");
 		passwordPanel.add(passwordTextBox);
 		passwordSizeLabel = new Label();
@@ -229,6 +236,8 @@ public class SignUpView extends Composite implements Display {
 		confirmPasswordHtml.setStyleName("mandatoryhtmlpanel");
 		confirmPasswordPanel.add(confirmPasswordHtml);
 		confirmPasswordTextBox = new PasswordTextBox();
+
+		confirmPasswordTextBox.setName("confirmPasswordTextBox");
 		confirmPasswordTextBox.addStyleName("styletextbox");
 		confirmPasswordTextBox.setMaxLength(50);
 		confirmPasswordPanel.add(confirmPasswordTextBox);
@@ -242,6 +251,7 @@ public class SignUpView extends Composite implements Display {
 		getStartedButtonPanel = new HorizontalPanel();
 		getStartedButtonPanel.addStyleName("stylehorizontalpanel");
 		getStartedButton = new Button("Get Started");
+
 		getStartedButton.addStyleName("getStartedButton");
 		getStartedButtonPanel.add(getStartedButton);
 		signUpFieldsPanel.add(getStartedButtonPanel);
@@ -305,149 +315,172 @@ public class SignUpView extends Composite implements Display {
 		return dateBox;
 	}
 
-	public void setRedColor(boolean isFirstname, boolean isLastname,
-			boolean isEmail, boolean ispassword, boolean isConfirmpassword,
-			boolean isGender, boolean isDob) {
+	public void setStatus(String id, boolean isNull, boolean isInValid,
+			boolean isPasswordShort, boolean isPasswordLong) {
 
-		if (!isFirstname) {
-			firstNameTextBox.addStyleName("invalid");
-			firstNameTextBox.setFocus(true);
-			firstNameErrorLabel.setVisible(true);
-			firstNameErrorLabel.setText("You can't leave this empty ");
-			firstNameErrorLabel.addStyleName("responselabelerror");
-		}
+		if (id.equals("firstNameTextBox")) {
 
-		if (!isLastname) {
-			lastNameTextBox.addStyleName("invalid");
-			lastNameTextBox.setFocus(true);
-			lastNameErrorLabel.setVisible(true);
-			lastNameErrorLabel.setText("You can't leave this empty ");
-			lastNameErrorLabel.addStyleName("responselabelerror");
-		}
-		if (!isEmail) {
-			emailTextBox.addStyleName("invalid");
-			emailTextBox.setFocus(true);
-			emailErrorLabel.setVisible(true);
-			emailErrorLabel.setText("You can't leave this empty ");
-			emailErrorLabel.addStyleName("responselabelerror");
-		}
-		if (!isGender) {
+			if (isNull) {
+				firstNameTextBox.addStyleName("invalid");
+				firstNameErrorLabel.setVisible(true);
+				firstNameErrorLabel.setText("You can't leave this empty ");
+				firstNameErrorLabel.addStyleName("responselabelerror");
 
-			genderErrorLabel.setVisible(true);
-			genderErrorLabel.setText("Please select the gender");
-			genderErrorLabel.addStyleName("responselabelerror");
-		}
-		if (!isDob) {
+			} else if (isInValid) {
+				firstNameTextBox.addStyleName("invalid");
+				firstNameErrorLabel.setVisible(true);
+				firstNameErrorLabel
+						.setText(" Please enter the first name in correct format ");
+				firstNameErrorLabel.addStyleName("responselabelerror");
+			} else {
 
-			dateBox.addStyleName("invalid");
-			dobErrorLabel.setVisible(true);
-			dobErrorLabel.setText("Date should be selected");
-			dobErrorLabel.addStyleName("responselabelerror");
-		}
+				firstNameTextBox.removeStyleName("invalid");
+				firstNameErrorLabel.setVisible(false);
+			}
 
-		if (!ispassword) {
-			passwordTextBox.addStyleName("invalid");
-			passwordTextBox.setFocus(true);
-			passwordErrorLabel.setVisible(true);
-			passwordErrorLabel.setText("You can't leave this empty ");
-			passwordErrorLabel.addStyleName("responselabelerror");
-		}
-		if (!isConfirmpassword) {
-			confirmPasswordTextBox.addStyleName("invalid");
-			confirmPasswordTextBox.setFocus(true);
-			confirmPasswordErrorLabel.setVisible(true);
-			confirmPasswordErrorLabel.setText("You can't leave this empty ");
-			confirmPasswordErrorLabel.addStyleName("responselabelerror");
+		} else if (id.equalsIgnoreCase("lastNameTextBox")) {
+
+			if (isNull) {
+
+				lastNameTextBox.addStyleName("invalid");
+				lastNameErrorLabel.setVisible(true);
+				lastNameErrorLabel.setText("You can't leave this empty ");
+				lastNameErrorLabel.addStyleName("responselabelerror");
+
+			} else if (isInValid) {
+
+				lastNameTextBox.addStyleName("invalid");
+				lastNameErrorLabel.setVisible(true);
+				lastNameErrorLabel
+						.setText(" Please enter the Last name in correct format ");
+				lastNameErrorLabel.addStyleName("responselabelerror");
+
+			} else {
+				lastNameTextBox.removeStyleName("invalid");
+				lastNameErrorLabel.setVisible(false);
+
+			}
+
+		} else if (id.equalsIgnoreCase("dateBox")) {
+
+			if (isNull) {
+				dateBox.addStyleName("invalid");
+				dobErrorLabel.setVisible(true);
+				dobErrorLabel.setText("Date should be selected");
+				dobErrorLabel.addStyleName("responselabelerror");
+
+			} else if (isInValid) {
+
+				dateBox.addStyleName("invalid");
+				dobErrorLabel.setVisible(true);
+				dobErrorLabel.setText("Future date cannot be selected");
+				dobErrorLabel.addStyleName("responselabelerror");
+
+			} else {
+
+				dateBox.removeStyleName("invalid");
+				dobErrorLabel.setVisible(false);
+			}
+
+		} else if (id.equalsIgnoreCase("emailTextBox")) {
+
+			if (isNull) {
+
+				emailTextBox.addStyleName("invalid");
+				emailErrorLabel.setVisible(true);
+				emailErrorLabel.setText("You can't leave this empty ");
+				emailErrorLabel.addStyleName("responselabelerror");
+			} else if (isInValid) {
+				emailTextBox.addStyleName("invalid");
+				emailErrorLabel.setVisible(true);
+				emailErrorLabel
+						.setText(" Please enter a valid e-mail address ");
+				emailErrorLabel.addStyleName("responselabelerror");
+
+			} else {
+
+				emailTextBox.removeStyleName("invalid");
+				emailErrorLabel.setVisible(false);
+			}
+		} else if (id.equalsIgnoreCase("passwordTextBox")) {
+
+			if (isNull) {
+				passwordTextBox.addStyleName("invalid");
+				passwordErrorLabel.setVisible(true);
+				passwordErrorLabel.setText("You can't leave this empty ");
+				passwordErrorLabel.addStyleName("responselabelerror");
+			} else if (isPasswordShort) {
+
+				passwordTextBox.addStyleName("invalid");
+				confirmPasswordTextBox.addStyleName("invalid");
+				passwordErrorLabel.setVisible(true);
+				passwordErrorLabel.setText("Password is too short");
+				passwordErrorLabel.addStyleName("responselabelerror");
+
+			} else if (isPasswordLong) {
+
+				passwordTextBox.addStyleName("invalid");
+				confirmPasswordTextBox.addStyleName("invalid");
+				passwordErrorLabel.setVisible(true);
+				passwordErrorLabel.setText("Password is too Long");
+				passwordErrorLabel.addStyleName("responselabelerror");
+
+			} else {
+				passwordTextBox.removeStyleName("invalid");
+				passwordErrorLabel.setVisible(false);
+
+			}
+
+		} else if (id.equalsIgnoreCase("confirmPasswordTextBox")) {
+
+			if (isNull) {
+
+				confirmPasswordTextBox.addStyleName("invalid");
+				confirmPasswordErrorLabel.setVisible(true);
+				confirmPasswordErrorLabel
+						.setText("You can't leave this empty ");
+				confirmPasswordErrorLabel.addStyleName("responselabelerror");
+
+			} else if (isInValid) {
+
+				passwordTextBox.addStyleName("invalid");
+				confirmPasswordTextBox.addStyleName("invalid");
+				confirmPasswordErrorLabel.setVisible(true);
+				confirmPasswordErrorLabel.setText(" Password does not match ");
+				confirmPasswordErrorLabel.addStyleName("responselabelerror");
+
+			} else {
+				confirmPasswordTextBox.removeStyleName("invalid");
+				confirmPasswordErrorLabel.setVisible(false);
+
+			}
+
+		} else {
+
+			if (isNull) {
+
+				genderErrorLabel.setVisible(true);
+				genderErrorLabel.setText("Please select the gender");
+				genderErrorLabel.addStyleName("responselabelerror");
+
+			} else {
+
+				genderErrorLabel.setVisible(false);
+			}
 		}
 	}
 
-	public void setValidateFormat(boolean isFirstValidate,
-			boolean isLastValidate, boolean isEmailValidate,
-			boolean isShortPasswordValidate, boolean isConfirmpasswordValidate,
-			boolean isLongPassdValidate, boolean isDobAfter) {
+	/**
+	 * Error validation for not entering duplicate email id
+	 * 
+	 */
+	public void duplicateEmailError() {
+		emailTextBox.addStyleName("invalid");
+		emailErrorLabel.setVisible(true);
+		emailErrorLabel
+				.setText(" Email already exists. Please choose another email id ");
+		emailErrorLabel.addStyleName("responselabelerror");
 
-		if (!isFirstValidate) {
-			firstNameTextBox.addStyleName("invalid");
-			firstNameTextBox.setText(null);
-			firstNameTextBox.setFocus(true);
-			firstNameErrorLabel.setVisible(true);
-			firstNameErrorLabel
-					.setText(" Please enter the first name in correct format ");
-			firstNameErrorLabel.addStyleName("responselabelerror");
-		}
-
-		if (!isLastValidate) {
-			lastNameTextBox.addStyleName("invalid");
-			lastNameTextBox.setText(null);
-			lastNameTextBox.setFocus(true);
-			lastNameErrorLabel.setVisible(true);
-			lastNameErrorLabel
-					.setText(" Please enter the Last name in correct format ");
-			lastNameErrorLabel.addStyleName("responselabelerror");
-		}
-
-		if (isDobAfter) {
-
-			dateBox.addStyleName("invalid");
-			dobErrorLabel.setVisible(true);
-			dobErrorLabel.setText("Future date cannot be selected");
-			dobErrorLabel.addStyleName("responselabelerror");
-		}
-
-		if (!isEmailValidate) {
-			emailTextBox.addStyleName("invalid");
-			emailTextBox.setText(null);
-			emailTextBox.setFocus(true);
-			emailErrorLabel.setVisible(true);
-			emailErrorLabel.setText(" Please enter a valid e-mail address ");
-			emailErrorLabel.addStyleName("responselabelerror");
-		}
-
-		if (!isShortPasswordValidate) {
-			passwordTextBox.addStyleName("invalid");
-			passwordTextBox.setText(null);
-			passwordTextBox.setFocus(true);
-			passwordErrorLabel.setVisible(true);
-			passwordErrorLabel.setText("Password is too short");
-			passwordErrorLabel.addStyleName("responselabelerror");
-		}
-
-		if (!isLongPassdValidate) {
-			passwordTextBox.addStyleName("invalid");
-			passwordTextBox.setText(null);
-			passwordTextBox.setFocus(true);
-			passwordErrorLabel.setVisible(true);
-			passwordErrorLabel.setText("Password is too Long");
-			passwordErrorLabel.addStyleName("responselabelerror");
-		}
-
-		if (!isConfirmpasswordValidate) {
-			passwordTextBox.addStyleName("invalid");
-			confirmPasswordTextBox.addStyleName("invalid");
-			confirmPasswordTextBox.setText(null);
-			confirmPasswordTextBox.setFocus(true);
-			confirmPasswordErrorLabel.setVisible(true);
-			confirmPasswordErrorLabel.setText(" Password does not match ");
-			confirmPasswordErrorLabel.addStyleName("responselabelerror");
-		}
-
-	}
-
-	public void removeError() {
-
-		firstNameTextBox.removeStyleName("invalid");
-		firstNameErrorLabel.setVisible(false);
-		lastNameTextBox.removeStyleName("invalid");
-		emailTextBox.removeStyleName("invalid");
-		passwordTextBox.removeStyleName("invalid");
-		confirmPasswordTextBox.removeStyleName("invalid");
-		lastNameErrorLabel.setVisible(false);
-		emailErrorLabel.setVisible(false);
-		genderErrorLabel.setVisible(false);
-		dobErrorLabel.setVisible(false);
-		dateBox.removeStyleName("invalid");
-		passwordErrorLabel.setVisible(false);
-		confirmPasswordErrorLabel.setVisible(false);
 	}
 
 }

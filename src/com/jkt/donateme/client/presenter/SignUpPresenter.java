@@ -8,51 +8,60 @@ import net.customware.gwt.presenter.client.widget.WidgetDisplay;
 import net.customware.gwt.presenter.client.widget.WidgetPresenter;
 
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.event.dom.client.BlurEvent;
+import com.google.gwt.event.dom.client.BlurHandler;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.event.dom.client.FocusEvent;
+import com.google.gwt.event.dom.client.FocusHandler;
 import com.google.gwt.event.dom.client.HasClickHandlers;
+import com.google.gwt.event.logical.shared.ValueChangeEvent;
+import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.i18n.client.DateTimeFormat;
 import com.google.gwt.user.client.rpc.AsyncCallback;
+import com.google.gwt.user.client.ui.FocusWidget;
 import com.google.gwt.user.client.ui.HasValue;
 import com.google.gwt.user.client.ui.RadioButton;
+import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.datepicker.client.DateBox;
 import com.jkt.donateme.client.model.SignUpFields;
+import com.jkt.donateme.client.rpc.EmailCheckService;
+import com.jkt.donateme.client.rpc.EmailCheckServiceAsync;
 import com.jkt.donateme.client.rpc.SignUpService;
 import com.jkt.donateme.client.rpc.SignUpServiceAsync;
 import com.jkt.donateme.client.validation.EmailValidator;
 
+
 public class SignUpPresenter extends WidgetPresenter<SignUpPresenter.Display> {
 
-	private SignUpFields signUpFields;
+	
 	private final SignUpServiceAsync signUpService = GWT
 			.create(SignUpService.class);
-	private EmailValidator validemail;
+	private final EmailCheckServiceAsync emailCheckServiceAsync = GWT
+			.create(EmailCheckService.class);
 	private String firstName;
 	private String lastName;
 	private String email;
 	private String password;
 	private String confirmPassword;
-	private Date dateOfBirth;
+	private String containerId ;
+	private String gender;
+    private String valueHolder ;
+	
+	private boolean isNull = false;
+	private boolean isInValid = false ;
+	private boolean isPasswordShort = false ;
+	private boolean isPasswordLong = false ;
+	private boolean isClicked = false;
+	private boolean maleGender = false ;
+	private boolean femaleGender = false ;
+		private boolean  dp  ;
+    private Date date;
+    private Date dateOfBirth;
+    private EmailValidator validemail;
+	private SignUpFields signUpFields;
 	private DateTimeFormat dateTimeFormat;
-	private boolean maleGender;
-	private boolean femaleGender;
-	public boolean isFirstname = true;
-	public boolean isLastname = true;
-	public boolean isEmail = true;
-	public boolean ispassword = true;
-	public boolean isConfirmpassword = true;
-	public boolean isFirstValidate = true;
-	public boolean isLastValidate = true;
-	public boolean isEmailValidate = true;
-	public boolean isShortPasswordValidate = true;
-	public boolean isConfirmpasswordValidate = true;
-	public boolean isLongPassdValidate = true;
-	public boolean isGender = false;
-	public boolean isDob = true;
-	public boolean isDobAfter = false;
-	public Date date;
-	public String gender;
-
+	
 	public interface Display extends WidgetDisplay {
 
 		public HasValue<String> getfirstNameTextBox();
@@ -73,18 +82,8 @@ public class SignUpPresenter extends WidgetPresenter<SignUpPresenter.Display> {
 
 		public DateBox getDob();
 
-		public void setRedColor(boolean isFirstname, boolean isLastname,
-				boolean isEmail, boolean ispassword, boolean isConfirmpassword,
-				boolean isGender, boolean isDob);
-
-		public void setValidateFormat(boolean isFirstValidate,
-				boolean isLastValidate, boolean isEmailValidate,
-				boolean isShortPasswordValidate,
-				boolean isConfirmpasswordValidate, boolean isLongPassdValidate,
-				boolean isDobAfter);
-
-		public void removeError();
-
+		public void setStatus(String box ,boolean isNull ,boolean isInValid , boolean isPasswordShort , boolean isPasswordLong);
+		public void duplicateEmailError();
 	}
 
 	/**
@@ -99,14 +98,61 @@ public class SignUpPresenter extends WidgetPresenter<SignUpPresenter.Display> {
 	/*
 	 * Adds Click Handler To GetStarted Button .
 	 */
+	
+	
+	
+	
 	ClickHandler clickHandler = new ClickHandler() {
 
 		public void onClick(ClickEvent arg0) {
-
-			clearAllError();
-			doValidate();
+			isClicked = true ;
+			getfields(isClicked);
+			
 		}
 	};
+	
+	
+	
+	
+	
+	
+	BlurHandler blurHandler = new BlurHandler(){
+
+		public void onBlur(BlurEvent event) {
+					
+  			TextBox object = (TextBox) event.getSource();
+  			containerId = object.getName();
+  			isClicked = false ;
+			getfields(isClicked);
+  						
+		}
+	};
+	
+	
+	FocusHandler focusHandler = new FocusHandler(){
+
+		public void onFocus(FocusEvent event) {
+			
+			TextBox object = (TextBox) event.getSource();
+  			containerId = object.getName();
+  			getFieldsOnFocus();
+		}
+	};
+	
+	
+	
+	
+	ValueChangeHandler<Date> vDhandler = new ValueChangeHandler<Date>(){
+
+		public void onValueChange(ValueChangeEvent<Date> event) {
+			
+			     DateBox object = (DateBox) event.getSource();
+			     containerId = object.getTextBox().getName();
+			  	 isClicked = false ;
+			     getfields(isClicked);
+			}
+	};
+	
 
 	/**
 	 * Binds data on click.
@@ -118,130 +164,357 @@ public class SignUpPresenter extends WidgetPresenter<SignUpPresenter.Display> {
 		 * For GetStartedButton .
 		 */
 		display.getbtnGetStarted().addClickHandler(clickHandler);
+		
+		display.getDob().addValueChangeHandler(vDhandler);
+		
+		
+		((FocusWidget) display.getfirstNameTextBox()).addBlurHandler(blurHandler);
+		((FocusWidget)display.getlastNameTextBox()).addBlurHandler(blurHandler);
+		((FocusWidget) display.getDob().getTextBox()).addBlurHandler(blurHandler);
+		((FocusWidget)display.getEmailTextBox()).addBlurHandler(blurHandler);
+		((FocusWidget)display.getPasswordTextBox()).addBlurHandler(blurHandler);
+		((FocusWidget)display.getConfirmPasswordTextBox()).addBlurHandler(blurHandler);
+		//----------------------------------------------------------------------------------
+		
+		((FocusWidget) display.getfirstNameTextBox()).addFocusHandler(focusHandler);
+		((FocusWidget)display.getlastNameTextBox()).addFocusHandler(focusHandler);
+		((FocusWidget)display.getEmailTextBox()).addFocusHandler(focusHandler);
+		((FocusWidget)display.getPasswordTextBox()).addFocusHandler(focusHandler);
+		((FocusWidget)display.getConfirmPasswordTextBox()).addFocusHandler(focusHandler);
+		
+		}
+	
+	
+
+	public void getfields(boolean way) {
+		
+		if(way){
+		String[] id = {"firstNameTextBox","lastNameTextBox","dateBox","Gender","emailTextBox","passwordTextBox","confirmPasswordTextBox"};
+		
+		doValidation(id);
+		}else{
+			String[] id = {containerId} ;
+			doValidation(id);
+		}
+		
 
 	}
-
-	public void getfields() {
-		firstName = display.getfirstNameTextBox().getValue();
-		lastName = display.getlastNameTextBox().getValue();
-		email = display.getEmailTextBox().getValue();
-		maleGender = display.getmRadioButton().getValue();
-		femaleGender = display.getfmRadioButton().getValue();
-		dateOfBirth = display.getDob().getValue();
-		password = display.getPasswordTextBox().getValue();
-		confirmPassword = display.getConfirmPasswordTextBox().getValue();
-
+	
+	
+	public void getFieldsOnFocus(){
+		
+		String[] id = {containerId} ;
+		getFocusStatus(id);
 	}
+	
+	public void getFocusStatus(String[] id){
+		
+		
+		for (int i = 0; i < id.length; i++) {
 
-	/**
-	 * It retrieves all the data from the textBox fields.
-	 */
-	public void doValidate() {
+			valueHolder = id[i];
 
+			if (id[i].equalsIgnoreCase("firstNameTextBox")) {
+
+				    isInValid = false;
+					isNull = false;
+					display.setStatus(valueHolder, isNull, isInValid,
+							isPasswordShort, isPasswordLong);
+					
+					
+				}
+			 else if (id[i].equalsIgnoreCase("lastNameTextBox")) {
+
+				
+
+					isInValid = false;
+					isNull = false;
+					display.setStatus(valueHolder, isNull, isInValid,
+							isPasswordShort, isPasswordLong);
+				}
+
+			else if(id[i].equalsIgnoreCase("dateBox")){
+
+								
+					isInValid = false;
+					isNull = false;
+					display.setStatus(valueHolder, isNull, isInValid,
+							isPasswordShort, isPasswordLong);
+
+										
+				}
+
+				
+			
+			else if (id[i].equalsIgnoreCase("emailTextBox")) {
+			
+
+					isInValid = false;
+					isNull = false;
+					display.setStatus(valueHolder, isNull, isInValid,
+							isPasswordShort, isPasswordLong);
+				}
+			else if (id[i].equalsIgnoreCase("passwordTextBox")) {
+
+					isNull = false;
+					isPasswordShort = false;
+					isPasswordLong = false;
+					display.setStatus(valueHolder, isNull, isInValid,
+							isPasswordShort, isPasswordLong);
+				}
+
+			 else if (id[i].equalsIgnoreCase("confirmPasswordTextBox")) {
+
+					isNull = false;
+					isInValid = false;
+					display.setStatus(valueHolder, isNull, isInValid,
+							isPasswordShort, isPasswordLong);
+					
+				}
+
+			
+		}
+		
+	}
+	
+	public void doValidation(String[] id){
+		date = new Date();
 		signUpFields = new SignUpFields();
 		validemail = new EmailValidator();
-		getfields();
-		date = new Date();
-		/**
-		 * validate first name using pattern matches
-		 */
-		if (firstName == null || firstName.isEmpty()) {
-			isFirstname = false;
-		} else if (validemail.usernameValidate(firstName) == false) {
-			isFirstValidate = false;
-		} else {
-			signUpFields.setFirstName(firstName);
+		
+		for (int i = 0; i < id.length; i++) {
 
+			valueHolder = id[i];
+
+			if (id[i].equalsIgnoreCase("firstNameTextBox")) {
+
+				firstName = display.getfirstNameTextBox().getValue().trim();
+				display.getfirstNameTextBox().setValue(firstName);
+				
+				if (firstName == null || firstName.isEmpty()) {
+					isNull = true;
+					isInValid = false;
+					display.setStatus(valueHolder, isNull, isInValid,
+							isPasswordShort, isPasswordLong);
+					
+				} else if (validemail.usernameValidate(firstName) == false) {
+					isInValid = true;
+					isNull = false;
+					display.setStatus(valueHolder, isNull, isInValid,
+							isPasswordShort, isPasswordLong);
+					
+				} else {
+					isInValid = false;
+					isNull = false;
+					display.setStatus(valueHolder, isNull, isInValid,
+							isPasswordShort, isPasswordLong);
+					signUpFields.setFirstName(firstName);
+					
+				}
+			} else if (id[i].equalsIgnoreCase("lastNameTextBox")) {
+
+				lastName = display.getlastNameTextBox().getValue().trim();
+				display.getlastNameTextBox().setValue(lastName);
+				
+				if (lastName == null || lastName.isEmpty()) {
+
+					isNull = true;
+					isInValid = false;
+					display.setStatus(valueHolder, isNull, isInValid,
+							isPasswordShort, isPasswordLong);
+					
+
+				} else if (validemail.usernameValidate(lastName) == false) {
+
+					isInValid = true;
+					isNull = false;
+					display.setStatus(valueHolder, isNull, isInValid,
+							isPasswordShort, isPasswordLong);
+					
+
+				} else {
+
+					isInValid = false;
+					isNull = false;
+					display.setStatus(valueHolder, isNull, isInValid,
+							isPasswordShort, isPasswordLong);
+					signUpFields.setLastName(lastName);
+					
+				}
+
+			}else if(id[i].equalsIgnoreCase("dateBox")){
+
+
+				dateOfBirth = display.getDob().getValue();
+				if (dateOfBirth == null) {
+
+					isNull = true;
+					isInValid = false;
+					display.setStatus(valueHolder, isNull, isInValid,
+							isPasswordShort, isPasswordLong);
+
+				} else if (dateOfBirth.after(date)) {
+					isInValid = true;
+					isNull = false;
+					display.setStatus(valueHolder, isNull, isInValid,
+							isPasswordShort, isPasswordLong);
+
+				} else {
+					isInValid = false;
+					isNull = false;
+					display.setStatus(valueHolder, isNull, isInValid,
+							isPasswordShort, isPasswordLong);
+
+					dateTimeFormat = DateTimeFormat.getFormat("dd - MM - yyyy");
+					String dateInString = dateTimeFormat.format(dateOfBirth);
+					 signUpFields.setDob(dateInString);
+				}
+
+				
+			
+			}else if (id[i].equalsIgnoreCase("emailTextBox")) {
+			
+
+				email = display.getEmailTextBox().getValue().trim();
+				display.getEmailTextBox().setValue(email);
+				
+				if (email == null || email.isEmpty()) {
+
+					isNull = true;
+					isInValid = false;
+					display.setStatus(valueHolder, isNull, isInValid,
+							isPasswordShort, isPasswordLong);
+					
+
+				} else if (validemail.validate(email) == false) {
+
+					isInValid = true;
+					isNull = false;
+					display.setStatus(valueHolder, isNull, isInValid,
+							isPasswordShort, isPasswordLong);
+					
+ 				}else {
+					isInValid = false;
+					isNull = false;
+					display.setStatus(valueHolder, isNull, isInValid,
+							isPasswordShort, isPasswordLong);
+					signUpFields.setEmail(email);
+					
+				}
+			} else if (id[i].equalsIgnoreCase("passwordTextBox")) {
+
+				password = display.getPasswordTextBox().getValue();
+				
+				if (password == null || password.isEmpty()) {
+					isNull = true;
+					display.setStatus(valueHolder, isNull, isInValid,
+							isPasswordShort, isPasswordLong);
+					
+				} else if (password.length() < 6) {
+					isNull = false;
+					isPasswordShort = true;
+					isPasswordLong = false;
+					display.setStatus(valueHolder, isNull, isInValid,
+							isPasswordShort, isPasswordLong);
+					
+				} else if (password.length() > 12) {
+					isNull = false;
+					isPasswordShort = false;
+					isPasswordLong = true;
+					display.setStatus(valueHolder, isNull, isInValid,
+							isPasswordShort, isPasswordLong);
+					
+				} else {
+					isNull = false;
+					isPasswordShort = false;
+					isPasswordLong = false;
+					display.setStatus(valueHolder, isNull, isInValid,
+							isPasswordShort, isPasswordLong);
+					
+
+					signUpFields.setPassword(password);
+
+				}
+
+			} else if (id[i].equalsIgnoreCase("confirmPasswordTextBox")) {
+
+				confirmPassword = display.getConfirmPasswordTextBox()
+						.getValue();
+				if (confirmPassword == null || confirmPassword.isEmpty()) {
+					isNull = true;
+					isInValid = false;
+					display.setStatus(valueHolder, isNull, isInValid,
+							isPasswordShort, isPasswordLong);
+					
+				} else if ((!password.equals(confirmPassword))) {
+					isNull = false;
+					isInValid = true;
+					display.setStatus(valueHolder, isNull, isInValid,
+							isPasswordShort, isPasswordLong);
+					
+				} else {
+					isNull = false;
+					isInValid = false;
+					display.setStatus(valueHolder, isNull, isInValid,
+							isPasswordShort, isPasswordLong);
+					
+				}
+
+			}else{
+				
+				maleGender = display.getmRadioButton().getValue();
+				femaleGender = display.getfmRadioButton().getValue();
+				
+				if ((maleGender == false) && (femaleGender == false)) {
+					isNull = true;
+					isInValid = false;
+					display.setStatus(valueHolder, isNull, isInValid,
+							isPasswordShort, isPasswordLong);
+					
+				} else if ((maleGender == true) && (femaleGender == false)) {
+					isNull = false;
+					isInValid = false;
+					display.setStatus(valueHolder, isNull, isInValid,
+							isPasswordShort, isPasswordLong);
+					gender = "Male";
+					signUpFields.setGender(gender);
+				} else if ((femaleGender == true) && (maleGender == false)) {
+					isNull = false;
+					isInValid = false;
+					display.setStatus(valueHolder, isNull, isInValid,
+							isPasswordShort, isPasswordLong);
+					gender = "female";
+					signUpFields.setGender(gender);
+				}
+				
+				
+			}
+					 		
 		}
+		
+		
+		emailCheckServiceAsync.validateDuplicateEmail(email,
+				new AsyncCallback<Boolean>() {
+					public void onFailure(Throwable arg0) {
 
-		/**
-		 * validate lastName using pattern matches
-		 */
-		if (lastName == null || lastName.isEmpty()) {
-			isLastname = false;
-		} else if (validemail.usernameValidate(lastName) == false) {
-			isLastValidate = false;
-		} else {
-			signUpFields.setLastName(lastName);
-		}
+					}
 
-		/**
-		 * validate email-id using pattern matches
-		 */
-		if (email == null || email.isEmpty()) {
-			isEmail = false;
-		} else if (validemail.validate(email) == false) {
-			isEmailValidate = false;
-		} else {
-			signUpFields.setEmail(email);
-		}
-
-		/**
-		 * validate gender radio button for male or female
-		 */
-		if ((maleGender == false) && (femaleGender == false)) {
-			isGender = false;
-		} else if ((maleGender == true) && (femaleGender == false)) {
-			isGender = true;
-			gender = "Male";
-			signUpFields.setGender(gender);
-		} else if ((femaleGender == true) && (maleGender == false)) {
-			isGender = true;
-			gender = "female";
-			signUpFields.setGender(gender);
-		}
-
-		/**
-		 * validate date of birth
-		 */
-		if (dateOfBirth == null) {
-			isDob = false;
-		} else if (dateOfBirth.after(date)) {
-			isDobAfter = true;
-			System.out.println(date.toString());
-		}else {
-			isDob = true;
-			isDobAfter = false;
-			dateTimeFormat = DateTimeFormat.getFormat("dd - MM - yyyy");
-			String dateInString = dateTimeFormat.format(dateOfBirth);
-			signUpFields.setDob(dateInString);
-
-		}
-
-		/**
-		 * validate password i.e between 6 to 12 characters
-		 */
-
-		if (password == null || password.isEmpty()) {
-			ispassword = false;
-		} else if (password.length() < 6) {
-			isShortPasswordValidate = false;
-		} else if (password.length() > 12) {
-			isLongPassdValidate = false;
-		} else {
-			signUpFields.setPassword(password);
-		}
-
-		/**
-		 * validate confirm password
-		 */
-
-		if (confirmPassword == null || confirmPassword.isEmpty()) {
-			isConfirmpassword = false;
-		} else if ((!password.equals(confirmPassword))) {
-			isConfirmpasswordValidate = false;
-		} 
-
-		display.setRedColor(isFirstname, isLastname, isEmail, ispassword,
-				isConfirmpassword, isGender, isDob);
-		display.setValidateFormat(isFirstValidate, isLastValidate,
-				isEmailValidate, isShortPasswordValidate,
-				isConfirmpasswordValidate, isLongPassdValidate, isDobAfter);
-
-		validateSendToServer();
-
+					public void onSuccess(Boolean arg0) {
+						if (arg0) {
+							
+							
+							display.duplicateEmailError();
+						} else {
+							dp = false ;
+							validateSendToServer();
+						}
+					}
+				});
+		
+				
+		
 	}
-
+		
 	public void validateSendToServer() {
 
 		if (signUpFields.getFirstName() != null
@@ -255,7 +528,6 @@ public class SignUpPresenter extends WidgetPresenter<SignUpPresenter.Display> {
 		}
 
 	}
-
 	/**
 	 * on the click of getStart button the field values are send to server.
 	 */
@@ -263,14 +535,14 @@ public class SignUpPresenter extends WidgetPresenter<SignUpPresenter.Display> {
 
 		signUpService.signUpServer(signUpFields,
 				new AsyncCallback<SignUpFields>() {
-					public void onFailure(Throwable caught) {
+			public void onFailure(Throwable caught) {
 
-					}
+			}
 
-					public void onSuccess(SignUpFields signUpFields) {
+			public void onSuccess(SignUpFields signUpFields) {
 
-					}
-				});
+			}
+		});
 
 	}
 
@@ -328,23 +600,7 @@ public class SignUpPresenter extends WidgetPresenter<SignUpPresenter.Display> {
 	 * }
 	 */
 
-	public void clearAllError() {
-		isFirstname = true;
-		isLastname = true;
-		isDob = true;
-		isDobAfter = false;
-		isGender = true;
-		isEmail = true;
-		ispassword = true;
-		isConfirmpassword = true;
-		isFirstValidate = true;
-		isLastValidate = true;
-		isEmailValidate = true;
-		isShortPasswordValidate = true;
-		isLongPassdValidate = true;
-		isConfirmpasswordValidate = true;
-		display.removeError();
-	}
+	
 
 	/**
 	 * getter for signUp fields
