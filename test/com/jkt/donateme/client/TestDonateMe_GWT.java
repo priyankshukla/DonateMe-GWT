@@ -1,4 +1,4 @@
-package com.jkt.donateme.client;
+/*package com.jkt.donateme.client;
 
 import net.customware.gwt.presenter.client.DefaultEventBus;
 import net.customware.gwt.presenter.client.EventBus;
@@ -216,3 +216,4 @@ public class TestDonateMe_GWT extends GWTTestCase {
 	}
 
 }
+*/

@@ -3,14 +3,7 @@
          xsi:schemaLocation="http://java.sun.com/xml/ns/javaee 
               http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
          version="2.5"
-         xmlns="http://java.sun.com/xml/ns/javaee">
-
-  <!-- Servlets -->
- <!--  <servlet>
-    <servlet-name>greetServlet</servlet-name>
-    <servlet-class>com.jkt.donateme.server.GreetingServiceImpl</servlet-class>
-  </servlet> -->
-  
+         xmlns="http://java.sun.com/xml/ns/javaee"> 
   
   <servlet>
 		<servlet-name>greetServlet</servlet-name>
@@ -20,6 +13,16 @@
   <servlet-mapping>
     <servlet-name>greetServlet</servlet-name>
     <url-pattern>/donateme_gwt/greet</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+		<servlet-name>emailServlet</servlet-name>
+		<servlet-class>com.jkt.donateme.server.EmailCheckServiceImpl</servlet-class>
+	</servlet>
+  
+  <servlet-mapping>
+    <servlet-name>emailServlet</servlet-name>
+    <url-pattern>/donateme_gwt/email</url-pattern>
   </servlet-mapping>
   
   
