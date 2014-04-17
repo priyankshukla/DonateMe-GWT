@@ -86,11 +86,11 @@ public class MonthAndYearSelectorWithYear extends MonthSelector{
         forwards.setStyleName(BASE_NAME + "NextButton");
         forwards.addClickHandler(new ClickHandler() {
             public void onClick(ClickEvent event) {
-                if (model.getCurrentMonth().getYear() < 114) {
+                if (model.getCurrentMonth().getYear() < 1) {
                     addMonths(+1);
                 }
                 else if(model.getCurrentMonth().getMonth()<11 
-                                     &&model.getCurrentMonth().getYear()==114)
+                                     &&model.getCurrentMonth().getYear()==199)
                 {
                     addMonths(+1);
                 }
@@ -115,7 +115,7 @@ public class MonthAndYearSelectorWithYear extends MonthSelector{
         forwardsYear.setStyleName(BASE_NAME + "NextButton");
         forwardsYear.addClickHandler(new ClickHandler() {
             public void onClick(ClickEvent event) {
-                if (model.getCurrentMonth().getYear() < 114) {
+                if (model.getCurrentMonth().getYear() < 199) {
                     addMonths(+12);
                     picker.refreshComponents();
                 }
