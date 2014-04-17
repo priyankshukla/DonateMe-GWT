@@ -4,7 +4,6 @@ import net.customware.gwt.presenter.client.DefaultEventBus;
 import net.customware.gwt.presenter.client.EventBus;
 
 import com.google.gwt.core.client.EntryPoint;
-import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.jkt.donateme.client.presenter.SignUpPresenter;
 import com.jkt.donateme.client.view.SignUpView;

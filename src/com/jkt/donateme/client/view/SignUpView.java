@@ -252,7 +252,7 @@ public class SignUpView extends Composite implements Display {
 		getStartedButtonPanel.addStyleName("stylehorizontalpanel");
 		getStartedButton = new Button("Get Started");
 
-		getStartedButton.addStyleName("getStartedButton");
+		getStartedButton.addStyleName("nextButton");
 		getStartedButtonPanel.add(getStartedButton);
 		signUpFieldsPanel.add(getStartedButtonPanel);
 

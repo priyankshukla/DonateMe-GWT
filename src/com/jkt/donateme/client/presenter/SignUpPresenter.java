@@ -22,6 +22,7 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.FocusWidget;
 import com.google.gwt.user.client.ui.HasValue;
 import com.google.gwt.user.client.ui.RadioButton;
+import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.datepicker.client.DateBox;
 import com.jkt.donateme.client.model.SignUpFields;
@@ -30,6 +31,7 @@ import com.jkt.donateme.client.rpc.EmailCheckServiceAsync;
 import com.jkt.donateme.client.rpc.SignUpService;
 import com.jkt.donateme.client.rpc.SignUpServiceAsync;
 import com.jkt.donateme.client.validation.EmailValidator;
+import com.jkt.donateme.client.view.ProfileDetailView;
 
 
 public class SignUpPresenter extends WidgetPresenter<SignUpPresenter.Display> {
@@ -104,7 +106,8 @@ public class SignUpPresenter extends WidgetPresenter<SignUpPresenter.Display> {
 	
 	ClickHandler clickHandler = new ClickHandler() {
 
-		public void onClick(ClickEvent arg0) {
+		public void onClick(ClickEvent arg0) {	
+			
 			isClicked = true ;
 			getfields(isClicked);
 			
@@ -524,10 +527,26 @@ public class SignUpPresenter extends WidgetPresenter<SignUpPresenter.Display> {
 				&& signUpFields.getDob() != null
 				&& signUpFields.getPassword() != null) {
 			sendToServer();
-
 		}
 
 	}
+	
+	
+public void onNextPage(){
+		
+		
+		RootPanel.get("top").clear();
+		
+		ProfileDetailView display = new ProfileDetailView();
+		ProfileDetailPresenter presenter = new ProfileDetailPresenter(display, eventBus);
+		presenter.bind();
+
+		RootPanel.get("top").add(presenter.getDisplay().asWidget());
+		
+	}
+	
+	
+	
 	/**
 	 * on the click of getStart button the field values are send to server.
 	 */
@@ -540,11 +559,22 @@ public class SignUpPresenter extends WidgetPresenter<SignUpPresenter.Display> {
 			}
 
 			public void onSuccess(SignUpFields signUpFields) {
+				
+				
+				
+				
 
 			}
 		});
+		onNextPage();
 
+		
+		
+		
 	}
+	
+	
+	
 
 	/**
 	 * Need to be implemented
