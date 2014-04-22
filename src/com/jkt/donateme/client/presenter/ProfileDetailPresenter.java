@@ -244,6 +244,7 @@ public class ProfileDetailPresenter extends
  * Validation for patient detail fields
  * @param id
  */
+	@SuppressWarnings("deprecation")
 	public void doValidation(String[] id) {
 
 		date = new Date();

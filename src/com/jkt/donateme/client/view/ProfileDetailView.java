@@ -43,7 +43,10 @@ public class ProfileDetailView extends Composite implements Display {
 	private HorizontalPanel endCollectingMoneyOnPanel;
 	private HorizontalPanel uploadYourProfilePicturePanel;
 	private HorizontalPanel nextButtonPanel;
-	
+	private HorizontalPanel captionPanel;
+	private HorizontalPanel signCaptionPanel;
+	private HorizontalPanel profileDetailCaptionPanel;
+	private HorizontalPanel beneficiaryDetailCaptionPanel;
 
 	private Label titleOfYourPageLabel;
 	private Label donationNeededLabel;
@@ -52,7 +55,9 @@ public class ProfileDetailView extends Composite implements Display {
 	private Label endCollectingMoneyOnLabel;
 	private Label uploadLabel ;
 	private Label uploadNoteLabel ;
-	
+	private Label signupCaptionLabel;
+	private Label profileDetailCaptionLabel;
+	private Label beneficiaryDetailCaptionLabel;
 	
 	private Label titleOfYourPageErrorLabel;
 	private Label donationNeededErrorLabel;
@@ -145,6 +150,46 @@ public class ProfileDetailView extends Composite implements Display {
 		patientDetailPanel.addStyleName("signUpPanel");
 		formPanel.add(patientDetailPanel);
 		initWidget(formPanel);
+		
+		
+captionPanel = new HorizontalPanel();
+		
+		signCaptionPanel = new HorizontalPanel();
+		signCaptionPanel.addStyleName("innercaptionpanel");
+		signupCaptionLabel = new Label("Sign up");
+		signupCaptionLabel.addStyleName("captionLabel");
+		Image signUpImg = new Image("./images/1-red.png");
+		signUpImg.addStyleName("captionimage");
+		signCaptionPanel.add(signUpImg);
+		signCaptionPanel.add(signupCaptionLabel);
+		captionPanel.add(signCaptionPanel);
+		
+		profileDetailCaptionPanel = new HorizontalPanel();
+		profileDetailCaptionPanel.addStyleName("innercaptionpanel");
+		profileDetailCaptionLabel = new Label("Profile Detail");
+		profileDetailCaptionLabel.addStyleName("captionLabel");
+		Image profileCaptionImg = new Image("./images/2red.png");
+		profileCaptionImg.addStyleName("captionimage");
+		profileDetailCaptionPanel.add(profileCaptionImg);
+		profileDetailCaptionPanel.add(profileDetailCaptionLabel);
+		captionPanel.add(profileDetailCaptionPanel);
+		
+		
+		beneficiaryDetailCaptionPanel = new HorizontalPanel();
+		beneficiaryDetailCaptionPanel.addStyleName("innercaptionpanel");
+		beneficiaryDetailCaptionLabel = new Label("Beneficiary Details");
+		beneficiaryDetailCaptionLabel.addStyleName("captionLabel");
+		Image beneficiaryDetailImg = new Image("./images/3g.png");
+		beneficiaryDetailImg.addStyleName("captionimage");
+		beneficiaryDetailCaptionPanel.add(beneficiaryDetailImg);
+		beneficiaryDetailCaptionPanel.add(beneficiaryDetailCaptionLabel);
+		captionPanel.add(beneficiaryDetailCaptionPanel);
+		
+		patientDetailPanel.add(captionPanel);
+		
+		
+		
+		
 
 		titleOfYourPagePanel = new HorizontalPanel();
 		titleOfYourPagePanel.addStyleName("stylehorizontalpanel");
@@ -263,7 +308,7 @@ public class ProfileDetailView extends Composite implements Display {
 	    uploadLabel.addStyleName("uploadLabel");
 	    upload.add(uploadLabel);
 	    upload.add(defaultUploader);
-	    uploadYourProfilePicturePanel.add(panelImages);
+	  //  uploadYourProfilePicturePanel.add(panelImages);
 	    uploadYourProfilePicturePanel.add(upload);
 	    uploadNoteLabel = new Label("Note: (only jpeg,jpg,git,png,bmp)");
 	    uploadNoteLabel.addStyleName("uploadnotelabel");
@@ -274,7 +319,7 @@ public class ProfileDetailView extends Composite implements Display {
 		nextButtonPanel.addStyleName("stylehorizontalpanel");
 		nextButton = new Button("next");
 
-		nextButton.addStyleName("getStartedButton");
+		nextButton.addStyleName("nextButton");
 		nextButtonPanel.add(nextButton);
 		patientDetailPanel.add(nextButtonPanel);
 

@@ -1441,10 +1441,10 @@ textarea{ width:328px; height:80px;}
 		
 }
 
-styletextarea{
+.styletextarea{
 	
-	margin-top:-40px;
-	margin-left: 100px;
+	
+	margin-left: 65px;
 }
 .passwordtextbox{
 	/* width: 50px; */
@@ -1484,14 +1484,14 @@ styletextarea{
 .getStartedButton {
   background:none; border:none; cursor:pointer;border-radius:5px; 
    color:#FFF; background:url(./images/nav-bg.jpg) top repeat-x;font:normal 16px MyriadProRegular; 
-   width: 103px;height: 30px;  margin-left: 403px;
+   width: 103px;height: 30px;  margin-left: 407px;
 }
 
 
 .nextButton {
   background:none; border:none; cursor:pointer;border-radius:5px; 
    color:#FFF; background:url(./images/nav-bg.jpg) top repeat-x;font:normal 16px MyriadProRegular; 
-   width: 103px;height: 30px;  margin-left: 435px;
+   width: 103px;height: 30px;  margin-left: 445px;
 }
 
 
@@ -1518,6 +1518,19 @@ styletextarea{
 
 .uploadwidget{
 	margin-left:20px;
+}
+.innercaptionpanel{
+	width:70 px;
+}
+.captionLabel{
+	font:normal 25px MyriadProRegular;
+	padding:0px 30px 0px 5px;
+	margin-bottom:40px;
+	margin-top:-20px;
+}
+.captionimage{
+	margin-top:-60px;
+	padding:0px 0px 5px 15px;
 }
 
 }

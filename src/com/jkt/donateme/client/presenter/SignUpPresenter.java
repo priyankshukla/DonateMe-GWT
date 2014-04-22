@@ -57,7 +57,7 @@ public class SignUpPresenter extends WidgetPresenter<SignUpPresenter.Display> {
 	private boolean isClicked = false;
 	private boolean maleGender = false ;
 	private boolean femaleGender = false ;
-		private boolean  dp  ;
+		
     private Date date;
     private Date dateOfBirth;
     private EmailValidator validemail;
@@ -508,14 +508,14 @@ public class SignUpPresenter extends WidgetPresenter<SignUpPresenter.Display> {
 							
 							display.duplicateEmailError();
 						} else {
-							dp = false ;
+							
 							validateSendToServer();
 						}
 					}
 				});
 		
 				
-		
+		validateSendToServer();
 	}
 		
 	public void validateSendToServer() {
@@ -527,6 +527,7 @@ public class SignUpPresenter extends WidgetPresenter<SignUpPresenter.Display> {
 				&& signUpFields.getDob() != null
 				&& signUpFields.getPassword() != null) {
 			sendToServer();
+			
 		}
 
 	}

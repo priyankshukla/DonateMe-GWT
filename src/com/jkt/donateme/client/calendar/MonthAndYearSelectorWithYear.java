@@ -36,7 +36,7 @@ public class MonthAndYearSelectorWithYear extends MonthSelector{
 
         yearListBox = new ListBox();
 
-        for (int i = 1900; i <= 2014; i++) {
+        for (int i = 1900; i <= 2099; i++) {
             yearListBox.addItem(i + "");
         }
 
