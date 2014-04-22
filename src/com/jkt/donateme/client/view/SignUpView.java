@@ -39,7 +39,11 @@ public class SignUpView extends Composite implements Display {
 	private HorizontalPanel genderPanel;
 	private HorizontalPanel genderRadioPanel;
 	private HorizontalPanel dOBPanel;
-
+	private HorizontalPanel captionPanel;
+	private HorizontalPanel signCaptionPanel;
+	private HorizontalPanel profileDetailCaptionPanel;
+	private HorizontalPanel beneficiaryDetailCaptionPanel;
+	
 	private Label firstNameLabel;
 	private Label lastNameLabel;
 	private Label emailLabel;
@@ -55,7 +59,10 @@ public class SignUpView extends Composite implements Display {
 	private Label passwordErrorLabel;
 	private Label confirmPasswordErrorLabel;
 	private Label passwordSizeLabel;
-
+	private Label signupCaptionLabel;
+	private Label profileDetailCaptionLabel;
+	private Label beneficiaryDetailCaptionLabel;
+	
 	private TextBox lastNameTextBox;
 	private TextBox emailTextBox;
 	private TextBox firstNameTextBox;
@@ -107,6 +114,43 @@ public class SignUpView extends Composite implements Display {
 		signUpFieldsPanel.addStyleName("signUpPanel");
 		formPanel.add(signUpFieldsPanel);
 		initWidget(formPanel);
+		
+		captionPanel = new HorizontalPanel();
+		
+		signCaptionPanel = new HorizontalPanel();
+		signCaptionPanel.addStyleName("innercaptionpanel");
+		signupCaptionLabel = new Label("Sign up");
+		signupCaptionLabel.addStyleName("captionLabel");
+		Image signUpImg = new Image("./images/1-red.png");
+		signUpImg.addStyleName("captionimage");
+		signCaptionPanel.add(signUpImg);
+		signCaptionPanel.add(signupCaptionLabel);
+		captionPanel.add(signCaptionPanel);
+		
+		profileDetailCaptionPanel = new HorizontalPanel();
+		profileDetailCaptionPanel.addStyleName("innercaptionpanel");
+		profileDetailCaptionLabel = new Label("Profile Detail");
+		profileDetailCaptionLabel.addStyleName("captionLabel");
+		Image profileCaptionImg = new Image("./images/2g.png");
+		profileCaptionImg.addStyleName("captionimage");
+		profileDetailCaptionPanel.add(profileCaptionImg);
+		profileDetailCaptionPanel.add(profileDetailCaptionLabel);
+		captionPanel.add(profileDetailCaptionPanel);
+		
+		
+		beneficiaryDetailCaptionPanel = new HorizontalPanel();
+		beneficiaryDetailCaptionPanel.addStyleName("innercaptionpanel");
+		beneficiaryDetailCaptionLabel = new Label("Beneficiary Details");
+		beneficiaryDetailCaptionLabel.addStyleName("captionLabel");
+		Image beneficiaryDetailImg = new Image("./images/3g.png");
+		beneficiaryDetailImg.addStyleName("captionimage");
+		beneficiaryDetailCaptionPanel.add(beneficiaryDetailImg);
+		beneficiaryDetailCaptionPanel.add(beneficiaryDetailCaptionLabel);
+		captionPanel.add(beneficiaryDetailCaptionPanel);
+		
+		signUpFieldsPanel.add(captionPanel);
+		
+		
 
 		firstNamePanel = new HorizontalPanel();
 		firstNamePanel.addStyleName("stylehorizontalpanel");
@@ -252,7 +296,7 @@ public class SignUpView extends Composite implements Display {
 		getStartedButtonPanel.addStyleName("stylehorizontalpanel");
 		getStartedButton = new Button("Get Started");
 
-		getStartedButton.addStyleName("nextButton");
+		getStartedButton.addStyleName("getStartedButton");
 		getStartedButtonPanel.add(getStartedButton);
 		signUpFieldsPanel.add(getStartedButtonPanel);
 
