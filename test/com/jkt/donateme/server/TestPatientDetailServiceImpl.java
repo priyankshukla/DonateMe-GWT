@@ -1,14 +1,16 @@
 package com.jkt.donateme.server;
 
 import junit.framework.TestCase;
+
 import org.easymock.EasyMock;
 
 import com.jkt.donateme.client.model.PatientClient;
 import com.jkt.donateme.client.model.PatientClientImpl;
 import com.jkt.donateme.client.model.SignUpFields;
 
-public class TestSignUpServiceImpl extends TestCase {
+public class TestPatientDetailServiceImpl extends TestCase {
 	private PatientClient mockPatientClient;
+	PatientDetailServiceImpl mockDetailServiceImpl;
 
 	@Override
 	protected void setUp() throws Exception {
@@ -30,8 +32,7 @@ public class TestSignUpServiceImpl extends TestCase {
 		EasyMock.replay();
 		assertEquals("Adam", actualSignUpFields.getFirstName());
 		assertEquals("Eve", actualSignUpFields.getLastName());
-		assertEquals("Adam.eve@jktech.com",
-				actualSignUpFields.getEmail());
+		assertEquals("Adam.eve@jktech.com", actualSignUpFields.getEmail());
 		assertEquals("Female", actualSignUpFields.getGender());
 		assertEquals("123456", actualSignUpFields.getPassword());
 		EasyMock.verify();
@@ -45,12 +46,12 @@ public class TestSignUpServiceImpl extends TestCase {
 		EasyMock.replay();
 		assertEquals("Adam", expectedSignUpFields.getFirstName());
 		assertEquals("Eve", expectedSignUpFields.getLastName());
-		assertEquals("Adam.eve@jktech.com",
-				expectedSignUpFields.getEmail());
+		assertEquals("Adam.eve@jktech.com", expectedSignUpFields.getEmail());
 		assertEquals("Female", expectedSignUpFields.getGender());
 		assertEquals("123456", expectedSignUpFields.getPassword());
 		EasyMock.verify();
 	}
+
 	SignUpFields createSignUpFields() {
 		SignUpFields signUpFields = new SignUpFields();
 		signUpFields.setFirstName("Adam");

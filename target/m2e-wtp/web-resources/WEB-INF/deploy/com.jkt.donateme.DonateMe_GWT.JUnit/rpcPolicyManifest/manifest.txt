@@ -1,2 +1,0 @@
-# Module com.jkt.donateme.DonateMe_GWT.JUnit
-# RPC service class, partial path of RPC policy file

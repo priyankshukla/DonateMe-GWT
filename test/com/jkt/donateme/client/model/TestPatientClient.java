@@ -1,19 +1,21 @@
-/*package com.jkt.donateme.client.model;
+package com.jkt.donateme.client.model;
 
 import junit.framework.TestCase;
 
-import org.easymock.EasyMock;
+import org.mockito.Mockito;
+import org.mockito.MockitoAnnotations;
 
-import com.sun.jersey.api.client.RequestBuilder;
-
+import com.sun.jersey.api.client.Client;
+import com.sun.jersey.api.client.ClientResponse;
+import com.sun.jersey.api.client.WebResource;
 
 public class TestPatientClient extends TestCase {
 
-	private RequestBuilder requestBuilder;
 	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
-		requestBuilder = EasyMock.createMock(RequestBuilder.class);
+		MockitoAnnotations.initMocks(this);
+
 	}
 
 	@Override
@@ -22,26 +24,19 @@ public class TestPatientClient extends TestCase {
 	}
 
 	public void testRegisterPatient() {
-		SignUpFields expectedSignUpFields = createSignUpFields();
-		EasyMock.expect(requestBuilder.type("donateme")).andReturn(
-				requestBuilder);
-		EasyMock.expect(requestBuilder.type("signup"))
-				.andReturn(requestBuilder);
-		EasyMock.expect(requestBuilder.type("patient")).andReturn(
-				requestBuilder);
-		EasyMock.expect(requestBuilder.accept("text/xml")).andReturn(requestBuilder);
-		EasyMock.replay();
-		SignUpFields actualSignUpFields = PatientClient.getInstance()
-				.registerPatient(expectedSignUpFields);
-		assertEquals("Shruti", actualSignUpFields.getFirstName());
-		assertEquals("Tripathi", actualSignUpFields.getLastName());
-		assertEquals("shruti.tripathi@jktech.com",
-				actualSignUpFields.getEmail());
-		assertEquals("Female", actualSignUpFields.getGender());
-		assertEquals("123456", actualSignUpFields.getPassword());
-		assertEquals("123456", actualSignUpFields.getConfirmPassword());
+		PatientClientImpl pc = Mockito.mock(PatientClientImpl.class);
 
-		EasyMock.verify();
+		Mockito.when(pc.getClient()).thenReturn(
+				PatientClientImpl.getInstance().getClient());
+		Mockito.when(pc.getConfig()).thenReturn(
+				PatientClientImpl.getInstance().getConfig());
+		Mockito.when(pc.getService()).thenReturn(
+				PatientClientImpl.getInstance().getService());
+
+		SignUpFields expectedSignUpFields = createSignUpFields();
+		Mockito.when(pc.registerPatient(expectedSignUpFields)).thenReturn(
+				expectedSignUpFields);
+		assertFalse(pc.isClientResponseStatusCode());
 
 	}
 
@@ -52,9 +47,33 @@ public class TestPatientClient extends TestCase {
 		signUpFields.setGender("Female");
 		signUpFields.setEmail("shruti.tripathi@jktech.com");
 		signUpFields.setPassword("123456");
-		signUpFields.setConfirmPassword("123456");
 		return signUpFields;
 
 	}
+
+	ClientResponse getDummyResponse() {
+		ClientResponse cr = new ClientResponse(0, null, null, null);
+		cr.setStatus(200);
+		return cr;
+	}
+
+	public void testValidateEmail() {
+		WebResource service = Client.create().resource(
+				"http://localhost:8080/DonatemeWS");
+		WebResource mockSercvice = Mockito.mock(WebResource.class);
+		PatientClientImpl patientClient = PatientClientImpl.getInstance();
+		patientClient.setService(service);
+
+		ClientResponse clientResponse = new ClientResponse(2, null, null, null);
+
+		Mockito.when(mockSercvice.path("donateme")).thenReturn(service);
+		Mockito.when(mockSercvice.path("patient")).thenReturn(service);
+		Mockito.when(mockSercvice.path("signup")).thenReturn(service);
+		Mockito.when(mockSercvice.post(ClientResponse.class, null)).thenReturn(
+				clientResponse);
+
+		assertFalse(patientClient.isClientResponseStatusCode());
+
+	}
+
 }
-*/
