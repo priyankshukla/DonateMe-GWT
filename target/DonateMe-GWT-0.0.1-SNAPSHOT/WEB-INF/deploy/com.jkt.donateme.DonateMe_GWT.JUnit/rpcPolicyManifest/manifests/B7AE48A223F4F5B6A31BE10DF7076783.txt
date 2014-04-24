@@ -1,2 +1,0 @@
-serviceClass: com.jkt.donateme.client.rpc.MyService
-path: 812A975F29CFFC7185E03C3609F64897.gwt.rpc

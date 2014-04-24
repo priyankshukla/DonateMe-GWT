@@ -229,7 +229,11 @@ com.google.code.maven-play-plugin.net.tanesha.recaptcha4j
 	<artifactId>commons-io</artifactId>
 	<version>2.3</version>
 </dependency>
-
+<dependency>
+	<groupId>org.mockito</groupId>
+	<artifactId>mockito-all</artifactId>
+	<version>1.8.4</version>
+</dependency>
 <dependency>
 	<groupId>log4j</groupId>
 	<artifactId>log4j</artifactId>
