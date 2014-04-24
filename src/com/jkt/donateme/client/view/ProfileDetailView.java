@@ -299,7 +299,7 @@ captionPanel = new HorizontalPanel();
 	    
 	    defaultUploader.setMaximumFiles(1);
 	    defaultUploader.setMultipleSelection(false);
-	    defaultUploader.setValidExtensions("jpeg","jpg","git","png","bmp");
+	    defaultUploader.setValidExtensions("jpeg","jpg","gif","png","bmp");
 	    // Add a finish handler which will load the image once the upload finishes
 	    defaultUploader.addOnFinishUploadHandler(onFinishUploaderHandler);
 	    
@@ -310,7 +310,7 @@ captionPanel = new HorizontalPanel();
 	    upload.add(defaultUploader);
 	  //  uploadYourProfilePicturePanel.add(panelImages);
 	    uploadYourProfilePicturePanel.add(upload);
-	    uploadNoteLabel = new Label("Note: (only jpeg,jpg,git,png,bmp)");
+	    uploadNoteLabel = new Label("Note: (only jpeg,jpg,gif,png,bmp)");
 	    uploadNoteLabel.addStyleName("uploadnotelabel");
 	    uploadYourProfilePicturePanel.add(uploadNoteLabel);
 		patientDetailPanel.add(uploadYourProfilePicturePanel);

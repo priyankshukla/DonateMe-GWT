@@ -56,5 +56,7 @@ public class ProfileDetailsField implements Serializable {
 		return serialVersionUID;
 	}
 	
+	
+	
 
 }
