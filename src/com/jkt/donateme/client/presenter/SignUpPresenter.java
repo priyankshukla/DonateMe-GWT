@@ -58,7 +58,8 @@ public class SignUpPresenter extends WidgetPresenter<SignUpPresenter.Display> {
 	private boolean maleGender = false ;
 	private boolean femaleGender = false ;
 		
-    private Date date;
+    private Date date = new Date();
+
     private Date dateOfBirth;
     private EmailValidator validemail;
 	private SignUpFields signUpFields;
@@ -281,7 +282,6 @@ public class SignUpPresenter extends WidgetPresenter<SignUpPresenter.Display> {
 	}
 	
 	public void doValidation(String[] id){
-		date = new Date();
 		signUpFields = new SignUpFields();
 		validemail = new EmailValidator();
 		

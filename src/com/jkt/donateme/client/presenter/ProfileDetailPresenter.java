@@ -36,7 +36,8 @@ public class ProfileDetailPresenter extends
 	private boolean isNull = false;
 	private boolean isInValid = false;
 	private boolean isClicked = false;
-	private Date date;
+	private Date date = new Date();
+	
 	private Date dateOfBirth;
 	private EmailValidator validemail;
 	private ProfileDetailsField patientDetails;
@@ -172,7 +173,10 @@ public class ProfileDetailPresenter extends
 
 	}
 
+	@SuppressWarnings("deprecation")
 	public void getfields(boolean way) {
+		
+		
 
 		if (way) {
 			String[] id = { "titleOfYourPageTextBox", "donationNeededTextBox",
@@ -247,7 +251,6 @@ public class ProfileDetailPresenter extends
 	@SuppressWarnings("deprecation")
 	public void doValidation(String[] id) {
 
-		date = new Date();
 		date.setDate(date.getDate() -1);
 		patientDetails = new ProfileDetailsField();
 		validemail = new EmailValidator();
@@ -330,7 +333,7 @@ public class ProfileDetailPresenter extends
 					isNull = false;
 					display.setStatus(valueHolder, isNull, isInValid);
 					patientDetails
-							.setReasonForRaisingFundsPanel(donationNeeded);
+							.setReasonForRaisingFundsPanel(reasonsforRaisingFunds);
 
 				}
 
@@ -356,7 +359,7 @@ public class ProfileDetailPresenter extends
 					isNull = false;
 					display.setStatus(valueHolder, isNull, isInValid);
 					patientDetails
-							.setReasonForRaisingFundsPanel(profileSummary);
+							.setProfileSummaryPanel(profileSummary);
 
 				}
 
@@ -449,7 +452,7 @@ public class ProfileDetailPresenter extends
 	 * 
 	 * @return patientDetails
 	 */
-	public ProfileDetailsField getSignUpFields() {
+	public ProfileDetailsField getProfileDetailFields() {
 		return patientDetails;
 	}
 }
