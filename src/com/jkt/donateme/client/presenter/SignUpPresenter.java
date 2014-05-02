@@ -33,10 +33,8 @@ import com.jkt.donateme.client.rpc.SignUpServiceAsync;
 import com.jkt.donateme.client.validation.EmailValidator;
 import com.jkt.donateme.client.view.ProfileDetailView;
 
-
 public class SignUpPresenter extends WidgetPresenter<SignUpPresenter.Display> {
 
-	
 	private final SignUpServiceAsync signUpService = GWT
 			.create(SignUpService.class);
 	private final EmailCheckServiceAsync emailCheckServiceAsync = GWT
@@ -46,25 +44,25 @@ public class SignUpPresenter extends WidgetPresenter<SignUpPresenter.Display> {
 	private String email;
 	private String password;
 	private String confirmPassword;
-	private String containerId ;
+	private String containerId;
 	private String gender;
-    private String valueHolder ;
-	
-	private boolean isNull = false;
-	private boolean isInValid = false ;
-	private boolean isPasswordShort = false ;
-	private boolean isPasswordLong = false ;
-	private boolean isClicked = false;
-	private boolean maleGender = false ;
-	private boolean femaleGender = false ;
-		
-    private Date date = new Date();
+	private String valueHolder;
 
-    private Date dateOfBirth;
-    private EmailValidator validemail;
+	private boolean isNull = false;
+	private boolean isInValid = false;
+	private boolean isPasswordShort = false;
+	private boolean isPasswordLong = false;
+	private boolean isClicked = false;
+	private boolean maleGender = false;
+	private boolean femaleGender = false;
+
+	private Date date = new Date();
+
+	private Date dateOfBirth;
+	private EmailValidator validemail;
 	private SignUpFields signUpFields;
 	private DateTimeFormat dateTimeFormat;
-	
+
 	public interface Display extends WidgetDisplay {
 
 		public HasValue<String> getfirstNameTextBox();
@@ -85,7 +83,9 @@ public class SignUpPresenter extends WidgetPresenter<SignUpPresenter.Display> {
 
 		public DateBox getDob();
 
-		public void setStatus(String box ,boolean isNull ,boolean isInValid , boolean isPasswordShort , boolean isPasswordLong);
+		public void setStatus(String box, boolean isNull, boolean isInValid,
+				boolean isPasswordShort, boolean isPasswordLong);
+
 		public void duplicateEmailError();
 	}
 
@@ -101,62 +101,49 @@ public class SignUpPresenter extends WidgetPresenter<SignUpPresenter.Display> {
 	/*
 	 * Adds Click Handler To GetStarted Button .
 	 */
-	
-	
-	
-	
+
 	ClickHandler clickHandler = new ClickHandler() {
 
-		public void onClick(ClickEvent arg0) {	
-			
-			isClicked = true ;
+		public void onClick(ClickEvent arg0) {
+
+			isClicked = true;
 			getfields(isClicked);
-			
+
 		}
 	};
-	
-	
-	
-	
-	
-	
-	BlurHandler blurHandler = new BlurHandler(){
+
+	BlurHandler blurHandler = new BlurHandler() {
 
 		public void onBlur(BlurEvent event) {
-					
-  			TextBox object = (TextBox) event.getSource();
-  			containerId = object.getName();
-  			isClicked = false ;
+
+			TextBox object = (TextBox) event.getSource();
+			containerId = object.getName();
+			isClicked = false;
 			getfields(isClicked);
-  						
+
 		}
 	};
-	
-	
-	FocusHandler focusHandler = new FocusHandler(){
+
+	FocusHandler focusHandler = new FocusHandler() {
 
 		public void onFocus(FocusEvent event) {
-			
+
 			TextBox object = (TextBox) event.getSource();
-  			containerId = object.getName();
-  			getFieldsOnFocus();
+			containerId = object.getName();
+			getFieldsOnFocus();
 		}
 	};
-	
-	
-	
-	
-	ValueChangeHandler<Date> vDhandler = new ValueChangeHandler<Date>(){
+
+	ValueChangeHandler<Date> vDhandler = new ValueChangeHandler<Date>() {
 
 		public void onValueChange(ValueChangeEvent<Date> event) {
-			
-			     DateBox object = (DateBox) event.getSource();
-			     containerId = object.getTextBox().getName();
-			  	 isClicked = false ;
-			     getfields(isClicked);
-			}
+
+			DateBox object = (DateBox) event.getSource();
+			containerId = object.getTextBox().getName();
+			isClicked = false;
+			getfields(isClicked);
+		}
 	};
-	
 
 	/**
 	 * Binds data on click.
@@ -168,123 +155,117 @@ public class SignUpPresenter extends WidgetPresenter<SignUpPresenter.Display> {
 		 * For GetStartedButton .
 		 */
 		display.getbtnGetStarted().addClickHandler(clickHandler);
-		
+
 		display.getDob().addValueChangeHandler(vDhandler);
-		
-		
-		((FocusWidget) display.getfirstNameTextBox()).addBlurHandler(blurHandler);
-		((FocusWidget)display.getlastNameTextBox()).addBlurHandler(blurHandler);
-		((FocusWidget) display.getDob().getTextBox()).addBlurHandler(blurHandler);
-		((FocusWidget)display.getEmailTextBox()).addBlurHandler(blurHandler);
-		((FocusWidget)display.getPasswordTextBox()).addBlurHandler(blurHandler);
-		((FocusWidget)display.getConfirmPasswordTextBox()).addBlurHandler(blurHandler);
-		//----------------------------------------------------------------------------------
-		
-		((FocusWidget) display.getfirstNameTextBox()).addFocusHandler(focusHandler);
-		((FocusWidget)display.getlastNameTextBox()).addFocusHandler(focusHandler);
-		((FocusWidget)display.getEmailTextBox()).addFocusHandler(focusHandler);
-		((FocusWidget)display.getPasswordTextBox()).addFocusHandler(focusHandler);
-		((FocusWidget)display.getConfirmPasswordTextBox()).addFocusHandler(focusHandler);
-		
-		}
-	
-	
+
+		((FocusWidget) display.getfirstNameTextBox())
+				.addBlurHandler(blurHandler);
+		((FocusWidget) display.getlastNameTextBox())
+				.addBlurHandler(blurHandler);
+		((FocusWidget) display.getDob().getTextBox())
+				.addBlurHandler(blurHandler);
+		((FocusWidget) display.getEmailTextBox()).addBlurHandler(blurHandler);
+		((FocusWidget) display.getPasswordTextBox())
+				.addBlurHandler(blurHandler);
+		((FocusWidget) display.getConfirmPasswordTextBox())
+				.addBlurHandler(blurHandler);
+		// ----------------------------------------------------------------------------------
+
+		((FocusWidget) display.getfirstNameTextBox())
+				.addFocusHandler(focusHandler);
+		((FocusWidget) display.getlastNameTextBox())
+				.addFocusHandler(focusHandler);
+		((FocusWidget) display.getEmailTextBox()).addFocusHandler(focusHandler);
+		((FocusWidget) display.getPasswordTextBox())
+				.addFocusHandler(focusHandler);
+		((FocusWidget) display.getConfirmPasswordTextBox())
+				.addFocusHandler(focusHandler);
+
+	}
 
 	public void getfields(boolean way) {
-		
-		if(way){
-		String[] id = {"firstNameTextBox","lastNameTextBox","dateBox","Gender","emailTextBox","passwordTextBox","confirmPasswordTextBox"};
-		
-		doValidation(id);
-		}else{
-			String[] id = {containerId} ;
+
+		if (way) {
+			String[] id = { "firstNameTextBox", "lastNameTextBox", "dateBox",
+					"Gender", "emailTextBox", "passwordTextBox",
+					"confirmPasswordTextBox" };
+
+			doValidation(id);
+		} else {
+			String[] id = { containerId };
 			doValidation(id);
 		}
-		
 
 	}
-	
-	
-	public void getFieldsOnFocus(){
-		
-		String[] id = {containerId} ;
+
+	public void getFieldsOnFocus() {
+
+		String[] id = { containerId };
 		getFocusStatus(id);
 	}
-	
-	public void getFocusStatus(String[] id){
-		
-		
+
+	public void getFocusStatus(String[] id) {
+
 		for (int i = 0; i < id.length; i++) {
 
 			valueHolder = id[i];
 
 			if (id[i].equalsIgnoreCase("firstNameTextBox")) {
 
-				    isInValid = false;
-					isNull = false;
-					display.setStatus(valueHolder, isNull, isInValid,
-							isPasswordShort, isPasswordLong);
-					
-					
-				}
-			 else if (id[i].equalsIgnoreCase("lastNameTextBox")) {
+				isInValid = false;
+				isNull = false;
+				display.setStatus(valueHolder, isNull, isInValid,
+						isPasswordShort, isPasswordLong);
 
-				
+			} else if (id[i].equalsIgnoreCase("lastNameTextBox")) {
 
-					isInValid = false;
-					isNull = false;
-					display.setStatus(valueHolder, isNull, isInValid,
-							isPasswordShort, isPasswordLong);
-				}
+				isInValid = false;
+				isNull = false;
+				display.setStatus(valueHolder, isNull, isInValid,
+						isPasswordShort, isPasswordLong);
+			}
 
-			else if(id[i].equalsIgnoreCase("dateBox")){
+			else if (id[i].equalsIgnoreCase("dateBox")) {
 
-								
-					isInValid = false;
-					isNull = false;
-					display.setStatus(valueHolder, isNull, isInValid,
-							isPasswordShort, isPasswordLong);
+				isInValid = false;
+				isNull = false;
+				display.setStatus(valueHolder, isNull, isInValid,
+						isPasswordShort, isPasswordLong);
 
-										
-				}
+			}
 
-				
-			
 			else if (id[i].equalsIgnoreCase("emailTextBox")) {
-			
 
-					isInValid = false;
-					isNull = false;
-					display.setStatus(valueHolder, isNull, isInValid,
-							isPasswordShort, isPasswordLong);
-				}
-			else if (id[i].equalsIgnoreCase("passwordTextBox")) {
+				isInValid = false;
+				isNull = false;
+				display.setStatus(valueHolder, isNull, isInValid,
+						isPasswordShort, isPasswordLong);
+			} else if (id[i].equalsIgnoreCase("passwordTextBox")) {
 
-					isNull = false;
-					isPasswordShort = false;
-					isPasswordLong = false;
-					display.setStatus(valueHolder, isNull, isInValid,
-							isPasswordShort, isPasswordLong);
-				}
+				isNull = false;
+				isPasswordShort = false;
+				isPasswordLong = false;
+				display.setStatus(valueHolder, isNull, isInValid,
+						isPasswordShort, isPasswordLong);
+			}
 
-			 else if (id[i].equalsIgnoreCase("confirmPasswordTextBox")) {
+			else if (id[i].equalsIgnoreCase("confirmPasswordTextBox")) {
 
-					isNull = false;
-					isInValid = false;
-					display.setStatus(valueHolder, isNull, isInValid,
-							isPasswordShort, isPasswordLong);
-					
-				}
+				isNull = false;
+				isInValid = false;
+				display.setStatus(valueHolder, isNull, isInValid,
+						isPasswordShort, isPasswordLong);
 
-			
+			}
+
 		}
-		
+
 	}
-	
-	public void doValidation(String[] id){
+
+	public void doValidation(String[] id) {
 		signUpFields = new SignUpFields();
 		validemail = new EmailValidator();
-		
+
 		for (int i = 0; i < id.length; i++) {
 
 			valueHolder = id[i];
@@ -293,47 +274,45 @@ public class SignUpPresenter extends WidgetPresenter<SignUpPresenter.Display> {
 
 				firstName = display.getfirstNameTextBox().getValue().trim();
 				display.getfirstNameTextBox().setValue(firstName);
-				
+
 				if (firstName == null || firstName.isEmpty()) {
 					isNull = true;
 					isInValid = false;
 					display.setStatus(valueHolder, isNull, isInValid,
 							isPasswordShort, isPasswordLong);
-					
-				} else if (validemail.usernameValidate(firstName) == false) {
+
+				} else if (validemail.stringValidate(firstName) == false) {
 					isInValid = true;
 					isNull = false;
 					display.setStatus(valueHolder, isNull, isInValid,
 							isPasswordShort, isPasswordLong);
-					
+
 				} else {
 					isInValid = false;
 					isNull = false;
 					display.setStatus(valueHolder, isNull, isInValid,
 							isPasswordShort, isPasswordLong);
 					signUpFields.setFirstName(firstName);
-					
+
 				}
 			} else if (id[i].equalsIgnoreCase("lastNameTextBox")) {
 
 				lastName = display.getlastNameTextBox().getValue().trim();
 				display.getlastNameTextBox().setValue(lastName);
-				
+
 				if (lastName == null || lastName.isEmpty()) {
 
 					isNull = true;
 					isInValid = false;
 					display.setStatus(valueHolder, isNull, isInValid,
 							isPasswordShort, isPasswordLong);
-					
 
-				} else if (validemail.usernameValidate(lastName) == false) {
+				} else if (validemail.stringValidate(lastName) == false) {
 
 					isInValid = true;
 					isNull = false;
 					display.setStatus(valueHolder, isNull, isInValid,
 							isPasswordShort, isPasswordLong);
-					
 
 				} else {
 
@@ -342,11 +321,10 @@ public class SignUpPresenter extends WidgetPresenter<SignUpPresenter.Display> {
 					display.setStatus(valueHolder, isNull, isInValid,
 							isPasswordShort, isPasswordLong);
 					signUpFields.setLastName(lastName);
-					
+
 				}
 
-			}else if(id[i].equalsIgnoreCase("dateBox")){
-
+			} else if (id[i].equalsIgnoreCase("dateBox")) {
 
 				dateOfBirth = display.getDob().getValue();
 				if (dateOfBirth == null) {
@@ -370,24 +348,20 @@ public class SignUpPresenter extends WidgetPresenter<SignUpPresenter.Display> {
 
 					dateTimeFormat = DateTimeFormat.getFormat("dd - MM - yyyy");
 					String dateInString = dateTimeFormat.format(dateOfBirth);
-					 signUpFields.setDob(dateInString);
+					signUpFields.setDob(dateInString);
 				}
 
-				
-			
-			}else if (id[i].equalsIgnoreCase("emailTextBox")) {
-			
+			} else if (id[i].equalsIgnoreCase("emailTextBox")) {
 
 				email = display.getEmailTextBox().getValue().trim();
 				display.getEmailTextBox().setValue(email);
-				
+
 				if (email == null || email.isEmpty()) {
 
 					isNull = true;
 					isInValid = false;
 					display.setStatus(valueHolder, isNull, isInValid,
 							isPasswordShort, isPasswordLong);
-					
 
 				} else if (validemail.validate(email) == false) {
 
@@ -395,45 +369,44 @@ public class SignUpPresenter extends WidgetPresenter<SignUpPresenter.Display> {
 					isNull = false;
 					display.setStatus(valueHolder, isNull, isInValid,
 							isPasswordShort, isPasswordLong);
-					
- 				}else {
+
+				} else {
 					isInValid = false;
 					isNull = false;
 					display.setStatus(valueHolder, isNull, isInValid,
 							isPasswordShort, isPasswordLong);
 					signUpFields.setEmail(email);
-					
+
 				}
 			} else if (id[i].equalsIgnoreCase("passwordTextBox")) {
 
 				password = display.getPasswordTextBox().getValue();
-				
+
 				if (password == null || password.isEmpty()) {
 					isNull = true;
 					display.setStatus(valueHolder, isNull, isInValid,
 							isPasswordShort, isPasswordLong);
-					
+
 				} else if (password.length() < 6) {
 					isNull = false;
 					isPasswordShort = true;
 					isPasswordLong = false;
 					display.setStatus(valueHolder, isNull, isInValid,
 							isPasswordShort, isPasswordLong);
-					
+
 				} else if (password.length() > 12) {
 					isNull = false;
 					isPasswordShort = false;
 					isPasswordLong = true;
 					display.setStatus(valueHolder, isNull, isInValid,
 							isPasswordShort, isPasswordLong);
-					
+
 				} else {
 					isNull = false;
 					isPasswordShort = false;
 					isPasswordLong = false;
 					display.setStatus(valueHolder, isNull, isInValid,
 							isPasswordShort, isPasswordLong);
-					
 
 					signUpFields.setPassword(password);
 
@@ -448,32 +421,32 @@ public class SignUpPresenter extends WidgetPresenter<SignUpPresenter.Display> {
 					isInValid = false;
 					display.setStatus(valueHolder, isNull, isInValid,
 							isPasswordShort, isPasswordLong);
-					
+
 				} else if ((!password.equals(confirmPassword))) {
 					isNull = false;
 					isInValid = true;
 					display.setStatus(valueHolder, isNull, isInValid,
 							isPasswordShort, isPasswordLong);
-					
+
 				} else {
 					isNull = false;
 					isInValid = false;
 					display.setStatus(valueHolder, isNull, isInValid,
 							isPasswordShort, isPasswordLong);
-					
+
 				}
 
-			}else{
-				
+			} else {
+
 				maleGender = display.getmRadioButton().getValue();
 				femaleGender = display.getfmRadioButton().getValue();
-				
+
 				if ((maleGender == false) && (femaleGender == false)) {
 					isNull = true;
 					isInValid = false;
 					display.setStatus(valueHolder, isNull, isInValid,
 							isPasswordShort, isPasswordLong);
-					
+
 				} else if ((maleGender == true) && (femaleGender == false)) {
 					isNull = false;
 					isInValid = false;
@@ -489,13 +462,11 @@ public class SignUpPresenter extends WidgetPresenter<SignUpPresenter.Display> {
 					gender = "female";
 					signUpFields.setGender(gender);
 				}
-				
-				
+
 			}
-					 		
+
 		}
-		
-		
+
 		emailCheckServiceAsync.validateDuplicateEmail(email,
 				new AsyncCallback<Boolean>() {
 					public void onFailure(Throwable arg0) {
@@ -504,20 +475,18 @@ public class SignUpPresenter extends WidgetPresenter<SignUpPresenter.Display> {
 
 					public void onSuccess(Boolean arg0) {
 						if (arg0) {
-							
-							
+
 							display.duplicateEmailError();
 						} else {
-							
+
 							validateSendToServer();
 						}
 					}
 				});
-		
-				
+
 		validateSendToServer();
 	}
-		
+
 	public void validateSendToServer() {
 
 		if (signUpFields.getFirstName() != null
@@ -527,27 +496,11 @@ public class SignUpPresenter extends WidgetPresenter<SignUpPresenter.Display> {
 				&& signUpFields.getDob() != null
 				&& signUpFields.getPassword() != null) {
 			sendToServer();
-			
+
 		}
 
 	}
-	
-	
-public void onNextPage(){
-		
-		
-		RootPanel.get("top").clear();
-		
-		ProfileDetailView display = new ProfileDetailView();
-		ProfileDetailPresenter presenter = new ProfileDetailPresenter(display, eventBus);
-		presenter.bind();
 
-		RootPanel.get("top").add(presenter.getDisplay().asWidget());
-		
-	}
-	
-	
-	
 	/**
 	 * on the click of getStart button the field values are send to server.
 	 */
@@ -555,27 +508,30 @@ public void onNextPage(){
 
 		signUpService.signUpServer(signUpFields,
 				new AsyncCallback<SignUpFields>() {
-			public void onFailure(Throwable caught) {
+					public void onFailure(Throwable caught) {
 
-			}
+					}
 
-			public void onSuccess(SignUpFields signUpFields) {
-				
-				
-				
-				
+					public void onSuccess(SignUpFields signUpFields) {
 
-			}
-		});
+					}
+				});
 		onNextPage();
 
-		
-		
-		
 	}
-	
-	
-	
+
+	public void onNextPage() {
+
+		RootPanel.get("top").clear();
+
+		ProfileDetailView display = new ProfileDetailView();
+		ProfileDetailPresenter presenter = new ProfileDetailPresenter(display,
+				eventBus);
+		presenter.bind();
+
+		RootPanel.get("top").add(presenter.getDisplay().asWidget());
+
+	}
 
 	/**
 	 * Need to be implemented
@@ -630,8 +586,6 @@ public void onNextPage(){
 	 * 
 	 * }
 	 */
-
-	
 
 	/**
 	 * getter for signUp fields

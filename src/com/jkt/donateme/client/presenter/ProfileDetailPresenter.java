@@ -18,11 +18,15 @@ import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.i18n.client.DateTimeFormat;
 import com.google.gwt.user.client.ui.FocusWidget;
 import com.google.gwt.user.client.ui.HasValue;
+import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.TextArea;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.datepicker.client.DateBox;
+import com.jkt.donateme.client.model.BeneficiaryDetailsFields;
 import com.jkt.donateme.client.model.ProfileDetailsField;
 import com.jkt.donateme.client.validation.EmailValidator;
+import com.jkt.donateme.client.view.BeneficiaryDetailsView;
+import com.jkt.donateme.client.view.ProfileDetailView;
 
 public class ProfileDetailPresenter extends
 		WidgetPresenter<ProfileDetailPresenter.Display> {
@@ -42,6 +46,7 @@ public class ProfileDetailPresenter extends
 	private EmailValidator validemail;
 	private ProfileDetailsField patientDetails;
 	private DateTimeFormat dateTimeFormat;
+	private BeneficiaryDetailsFields beneficiaryDetailsFields;
 
 	public interface Display extends WidgetDisplay {
 
@@ -176,8 +181,6 @@ public class ProfileDetailPresenter extends
 	@SuppressWarnings("deprecation")
 	public void getfields(boolean way) {
 		
-		
-
 		if (way) {
 			String[] id = { "titleOfYourPageTextBox", "donationNeededTextBox",
 					"reasonForRaisingFundsTextBox", "profileSummaryTextArea",
@@ -270,7 +273,7 @@ public class ProfileDetailPresenter extends
 					isInValid = false;
 					display.setStatus(valueHolder, isNull, isInValid);
 
-				} else if (validemail.usernameValidate(titleOfYourPage) == false) {
+				} else if (validemail.stringValidate(titleOfYourPage) == false) {
 					isInValid = true;
 					isNull = false;
 					display.setStatus(valueHolder, isNull, isInValid);
@@ -294,7 +297,7 @@ public class ProfileDetailPresenter extends
 					isInValid = false;
 					display.setStatus(valueHolder, isNull, isInValid);
 
-				} else if (validemail.donationAmountValidate(donationNeeded) == false) {
+				} else if (validemail.integerValidate(donationNeeded) == false) {
 
 					isInValid = true;
 					isNull = false;
@@ -322,7 +325,7 @@ public class ProfileDetailPresenter extends
 					isInValid = false;
 					display.setStatus(valueHolder, isNull, isInValid);
 
-				} else if (validemail.usernameValidate(reasonsforRaisingFunds) == false) {
+				} else if (validemail.stringValidate(reasonsforRaisingFunds) == false) {
 					isInValid = true;
 					isNull = false;
 					display.setStatus(valueHolder, isNull, isInValid);
@@ -390,9 +393,42 @@ public class ProfileDetailPresenter extends
 			}
 
 		}
+		validateSendToServer();
+		
+	}
+	public void validateSendToServer() {
+
+		if (patientDetails.getTitleOfYourPagePanel() != null && 
+				patientDetails.getDonationNeededPanel() != null
+				&& patientDetails.getProfileSummaryPanel() != null
+				&& patientDetails.getReasonForRaisingFundsPanel() != null
+				&& patientDetails.getEndCollectingMoneyOnPanel() != null
+				/*&& beneficiaryDetailsFields.gete != null
+				&& beneficiaryDetailsFields.getAddressLine2() != null
+				&& beneficiaryDetailsFields.getCity() != null
+				&& beneficiaryDetailsFields.getState() != null
+				&& beneficiaryDetailsFields.getZip() != null
+				&& beneficiaryDetailsFields.getPhoneNumber() != null*/) {
+			onNextPage();
+
+		}
 
 	}
 
+
+	public void onNextPage(){
+		
+		
+		RootPanel.get("top").clear();
+		
+		BeneficiaryDetailsView display = new BeneficiaryDetailsView();
+		BeneficiaryDetailsPresenter presenter = new BeneficiaryDetailsPresenter(display, eventBus);
+		presenter.bind();
+
+		RootPanel.get("top").add(presenter.getDisplay().asWidget());
+		
+	}
+	
 	/**
 	 * Need to be implemented
 	 */
