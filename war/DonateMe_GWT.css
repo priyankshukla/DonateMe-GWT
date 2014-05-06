@@ -1350,6 +1350,10 @@ a:focus{outline:none;}
 .fields{margin-bottom:15px;}
 .panelspace{ }
 .fieldlabel{font:normal 16px MyriadProRegular; float:left;}
+.relationfieldlabel{font: 16px MyriadProRegular;
+float: left;
+width: 246px;}
+
 .started-btn input[type="button"]{ background:none; border:none; cursor:pointer; float:right; padding:10px 0px; border-radius:5px; width:123px; color:#FFF; background:url(./images/nav-bg.jpg) top repeat-x;font:normal 16px MyriadProRegular; margin-right:10px; margin-top:60px;margin-left: 1000px}
 .continue-btn{ margin-right:122px;}
 .continue-btn input[type="button"]{ background:none; border:none; cursor:pointer; float:right; padding:10px 0px; border-radius:5px; width:160px; color:#FFF; background:url(./images/nav-bg.jpg) top repeat-x;font:normal 16px MyriadProRegular; margin-top:40px; margin-right:10px;}
@@ -1427,12 +1431,38 @@ textarea{ width:328px; height:80px;}
 	width: 630px;height: 47px;margin-bottom:15px;
 	    padding: 20px 0px 0px 20px;
 }
+/* .stylehorizontalpanelForrelation{
+	width: 830px;height: 47px;margin-bottom:15px;
+	    padding: 20px 0px 0px 20px;
+} */
+
+.styleverticalnamepanel{
+	width: 146px;height: 35px;margin-bottom:15px;
+	    padding: 20px 0px 0px 20px;
+	    margin-right: -110px;
+}
+
 .styletextbox{
 	
 	margin-top:-40px;
 	margin-right: -10px;
 		
 }
+.stylevvvvvvvvvvvvvvvvvtextbox{
+	
+	margin-top:222px;
+	margin-right: 35px;
+		
+}
+.styleveticaltextboxes{
+	width:222px !important ;
+	height:35px !important ;
+	margin-bottom:15px;
+	    padding: 20px 0px 0px 20px;
+	
+	
+}
+
 
 .styleendcollectingmoneybox{
 	
@@ -1470,9 +1500,26 @@ textarea{ width:328px; height:80px;}
 
 	
 }
+
+.relationhtmlstyle{
+	color:  #ff0000 !important;
+	float: left; /* display:block; */
+	 width:10px; margin-left:-11px;
+	 margin-right: -144px;
+
+	
+}
+
 .mandatoryhtmlpanel{
 	float: left;
 	width: 135px;
+}
+
+.mandatoryhtmlpanelForrelation{
+	float: left;
+	width: 262px;
+	padding: 0px 0px 19px 0px;
+	
 }
 .mandatoryhtmlpanelinprofiledetailpage{
 	float: left;
@@ -1532,5 +1579,133 @@ textarea{ width:328px; height:80px;}
 	margin-top:-60px;
 	padding:0px 0px 5px 15px;
 }
+.toppage{
+	width:250px !important;
+}
 
+.stylelistbox{
+	width:250px !important;
+	height:35px;
+	padding: 8px;
+}
+
+.toppageForArea{
+	width:150px !important;
+}
+.errortest{
+	width:10px;	
+}
+.responselabelerrorforbeneficiarypage {
+  color: #ff0000;
+  width : 203px;
+  height:17px;
+  /* margin-left:20 px; */
+  font-size:x-small;  !important; /* margin-top:-15px; */
+ /*  padding-left: 198px; */
+}
+
+
+/* nitish */
+.paymenttextbox{
+	width:250px !important;
+}
+
+
+.responselabelerrorforbeneficiary{
+	color: #ff0000;
+  width : 250px;
+  height:17px;
+  /* margin-left:20 px; */
+  font-size:x-small;  !important;/*  margin-top:-15px; */
+ /*  padding-left: 198px; */
+}
+.beneficiaryradiopanel{
+ width: 250px;
+ margin-top:15px;
+}
+
+/* ankita */
+
+.feildmedicallabel{
+	font:normal 20px MyriadProRegular; float:left; font-weight:bold;
+}
+.stylehorizontalpanel{
+	width: 630px;height: 47px;margin-bottom:15px;
+	    padding: 20px 0px 0px 20px;
+}
+
+.styledoctorstextbox{
+	
+  width: 250px !important;
+height: 35px !important;
+  
+		
+}
+
+.uploadreportLabel{
+	
+	margin-left:20px;
+	margin-top:30px;
+	font:normal 16px MyriadProRegular;
+	padding:0px 0px 10px 0px;
+	font-weight: bold;
+}
+
+
+.checkboxstylepanel{
+	padding:0px 0px 10px 0px;
+	margin-left:20px;
+	margin-top:30px;
+}
+
+.termsandconditionsButton {
+  background:none; border:none; cursor:pointer;border-radius:5px; 
+   color:rgb(229,238,242); /* background:url(./images/nav-bg.jpg) top repeat-x; */font:normal 16px MyriadProRegular ;color:  #0041C2 !important; 
+   width: 190px;height: 30px;  margin-left: 0px; padding: 0px 40px 30px 0px;
+}
+
+.finishButton {
+  background:none; border:none; cursor:pointer;border-radius:5px; 
+   color:#FFF; background:url(./images/nav-bg.jpg) top repeat-x;font:normal 16px MyriadProRegular; 
+   width: 103px;height: 30px;  margin-left: 10px;
+}
+
+.backButton {
+  background:none; border:none; cursor:pointer;border-radius:5px; 
+   color:#FFF; background:url(./images/nav-bg.jpg) top repeat-x;font:normal 16px MyriadProRegular; 
+   width: 103px;height: 30px;  margin-left: 350px;
+}
+
+
+
+ .doctornameerrorlabel {
+  color: #ff0000;
+  width : 330px;
+  height:17px;
+  /* margin-left:20 px; */
+  font-size:x-small;  !important; margin-top:-15px;
+  padding-left: 20px;
+}
+
+.hospitalerrornamelabel{
+	 color: #ff0000;
+  width : 330px;
+  height:17px;
+  /* margin-left:20 px; */
+  font-size:x-small;  !important; margin-top:-15px;
+  padding-left: 325px;
+}
+
+.checkuploadfileerrornamelabel{
+	color: #ff0000;
+  width : 330px;
+  height:17px;
+  /* margin-left:20 px; */
+  font-size:x-small;  !important; margin-top:-15px;
+  padding-left: 325px;
+  padding: 0px 0px 0px 20px;
+  margin-top: 1px;
+}
+
+}
 }

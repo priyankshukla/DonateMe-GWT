@@ -24,7 +24,6 @@ public class DonateMe_GWT implements EntryPoint {
 
 		SignUpView display = new SignUpView();
 		SignUpPresenter presenter = new SignUpPresenter(display, eventBus);
-
 		presenter.bind();
 
 		RootPanel.get("top").add(presenter.getDisplay().asWidget());

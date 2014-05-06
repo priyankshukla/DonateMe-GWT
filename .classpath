@@ -27,13 +27,6 @@
   <classpathentry kind="var" path="M2_REPO/com/googlecode/gwtupload/gwtupload/1.0.0/gwtupload-1.0.0.jar"/>
   <classpathentry kind="var" path="M2_REPO/commons-fileupload/commons-fileupload/1.2.1/commons-fileupload-1.2.1.jar"/>
   <classpathentry kind="var" path="M2_REPO/commons-io/commons-io/2.3/commons-io-2.3.jar"/>
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
   <classpathentry kind="var" path="M2_REPO/org/mockito/mockito-all/1.8.4/mockito-all-1.8.4.jar"/>
->>>>>>> 3e530eb63d0b98d66885acb6861033c56b33c88e
-=======
-  <classpathentry kind="var" path="M2_REPO/org/mockito/mockito-all/1.8.4/mockito-all-1.8.4.jar"/>
->>>>>>> 231d8c16a41687bb6ae8a88316a7d6076f05e5e8
   <classpathentry kind="var" path="M2_REPO/log4j/log4j/1.2.4/log4j-1.2.4.jar"/>
 </classpath>
