@@ -87,6 +87,8 @@ public class SignUpPresenter extends WidgetPresenter<SignUpPresenter.Display> {
 				boolean isPasswordShort, boolean isPasswordLong);
 
 		public void duplicateEmailError();
+		
+		public void setServiceStatus();
 	}
 
 	/**
@@ -509,14 +511,17 @@ public class SignUpPresenter extends WidgetPresenter<SignUpPresenter.Display> {
 		signUpService.signUpServer(signUpFields,
 				new AsyncCallback<SignUpFields>() {
 					public void onFailure(Throwable caught) {
+						
+						display.setServiceStatus();
 
 					}
 
 					public void onSuccess(SignUpFields signUpFields) {
-
+						onNextPage();
+						
 					}
 				});
-		onNextPage();
+		
 
 	}
 

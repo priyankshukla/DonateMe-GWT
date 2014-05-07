@@ -8,6 +8,7 @@ import com.google.gwt.event.dom.client.HasClickHandlers;
 import com.google.gwt.i18n.client.DateTimeFormat;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
+import com.google.gwt.user.client.ui.DialogBox;
 import com.google.gwt.user.client.ui.FormPanel;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.HasValue;
@@ -43,6 +44,7 @@ public class SignUpView extends Composite implements Display {
 	private HorizontalPanel signCaptionPanel;
 	private HorizontalPanel profileDetailCaptionPanel;
 	private HorizontalPanel beneficiaryDetailCaptionPanel;
+	private VerticalPanel serviceDownPanel;
 	
 	private Label firstNameLabel;
 	private Label lastNameLabel;
@@ -62,6 +64,7 @@ public class SignUpView extends Composite implements Display {
 	private Label signupCaptionLabel;
 	private Label profileDetailCaptionLabel;
 	private Label beneficiaryDetailCaptionLabel;
+	private Label serviceDownErrorLabel;
 	
 	private TextBox lastNameTextBox;
 	private TextBox emailTextBox;
@@ -72,9 +75,12 @@ public class SignUpView extends Composite implements Display {
 	private RadioButton mRadioButton;
 	private RadioButton fmRadioButton;
 	private Button getStartedButton;
+	private Button serviceDownButton;
+	private DialogBox serviceDownErrorBox;
 	DateTimeFormat dateTimeFormat;
 	DefaultFormat defaultFormat;
 	ClickHandler doBImageClickhandler;
+	
 	DatePickerWithYearSelectorNew datePickerWithYearSelectorNew;
 	Date date = new Date();
 
@@ -525,6 +531,41 @@ public class SignUpView extends Composite implements Display {
 				.setText(" Email already exists. Please choose another email id ");
 		emailErrorLabel.addStyleName("responselabelerror");
 
+	}
+	
+	public void setServiceStatus(){
+		serviceDownErrorBox = new DialogBox();
+		serviceDownErrorBox.setGlassEnabled(true);
+		serviceDownPanel = new VerticalPanel();
+		
+		serviceDownErrorLabel = new Label();
+		serviceDownErrorLabel.addStyleName("servicedownlabel");
+		serviceDownErrorLabel.setText("Unable to save the data");
+			
+		serviceDownButton = new Button("Ok");
+		serviceDownButton.addStyleName("servicebutton");
+		
+		serviceDownPanel.add(serviceDownErrorLabel);
+		serviceDownPanel.add(serviceDownButton);
+		
+		serviceDownErrorBox.add(serviceDownPanel);
+		serviceDownErrorBox.center();
+		serviceDownErrorBox.setAnimationEnabled(true);
+		serviceDownErrorBox.setVisible(true);
+		
+		ClickHandler handler = new  ClickHandler(){
+
+			public void onClick(ClickEvent arg0) {
+				serviceDownErrorBox.hide();
+				
+}
+			
+		};
+		
+		
+		
+		serviceDownButton.addClickHandler(handler);
+		
 	}
 
 }
