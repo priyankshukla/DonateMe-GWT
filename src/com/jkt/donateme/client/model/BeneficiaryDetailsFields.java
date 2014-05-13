@@ -1,11 +1,11 @@
 package com.jkt.donateme.client.model;
 
-import java.io.Serializable;
-
 import javax.xml.bind.annotation.XmlRootElement;
-@XmlRootElement(name = "register")
 
-public class BeneficiaryDetailsFields implements Serializable {
+import com.google.gwt.user.client.rpc.IsSerializable;
+@XmlRootElement(name = "profile")
+
+public class BeneficiaryDetailsFields implements IsSerializable {
 
 	private static final long serialVersionUID = 1L;
 	private String relationToBeneficiary;	
@@ -24,11 +24,29 @@ public class BeneficiaryDetailsFields implements Serializable {
 	private String containerId;
 	private String valueHolder;
 	private String reasonsforRaisingFunds;
-	//ankita
+	private boolean isCheque ;
+	private boolean isWireTransfer ;
+	private String cheque ;
+	private String accNumber;
+	private String bankName ;
+	private String holderName ;
+	private String ifscCode ;
+	private String cityName ;
+	private String stateName ;
+	//medical details
 	private String doctorName;
+	
 	private String hospitalName;
 	private String diseaseName;
 	private String uploadYourProfilePicturePanel;
+	private String titleOfYourPagePanel;
+	private String donationNeededPanel;
+	private String reasonForRaisingFundsPanel;
+	private String profileSummaryPanel;
+	private String endCollectingMoneyOnPanel;
+	
+	
+	
 	
 	public String getTitleOfYourPage() {
 		return titleOfYourPage;
@@ -161,5 +179,106 @@ public class BeneficiaryDetailsFields implements Serializable {
 			String uploadYourProfilePicturePanel) {
 		this.uploadYourProfilePicturePanel = uploadYourProfilePicturePanel;
 	}
+	public boolean isCheque() {
+		return isCheque;
+	}
+	public void setCheque(boolean isCheque) {
+		this.isCheque = isCheque;
+	}
+	public boolean isWireTransfer() {
+		return isWireTransfer;
+	}
+	public void setWireTransfer(boolean isWireTransfer) {
+		this.isWireTransfer = isWireTransfer;
+	}
+	public String getCheque() {
+		return cheque;
+	}
+	public void setCheque(String cheque) {
+		this.cheque = cheque;
+	}
+	public String getAccNumber() {
+		return accNumber;
+	}
+	public void setAccNumber(String accNumber) {
+		this.accNumber = accNumber;
+	}
+	public String getBankName() {
+		return bankName;
+	}
+	public void setBankName(String bankName) {
+		this.bankName = bankName;
+	}
+	public String getHolderName() {
+		return holderName;
+	}
+	public void setHolderName(String holderName) {
+		this.holderName = holderName;
+	}
+	public String getIfscCode() {
+		return ifscCode;
+	}
+	public void setIfscCode(String ifscCode) {
+		this.ifscCode = ifscCode;
+	}
+	public String getCityName() {
+		return cityName;
+	}
+	public void setCityName(String cityName) {
+		this.cityName = cityName;
+	}
+	public String getStateName() {
+		return stateName;
+	}
+	public void setStateName(String stateName) {
+		this.stateName = stateName;
+	}
 	
+	
+	//pro
+	
+	//private static final long serialVersionUID = 1L;
+	
+	//private String uploadYourProfilePicturePanel;
+	
+	public String getTitleOfYourPagePanel() {
+		return titleOfYourPagePanel;
+	}
+	public void setTitleOfYourPagePanel(String titleOfYourPagePanel) {
+		this.titleOfYourPagePanel = titleOfYourPagePanel;
+	}
+	public String getDonationNeededPanel() {
+		return donationNeededPanel;
+	}
+	public void setDonationNeededPanel(String donationNeededPanel) {
+		this.donationNeededPanel = donationNeededPanel;
+	}
+	public String getReasonForRaisingFundsPanel() {
+		return reasonForRaisingFundsPanel;
+	}
+	public void setReasonForRaisingFundsPanel(String reasonForRaisingFundsPanel) {
+		this.reasonForRaisingFundsPanel = reasonForRaisingFundsPanel;
+	}
+	public String getProfileSummaryPanel() {
+		return profileSummaryPanel;
+	}
+	public void setProfileSummaryPanel(String profileSummaryPanel) {
+		this.profileSummaryPanel = profileSummaryPanel;
+	}
+	public String getEndCollectingMoneyOnPanel() {
+		return endCollectingMoneyOnPanel;
+	}
+	public void setEndCollectingMoneyOnPanel(String endCollectingMoneyOnPanel) {
+		this.endCollectingMoneyOnPanel = endCollectingMoneyOnPanel;
+	}
+	/*public String getUploadYourProfilePicturePanel() {
+		return uploadYourProfilePicturePanel;
+	}
+	public void setUploadYourProfilePicturePanel(
+			String uploadYourProfilePicturePanel) {
+		this.uploadYourProfilePicturePanel = uploadYourProfilePicturePanel;
+	}
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}*/
 }

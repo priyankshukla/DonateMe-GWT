@@ -5,7 +5,7 @@ import junit.framework.TestCase;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 
-import com.jkt.donateme.client.model.ProfileDetailsField;
+import com.jkt.donateme.client.model.BeneficiaryDetailsFields;
 import com.jkt.donateme.client.presenter.ProfileDetailPresenter;
 
 public class TestProfileDetails extends TestCase {
@@ -31,7 +31,7 @@ public class TestProfileDetails extends TestCase {
 	
 	
 	public void testPatientProfile() {
-		ProfileDetailsField createprofileFields = Mockito.mock(ProfileDetailsField.class);;
+		BeneficiaryDetailsFields createprofileFields = Mockito.mock(BeneficiaryDetailsFields.class);;
 		createprofileFields.setTitleOfYourPagePanel("titles");
 		createprofileFields.setDonationNeededPanel("10");
 		createprofileFields.setReasonForRaisingFundsPanel("cancer");
@@ -39,7 +39,7 @@ public class TestProfileDetails extends TestCase {
 		createprofileFields.setEndCollectingMoneyOnPanel("01/01/2014");
 		ProfileDetailPresenter presenter = Mockito.mock(ProfileDetailPresenter.class);
 		   
-		ProfileDetailsField pdf =createSignUpFields();
+		BeneficiaryDetailsFields pdf =createSignUpFields();
 		
      Mockito.when(createprofileFields.getTitleOfYourPagePanel()).thenReturn(pdf.getTitleOfYourPagePanel());
      Mockito.when(createprofileFields.getDonationNeededPanel()).thenReturn(pdf.getDonationNeededPanel());
@@ -52,8 +52,8 @@ public class TestProfileDetails extends TestCase {
 
 	}
 	
-	ProfileDetailsField createSignUpFields() {
-		ProfileDetailsField patientDetails = new ProfileDetailsField();
+	BeneficiaryDetailsFields createSignUpFields() {
+		BeneficiaryDetailsFields patientDetails = new BeneficiaryDetailsFields();
 		patientDetails.setTitleOfYourPagePanel("titles");
 		patientDetails.setDonationNeededPanel("10");
 		patientDetails.setProfileSummaryPanel("hello");
@@ -66,7 +66,7 @@ public class TestProfileDetails extends TestCase {
 	
 	
 	public void testRegisterPatientWithNullvalues() {
-		ProfileDetailsField createprofileFields = Mockito.mock(ProfileDetailsField.class);;
+		BeneficiaryDetailsFields createprofileFields = Mockito.mock(BeneficiaryDetailsFields.class);;
 		createprofileFields.setTitleOfYourPagePanel(null);
 		createprofileFields.setDonationNeededPanel(null);
 		createprofileFields.setReasonForRaisingFundsPanel(null);
@@ -74,7 +74,7 @@ public class TestProfileDetails extends TestCase {
 		createprofileFields.setEndCollectingMoneyOnPanel(null);
 		ProfileDetailPresenter presenter = Mockito.mock(ProfileDetailPresenter.class);
 		   
-		ProfileDetailsField pdf =createSignUpFields();
+		BeneficiaryDetailsFields pdf =createSignUpFields();
 		
      Mockito.when(createprofileFields.getTitleOfYourPagePanel()).thenReturn(pdf.getTitleOfYourPagePanel());
      Mockito.when(createprofileFields.getDonationNeededPanel()).thenReturn(pdf.getDonationNeededPanel());

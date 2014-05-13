@@ -23,7 +23,6 @@ import com.google.gwt.user.client.ui.TextArea;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.datepicker.client.DateBox;
 import com.jkt.donateme.client.model.BeneficiaryDetailsFields;
-import com.jkt.donateme.client.model.ProfileDetailsField;
 import com.jkt.donateme.client.validation.EmailValidator;
 import com.jkt.donateme.client.view.BeneficiaryDetailsView;
 import com.jkt.donateme.client.view.ProfileDetailView;
@@ -44,7 +43,7 @@ public class ProfileDetailPresenter extends
 	
 	private Date dateOfBirth;
 	private EmailValidator validemail;
-	private ProfileDetailsField patientDetails;
+	private BeneficiaryDetailsFields patientDetails;
 	private DateTimeFormat dateTimeFormat;
 	private BeneficiaryDetailsFields beneficiaryDetailsFields;
 
@@ -255,7 +254,7 @@ public class ProfileDetailPresenter extends
 	public void doValidation(String[] id) {
 
 		date.setDate(date.getDate() -1);
-		patientDetails = new ProfileDetailsField();
+		patientDetails = new BeneficiaryDetailsFields();
 		validemail = new EmailValidator();
 
 		for (int i = 0; i < id.length; i++) {
@@ -488,7 +487,7 @@ public class ProfileDetailPresenter extends
 	 * 
 	 * @return patientDetails
 	 */
-	public ProfileDetailsField getProfileDetailFields() {
+	public BeneficiaryDetailsFields getProfileDetailFields() {
 		return patientDetails;
 	}
 }

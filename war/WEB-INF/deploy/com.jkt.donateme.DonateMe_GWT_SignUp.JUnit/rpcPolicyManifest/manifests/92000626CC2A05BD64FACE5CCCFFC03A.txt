@@ -1,0 +1,2 @@
+serviceClass: com.jkt.donateme.client.rpc.EmailCheckService
+path: 31693FE917660E89F8E0E34A6C3C0C46.gwt.rpc
