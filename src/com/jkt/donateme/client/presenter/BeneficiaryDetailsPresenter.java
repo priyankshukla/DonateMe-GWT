@@ -858,7 +858,7 @@ public class BeneficiaryDetailsPresenter extends
 					isInValid = false;
 					isNull = false;
 					display.setStatus(valueHolder, isNull, isInValid);
-					//signUpFields.setFirstName(cheque);
+					beneficiaryDetailsFields.setCheque(cheque);
 					
 				}
 			} else if (id[i].equalsIgnoreCase("accNoTextBox")) {
@@ -885,7 +885,7 @@ public class BeneficiaryDetailsPresenter extends
 					isInValid = false;
 					isNull = false;
 					display.setStatus(valueHolder, isNull, isInValid);
-					//signUpFields.setLastName(accNumber);
+					beneficiaryDetailsFields.setAccNumber(accNumber);
 					
 				}
 
@@ -912,7 +912,7 @@ public class BeneficiaryDetailsPresenter extends
 					isNull = false;
 					display.setStatus(valueHolder, isNull, isInValid);
 							
-					 //signUpFields.setDob(bankName);
+					beneficiaryDetailsFields.setBankName(bankName);
 				}
 
 				
@@ -940,7 +940,7 @@ public class BeneficiaryDetailsPresenter extends
 						isInValid = false;
 					isNull = false;
 					display.setStatus(valueHolder, isNull, isInValid);
-					//signUpFields.setEmail(holderName);
+					beneficiaryDetailsFields.setHolderName(holderName);
 					
 				}
 			} else if (id[i].equalsIgnoreCase("ifscTextBox")) {
@@ -962,7 +962,7 @@ public class BeneficiaryDetailsPresenter extends
 					isInValid = false;
 					isNull = false;
 					display.setStatus(valueHolder, isNull, isInValid);
-					//signUpFields.setEmail(ifscCode);
+					beneficiaryDetailsFields.setIfscCode(ifscCode);
 					
 				}
 
@@ -986,7 +986,7 @@ public class BeneficiaryDetailsPresenter extends
 						isInValid = false;
 					isNull = false;
 					display.setStatus(valueHolder, isNull, isInValid);
-					//signUpFields.setEmail(cityName);
+					beneficiaryDetailsFields.setCityName(cityName);
 					
 				}
 
@@ -1010,7 +1010,7 @@ public class BeneficiaryDetailsPresenter extends
 						isInValid = false;
 					isNull = false;
 					display.setStatus(valueHolder, isNull, isInValid);
-					//signUpFields.setEmail(stateName);
+					beneficiaryDetailsFields.setStateName(stateName);
 					
 				}
 
@@ -1116,7 +1116,7 @@ public class BeneficiaryDetailsPresenter extends
 			}
 
 		}
-		else {
+		else if (id[i].equalsIgnoreCase("checkuploadFile")){
 //upload file
 			if(display.getUploadInfo() == null){
 				
@@ -1177,6 +1177,9 @@ public class BeneficiaryDetailsPresenter extends
 	protected void onUnbind() {
 		// TODO Auto-generated method stub
 
+	}
+	public BeneficiaryDetailsFields getBenefiaryDetails() {
+		return beneficiaryDetailsFields;
 	}
 	
 

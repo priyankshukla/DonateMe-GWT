@@ -1347,8 +1347,8 @@ public void reInitialisePayment(boolean cheque){
 		if (value) {
 			namePanel.setVisible(false);
 			emailPanel.setVisible(false);
-			contactPanel.setVisible(true);
-			phoneNumberPanel.setVisible(true);
+			//contactPanel.setVisible(true);
+			//phoneNumberPanel.setVisible(true);
 		}
 	}
 public void resetItems(){
