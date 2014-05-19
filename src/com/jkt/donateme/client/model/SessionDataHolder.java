@@ -15,8 +15,8 @@ public class SessionDataHolder implements IsSerializable {
 			BeneficiaryDetailsFields beneficiarysessionDetails) {
 		
 		this.beneficiarysessionDetails = beneficiarysessionDetails;
-		System.out.println("beneficiarysessionDetails " +beneficiarysessionDetails);
-		System.out.println(beneficiarysessionDetails.getAddressLine1()+" Address line 1111111");
+	//	System.out.println("beneficiarysessionDetails " +beneficiarysessionDetails);
+	//	System.out.println(beneficiarysessionDetails.getAddressLine1()+" Address line 1111111");
 	}
 	public SessionDataHolder() {
 		//not required

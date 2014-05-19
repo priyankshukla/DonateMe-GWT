@@ -1,14 +1,11 @@
 package com.jkt.donateme.client.model;
-
-import java.sql.Blob;
-import java.util.Date;
+import java.io.Serializable;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
-import com.google.gwt.user.client.rpc.IsSerializable;
 @XmlRootElement(name = "profile")
 
-public class BeneficiaryDetailsFields implements IsSerializable {
+public class BeneficiaryDetailsFields implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	private String relationToBeneficiary;	
@@ -27,8 +24,8 @@ public class BeneficiaryDetailsFields implements IsSerializable {
 	private String containerId;
 	private String valueHolder;
 	private String reasonsforRaisingFunds;
-//	private boolean isCheque ;
-//	private boolean isWireTransfer ;
+	//private boolean isCheque ;
+	//private boolean isWireTransfer ;
 	private String cheque ;
 	private String accNumber;
 	private String bankName ;
@@ -41,7 +38,7 @@ public class BeneficiaryDetailsFields implements IsSerializable {
 	private String doctorName;	
 	private String hospitalName;
 	private String diseaseName;
-	//private Blob uploadYourProfilePicturePanel;
+	private String uploadYourProfilePicturePanel;
 	
 	private String titleOfYourPagePanel;
 	private String donationNeededPanel;
@@ -80,12 +77,15 @@ public class BeneficiaryDetailsFields implements IsSerializable {
 	public void setEndCollectingMoneyOnPanel(String endCollectingMoneyOnPanel) {
 		this.endCollectingMoneyOnPanel = endCollectingMoneyOnPanel;
 	}
-	/*public Blob getUploadYourProfilePicturePanel() {
+	/*public String getUploadYourProfilePicturePanel() {
 		return uploadYourProfilePicturePanel;
 	}
 	public void setUploadYourProfilePicturePanel(
-			Blob uploadYourProfilePicturePanel) {
+			String uploadYourProfilePicturePanel) {
 		this.uploadYourProfilePicturePanel = uploadYourProfilePicturePanel;
+	}
+	public static long getSerialversionuid() {
+		return serialVersionUID;
 	}*/
 	
 	public String getTitleOfYourPage() {
@@ -211,14 +211,14 @@ public class BeneficiaryDetailsFields implements IsSerializable {
 	public void setDiseaseName(String diseaseName) {
 		this.diseaseName = diseaseName;
 	}
-	/*
+	
 	public String getUploadYourProfilePicturePanel() {
 		return uploadYourProfilePicturePanel;
 	}
 	public void setUploadYourProfilePicturePanel(
 			String uploadYourProfilePicturePanel) {
 		this.uploadYourProfilePicturePanel = uploadYourProfilePicturePanel;
-	}*/
+	}
 	/*public boolean isCheque() {
 		return isCheque;
 	}

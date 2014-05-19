@@ -1317,12 +1317,15 @@ public class BeneficiaryDetailsView extends Composite implements Display {
 		if (value) {
 			namePanel.setVisible(false);
 			emailPanel.setVisible(false);
+
 			firstNameTextBox.setValue(null);
 			lastNameTextBox.setValue(null);
 			emailTextBox.setValue(null);
 			//addressPanel.setVisible(true);
 		//	phoneNumberPanel.setVisible(true);
 			
+			//contactPanel.setVisible(true);
+			//phoneNumberPanel.setVisible(true);
 		}
 	}
 

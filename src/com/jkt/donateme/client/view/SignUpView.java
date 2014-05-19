@@ -21,7 +21,6 @@ import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.datepicker.client.DateBox;
 import com.google.gwt.user.datepicker.client.DateBox.DefaultFormat;
-import com.jkt.donateme.client.calendar.DatePickerWithYearSelectorNew;
 import com.jkt.donateme.client.presenter.SignUpPresenter.Display;
 
 public class SignUpView extends Composite implements Display {

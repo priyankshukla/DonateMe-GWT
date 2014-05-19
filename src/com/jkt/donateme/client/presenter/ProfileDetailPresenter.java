@@ -34,7 +34,6 @@ import com.jkt.donateme.client.rpc.PatientDetailService;
 import com.jkt.donateme.client.rpc.PatientDetailServiceAsync;
 import com.jkt.donateme.client.validation.EmailValidator;
 import com.jkt.donateme.client.view.BeneficiaryDetailsView;
-import com.jkt.donateme.client.view.ProfileDetailView;
 
 public class ProfileDetailPresenter extends
 		WidgetPresenter<ProfileDetailPresenter.Display> {
@@ -53,7 +52,11 @@ public class ProfileDetailPresenter extends
 	
 	private Date dateOfBirth;
 	private EmailValidator validemail;
+
 	private ProfileDetailsFields profileDetails;
+
+	private BeneficiaryDetailsFields patientDetails;
+
 	private DateTimeFormat dateTimeFormat;
 //	private BeneficiaryDetailsFields beneficiaryDetailsFields = ApplicationData.getInstance().getSessionDataHolder("beneficiaryDetailsFields").getBeneficiarysessionDetails();
 	//private BeneficiaryDetailsFields bef = ApplicationData.getInstance().getSessionDataHolder("BeneficiaryDetailsFields").getBeneficiarysessionDetails();
@@ -270,7 +273,11 @@ public class ProfileDetailPresenter extends
 	public void doValidation(String[] id) {
 
 		date.setDate(date.getDate() -1);
+
 		profileDetails = new ProfileDetailsFields();
+
+		patientDetails = new BeneficiaryDetailsFields();
+
 		validemail = new EmailValidator();
 
 		for (int i = 0; i < id.length; i++) {
@@ -569,7 +576,11 @@ public class ProfileDetailPresenter extends
 	 * 
 	 * @return patientDetails
 	 */
-	public ProfileDetailsFields getProfileDetailFields() {
-		return profileDetails;
+
+	/*public ProfileDetailsFields getProfileDetailFields() {
+		return profileDetails;*/
+
+	public BeneficiaryDetailsFields getProfileDetailFields() {
+		return patientDetails;
 	}
 }

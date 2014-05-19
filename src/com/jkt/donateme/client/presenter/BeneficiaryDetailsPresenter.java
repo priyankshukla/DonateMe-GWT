@@ -859,6 +859,7 @@ public class BeneficiaryDetailsPresenter extends
 					isNull = false;
 					display.setStatus(valueHolder, isNull, isInValid);
 					beneficiaryDetailsFields.setCheque(cheque);
+
 				}
 			} else if (id[i].equalsIgnoreCase("accNoTextBox")) {
 
@@ -883,6 +884,7 @@ public class BeneficiaryDetailsPresenter extends
 					isNull = false;
 					display.setStatus(valueHolder, isNull, isInValid);
 					beneficiaryDetailsFields.setAccNumber(accNumber);
+
 				}
 
 			} else if (id[i].equalsIgnoreCase("bankNameTextBox")) {
@@ -931,6 +933,7 @@ public class BeneficiaryDetailsPresenter extends
 					isNull = false;
 					display.setStatus(valueHolder, isNull, isInValid);
 					beneficiaryDetailsFields.setHolderName(holderName);
+
 				}
 			} else if (id[i].equalsIgnoreCase("ifscTextBox")) {
 
@@ -952,6 +955,7 @@ public class BeneficiaryDetailsPresenter extends
 					isNull = false;
 					display.setStatus(valueHolder, isNull, isInValid);
 					beneficiaryDetailsFields.setIfscCode(ifscCode);
+
 				}
 
 			} else if (id[i].equalsIgnoreCase("cityTextBox")) {
@@ -975,6 +979,7 @@ public class BeneficiaryDetailsPresenter extends
 					isNull = false;
 					display.setStatus(valueHolder, isNull, isInValid);
 					beneficiaryDetailsFields.setCityName(cityName);
+
 				}
 
 			} else if (id[i].equalsIgnoreCase("stateTextBox")) {
@@ -999,6 +1004,7 @@ public class BeneficiaryDetailsPresenter extends
 					isNull = false;
 					display.setStatus(valueHolder, isNull, isInValid);
 					beneficiaryDetailsFields.setStateName(stateName);
+
 				}
 
 			} else if (id[i].equalsIgnoreCase("paymentMode")) {
@@ -1115,6 +1121,7 @@ public class BeneficiaryDetailsPresenter extends
 
 			}
 		}
+
 		validateSendToServer();
 		
 	}
@@ -1129,9 +1136,23 @@ public class BeneficiaryDetailsPresenter extends
 							&& profileDetails.getEndCollectingMoneyOnPanel() != null
 							&& profileDetails.getProfileSummaryPanel() != null
 							&& profileDetails.getReasonForRaisingFundsPanel() != null
-						
+							&& beneficiaryDetailsFields.getAddressLine1() != null
+							&& beneficiaryDetailsFields.getAddressLine2() != null
+							&& beneficiaryDetailsFields.getCity() != null
+							 && beneficiaryDetailsFields.getState() != null 
+							&& beneficiaryDetailsFields.getZip() != null
+							&& beneficiaryDetailsFields.getPhoneNumber() != null
+							&& beneficiaryDetailsFields.getDiseaseName() != null
+							&& beneficiaryDetailsFields.getDoctorName() != null
+							&& beneficiaryDetailsFields.getHospitalName() != null
+							&& beneficiaryDetailsFields.getCheque() != null){
 				
-				&& beneficiaryDetailsFields.getAddressLine1() != null
+				setSecondScreenValues();
+				sendToServer();}
+
+
+			else if(
+				 beneficiaryDetailsFields.getAddressLine1() != null
 					&& beneficiaryDetailsFields.getAddressLine2() != null
 					&& beneficiaryDetailsFields.getCity() != null
 					 && beneficiaryDetailsFields.getState() != null 
@@ -1140,7 +1161,6 @@ public class BeneficiaryDetailsPresenter extends
 					&& beneficiaryDetailsFields.getDiseaseName() != null
 					&& beneficiaryDetailsFields.getDoctorName() != null
 					&& beneficiaryDetailsFields.getHospitalName() != null
-					&& beneficiaryDetailsFields.getZip() != null
 					&& beneficiaryDetailsFields.getCheque() != null
 			
 			) {
@@ -1171,9 +1191,9 @@ public class BeneficiaryDetailsPresenter extends
 
 				sendToServer();
 			}
-				
+		}	
 
-	}
+	
 
 	public BeneficiaryDetailsFields setSelfFields() {
 		BeneficiaryDetailsFields beneficiaryDetailsFields = new BeneficiaryDetailsFields();
@@ -1254,6 +1274,9 @@ public class BeneficiaryDetailsPresenter extends
 	protected void onUnbind() {
 		// TODO Auto-generated method stub
 
+	}
+	public BeneficiaryDetailsFields getBenefiaryDetails() {
+		return beneficiaryDetailsFields;
 	}
 	
 	public void populateValue(ProfileDetailPresenter presenter){

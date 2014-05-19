@@ -30,7 +30,7 @@ public class TestDonateMe_GWT extends GWTTestCase {
 
 	@Override
 	public String getModuleName() {
-		return "com.jkt.donateme.DonateMe_GWT";
+		return "com.jkt.donateme.DonateMe_GWT_SignUp";
 	}
 
 	public void gwtSetUp() {

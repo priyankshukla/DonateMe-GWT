@@ -1,2 +1,0 @@
-serviceClass: com.jkt.donateme.client.rpc.PatientDetailService
-path: 2E19163809106AFB081AF1C1CF355215.gwt.rpc
