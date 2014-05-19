@@ -1,15 +1,7 @@
 package com.jkt.donateme.client.presenter;
 
-import gwtupload.client.MultiUploader;
-
 import java.util.Date;
 
-import net.customware.gwt.presenter.client.EventBus;
-import net.customware.gwt.presenter.client.place.PlaceRequest;
-import net.customware.gwt.presenter.client.widget.WidgetDisplay;
-import net.customware.gwt.presenter.client.widget.WidgetPresenter;
-
-import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.BlurEvent;
 import com.google.gwt.event.dom.client.BlurHandler;
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -22,24 +14,23 @@ import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.i18n.client.DateTimeFormat;
 import com.google.gwt.user.client.ui.FocusWidget;
 import com.google.gwt.user.client.ui.HasValue;
-import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.TextArea;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.datepicker.client.DateBox;
-import com.jkt.donateme.client.model.ApplicationData;
-import com.jkt.donateme.client.model.BeneficiaryDetailsFields;
-import com.jkt.donateme.client.model.ProfileDetailsFields;
-import com.jkt.donateme.client.model.SessionDataHolder;
-import com.jkt.donateme.client.rpc.PatientDetailService;
-import com.jkt.donateme.client.rpc.PatientDetailServiceAsync;
+import com.jkt.donateme.client.model.ProfileDetailsField;
 import com.jkt.donateme.client.validation.EmailValidator;
-import com.jkt.donateme.client.view.BeneficiaryDetailsView;
-import com.jkt.donateme.client.view.ProfileDetailView;
 
-public class ProfileDetailPresenter extends
-		WidgetPresenter<ProfileDetailPresenter.Display> {
-	private final PatientDetailServiceAsync patientDetailServiceAsync = GWT
-			.create(PatientDetailService.class);
+import net.customware.gwt.presenter.client.EventBus;
+import net.customware.gwt.presenter.client.place.PlaceRequest;
+import net.customware.gwt.presenter.client.widget.WidgetDisplay;
+import net.customware.gwt.presenter.client.widget.WidgetPresenter;
+
+public class BeneficiaryDetailsPresenter extends
+WidgetPresenter<BeneficiaryDetailsPresenter.Display>{
+	
+
+	
+
 	private String titleOfYourPage;
 	private String donationNeeded;
 	private String profileSummary;
@@ -53,10 +44,8 @@ public class ProfileDetailPresenter extends
 	
 	private Date dateOfBirth;
 	private EmailValidator validemail;
-	private ProfileDetailsFields profileDetails;
+	private ProfileDetailsField patientDetails;
 	private DateTimeFormat dateTimeFormat;
-//	private BeneficiaryDetailsFields beneficiaryDetailsFields = ApplicationData.getInstance().getSessionDataHolder("beneficiaryDetailsFields").getBeneficiarysessionDetails();
-	//private BeneficiaryDetailsFields bef = ApplicationData.getInstance().getSessionDataHolder("BeneficiaryDetailsFields").getBeneficiarysessionDetails();
 
 	public interface Display extends WidgetDisplay {
 
@@ -71,12 +60,8 @@ public class ProfileDetailPresenter extends
 		public HasClickHandlers getnextButton();
 
 		public DateBox getDob();
-		
-		public MultiUploader getuploadOfSecondScreen();
 
 		public void setStatus(String box, boolean isNull, boolean isInValid);
-		
-		
 	}
 
 	/**
@@ -84,9 +69,14 @@ public class ProfileDetailPresenter extends
 	 * service.
 	 */
 
-	public ProfileDetailPresenter(Display display, EventBus eventBus) {
+	
+	public BeneficiaryDetailsPresenter(Display display, EventBus eventBus) {
 		super(display, eventBus);
+		
 	}
+	/*public ProfileDetailPresenter(Display display, EventBus eventBus) {
+		super(display, eventBus);
+	}*/
 
 	/*
 	 * Adds Click Handler To GetStarted Button .
@@ -195,6 +185,8 @@ public class ProfileDetailPresenter extends
 	@SuppressWarnings("deprecation")
 	public void getfields(boolean way) {
 		
+		
+
 		if (way) {
 			String[] id = { "titleOfYourPageTextBox", "donationNeededTextBox",
 					"reasonForRaisingFundsTextBox", "profileSummaryTextArea",
@@ -224,7 +216,6 @@ public class ProfileDetailPresenter extends
 		for (int i = 0; i < id.length; i++) {
 
 			valueHolder = id[i];
-			
 
 			if (id[i].equalsIgnoreCase("titleOfYourPageTextBox")) {
 
@@ -270,7 +261,7 @@ public class ProfileDetailPresenter extends
 	public void doValidation(String[] id) {
 
 		date.setDate(date.getDate() -1);
-		profileDetails = new ProfileDetailsFields();
+		patientDetails = new ProfileDetailsField();
 		validemail = new EmailValidator();
 
 		for (int i = 0; i < id.length; i++) {
@@ -288,7 +279,7 @@ public class ProfileDetailPresenter extends
 					isInValid = false;
 					display.setStatus(valueHolder, isNull, isInValid);
 
-				} else if (validemail.stringValidate(titleOfYourPage) == false) {
+				} else if (validemail.usernameValidate(titleOfYourPage) == false) {
 					isInValid = true;
 					isNull = false;
 					display.setStatus(valueHolder, isNull, isInValid);
@@ -297,7 +288,7 @@ public class ProfileDetailPresenter extends
 					isInValid = false;
 					isNull = false;
 					display.setStatus(valueHolder, isNull, isInValid);
-					profileDetails.setTitleOfYourPagePanel(titleOfYourPage);
+					patientDetails.setTitleOfYourPagePanel(titleOfYourPage);
 
 				}
 			} else if (id[i].equalsIgnoreCase("donationNeededTextBox")) {
@@ -312,7 +303,7 @@ public class ProfileDetailPresenter extends
 					isInValid = false;
 					display.setStatus(valueHolder, isNull, isInValid);
 
-				} else if (validemail.integerValidate(donationNeeded) == false) {
+				} else if (validemail.donationAmountValidate(donationNeeded) == false) {
 
 					isInValid = true;
 					isNull = false;
@@ -323,7 +314,7 @@ public class ProfileDetailPresenter extends
 					isInValid = false;
 					isNull = false;
 					display.setStatus(valueHolder, isNull, isInValid);
-					profileDetails.setDonationNeededPanel(donationNeeded);
+					patientDetails.setDonationNeededPanel(donationNeeded);
 
 				}
 
@@ -340,7 +331,7 @@ public class ProfileDetailPresenter extends
 					isInValid = false;
 					display.setStatus(valueHolder, isNull, isInValid);
 
-				} else if (validemail.stringValidate(reasonsforRaisingFunds) == false) {
+				} else if (validemail.usernameValidate(reasonsforRaisingFunds) == false) {
 					isInValid = true;
 					isNull = false;
 					display.setStatus(valueHolder, isNull, isInValid);
@@ -350,7 +341,7 @@ public class ProfileDetailPresenter extends
 					isInValid = false;
 					isNull = false;
 					display.setStatus(valueHolder, isNull, isInValid);
-					profileDetails
+					patientDetails
 							.setReasonForRaisingFundsPanel(reasonsforRaisingFunds);
 
 				}
@@ -376,7 +367,7 @@ public class ProfileDetailPresenter extends
 					isInValid = false;
 					isNull = false;
 					display.setStatus(valueHolder, isNull, isInValid);
-					profileDetails
+					patientDetails
 							.setProfileSummaryPanel(profileSummary);
 
 				}
@@ -400,91 +391,17 @@ public class ProfileDetailPresenter extends
 					isNull = false;
 					display.setStatus(valueHolder, isNull, isInValid);
 
-					//dateTimeFormat = DateTimeFormat.getFormat("dd - MM - yyyy");
-					//String dateInString = dateTimeFormat.format(dateOfBirth);
-					profileDetails.setEndCollectingMoneyOnPanel(dateOfBirth);
-					
+					dateTimeFormat = DateTimeFormat.getFormat("dd - MM - yyyy");
+					String dateInString = dateTimeFormat.format(dateOfBirth);
+					patientDetails.setEndCollectingMoneyOnPanel(dateInString);
 				}
 
 			}
 
 		}
-		
-		
-		validateSendToServer();
-		
-	}
-	public void validateSendToServer() {
-
-		if (profileDetails.getTitleOfYourPagePanel() != null && 
-				profileDetails.getDonationNeededPanel() != null
-				&& profileDetails.getProfileSummaryPanel() != null
-				&& profileDetails.getReasonForRaisingFundsPanel() != null
-				&& profileDetails.getEndCollectingMoneyOnPanel() != null
-				/*&& beneficiaryDetailsFields.gete != null
-				&& beneficiaryDetailsFields.getAddressLine2() != null
-				&& beneficiaryDetailsFields.getCity() != null
-				&& beneficiaryDetailsFields.getState() != null
-				&& beneficiaryDetailsFields.getZip() != null
-				&& beneficiaryDetailsFields.getPhoneNumber() != null*/) {
-			
-			onNextPage(profileDetails);
-
-		}
 
 	}
-	
-	public void onNextPage(ProfileDetailsFields profileDetailsFields){		
-//		patientDetailServiceAsync.doLogin(loginModel, new AsyncCallback<ProfileDetailsFields>() {
-//			
-//			public void onSuccess(ProfileDetailsFields employee) {
-		
-	//	System.out.println("&&&&&&&&&&&&" + profileDetailsFields.getEndCollectingMoneyOnPanel());
-		sessionData(profileDetailsFields);
-		
-		
-		
-	}
 
-	private void sessionData(ProfileDetailsFields profileDetailsFields) {
-			//	System.out.println(employee.getDonationNeededPanel());
-			//	RootPanel.get().remove(0);
-				SessionDataHolder sessionDataHolder = new SessionDataHolder();
-				sessionDataHolder.setSecondScreendetails(profileDetailsFields);
-			//	System.out.println("**** " +sessionDataHolder.getSecondScreendetails().getTitleOfYourPagePanel());
-
-				ApplicationData.getInstance().injectSessionDataHolder("profileDetailsFields", sessionDataHolder);
-				
-				
-				//System.out.println(((ProfileDetailsFields)
-
-				/*System.out
-						.println("%%%%%%" +((ProfileDetailsFields) (((SessionDataHolder) ApplicationData
-								.getInstance().getSessionDataHolder(
-										"profileDetailsFields")).getSecondScreendetails()))
-								.getEndCollectingMoneyOnPanel());*/
-				
-				
-					//	.getEndCollectingMoneyOnPanel());
-
-				RootPanel.get("top").clear();
-				
-				BeneficiaryDetailsView display = new BeneficiaryDetailsView();
-				BeneficiaryDetailsPresenter presenter = new BeneficiaryDetailsPresenter(display, eventBus);
-				presenter.bind();
-
-				RootPanel.get("top").add(presenter.getDisplay().asWidget());
-				
-				/*BeneficiaryDetailsView displayBeneficiary = new BeneficiaryDetailsView();
-				BeneficiaryDetailsPresenter presenterBeneficiary = new BeneficiaryDetailsPresenter(
-						display, eventBus);
-				
-				populateBeneficiaryFields(presenterBeneficiary);*/
-			//	if(ApplicationData.getInstance().getSessionDataHolder("beneficiaryDetailsFields").getBeneficiarysessionDetails(). != null){
-			//	populateBeneficiaryFields(presenter);
-				//}
-	}
-	
 	/**
 	 * Need to be implemented
 	 */
@@ -528,31 +445,6 @@ public class ProfileDetailPresenter extends
 		// TODO Auto-generated method stub
 
 	}
-	
-	public void populateBeneficiaryFields(BeneficiaryDetailsPresenter presenterBeneficiary){
-		
-
-		//if(beneficiaryDetailsFields != null){
-		 BeneficiaryDetailsFields beneficiaryDetailsFields = ApplicationData.getInstance().getSessionDataHolder("beneficiaryDetailsFields").getBeneficiarysessionDetails();
-		System.out.println("()()() "+ApplicationData.getInstance().getSessionDataHolder("beneficiaryDetailsFields").getBeneficiarysessionDetails());
-		presenterBeneficiary.getDisplay().getAddressLine1TextBox().setValue(beneficiaryDetailsFields.getAddressLine1());
-		presenterBeneficiary.getDisplay().getAddressLine2TextBox().setValue(beneficiaryDetailsFields.getAddressLine2());
-		presenterBeneficiary.getDisplay().getCityTextBox().setValue(beneficiaryDetailsFields.getCity());
-		//presenterBeneficiary.getDisplay().getStateTextBox().setValue(beneficiaryDetailsFields.getState());
-		presenterBeneficiary.getDisplay().getZipTextBox().setValue(beneficiaryDetailsFields.getZip());
-		presenterBeneficiary.getDisplay().getChequeTextBox().setValue(beneficiaryDetailsFields.getCheque());
-		presenterBeneficiary.getDisplay().getAccNoTextBox().setValue(beneficiaryDetailsFields.getAccNumber());
-		presenterBeneficiary.getDisplay().getBankNameTextBox().setValue(beneficiaryDetailsFields.getBankName());
-		presenterBeneficiary.getDisplay().getHolderNameTextBox().setValue(beneficiaryDetailsFields.getHolderName());
-		presenterBeneficiary.getDisplay().getIfscTextBox().setValue(beneficiaryDetailsFields.getIfscCode());
-		presenterBeneficiary.getDisplay().getCityTextBoxForPayment().setValue(beneficiaryDetailsFields.getCityName());
-		presenterBeneficiary.getDisplay().getStateTextBoxForPayment().setValue(beneficiaryDetailsFields.getStateName());
-		presenterBeneficiary.getDisplay().gethospitalNameTextBox().setValue(beneficiaryDetailsFields.getHospitalName());
-		presenterBeneficiary.getDisplay().getdoctorNameTextBox().setValue(beneficiaryDetailsFields.getDoctorName());
-		presenterBeneficiary.getDisplay().getdiseaseNameTextBox().setValue(beneficiaryDetailsFields.getDiseaseName());
-		presenterBeneficiary.getDisplay().gethospitalNameTextBox().setValue(beneficiaryDetailsFields.getHospitalName());
-		//}
-	}
 
 	/**
 	 * This method directs the click on the get started button to fetch all the
@@ -569,7 +461,10 @@ public class ProfileDetailPresenter extends
 	 * 
 	 * @return patientDetails
 	 */
-	public ProfileDetailsFields getProfileDetailFields() {
-		return profileDetails;
+	public ProfileDetailsField getProfileDetailFields() {
+		return patientDetails;
 	}
+	
+	
+
 }

@@ -180,7 +180,7 @@ select {
   overflow: hidden;
 }
 
-/* .gwt-DialogBox .Caption {
+.gwt-DialogBox .Caption {
   background: #F1F1F1;
   padding: 4px 8px 4px 4px;
   cursor: default;
@@ -188,21 +188,13 @@ select {
   font-weight: bold;
   border-bottom: 1px solid #bbbbbb;
   border-top: 1px solid #D2D2D2;
-} */
+}
 .gwt-DialogBox .dialogContent {
 }
 .gwt-DialogBox .dialogMiddleCenter {
- padding: 3px;
-	background: white;
-	width:300px;
-	height:150px;
-	background: url("./images/small-box-bg.jpg") repeat-x scroll center top rgb(229, 238, 243);
-	/* box-shadow: 1px 1px 10px 3px rgb(224, 226, 225); */
-	box-shadow: 0px 0px 0px 0px rgb(224, 226, 225);
-	border-radius: 10px 10px 10px 10px;
+  padding: 3px;
+  background: white;
 }
-
-/* 
 .gwt-DialogBox .dialogBottomCenter {
   background: url(images/hborder.png) repeat-x 0px -2945px;
   -background: url(images/hborder_ie6.png) repeat-x 0px -2144px;
@@ -266,7 +258,7 @@ select {
   width: 12px;
   height: 12px;
   overflow: hidden;
-} */
+}
 
 .gwt-DisclosurePanel {
 }
@@ -1598,7 +1590,8 @@ textarea{ width:328px; height:80px;}
 }
 
 .toppageForArea{
-	width:150px !important;
+	width:187px !important;
+	font-size: 11px;
 }
 .errortest{
 	width:10px;	
@@ -1713,25 +1706,6 @@ height: 35px !important;
   padding-left: 325px;
   padding: 0px 0px 0px 20px;
   margin-top: 1px;
-}
-
-.servicebutton {
-	background: none;
-	border: none;
-	cursor: pointer;
-	border-radius: 5px;
-	color: #FFF;
-	background: url(./images/nav-bg.jpg) top repeat-x;
-	font: normal 16px MyriadProRegular;
-	width: 70px;
-	height: 30px;
-	margin-left: 110px;
-	margin-top:30px;
-}
-
-.servicedownlabel{
-	margin-left:60px;
-	font: normal 20px MyriadProRegular;
 }
 
 }

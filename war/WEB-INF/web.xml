@@ -19,13 +19,15 @@
   
   <servlet>
 		<servlet-name>greetServlet</servlet-name>
-		<servlet-class>com.jkt.donateme.server.SignUpServiceImpl</servlet-class>
+		<servlet-class>com.jkt.donateme.server.SignUpServiceImpl</servlet-class>		
 	</servlet>
   
   <servlet-mapping>
     <servlet-name>greetServlet</servlet-name>
     <url-pattern>/donateme_gwt/greet</url-pattern>
   </servlet-mapping>
+  
+  
   
   <servlet>
 		<servlet-name>emailServlet</servlet-name>
@@ -53,7 +55,18 @@
   <servlet-mapping>
     <servlet-name>uploadServlet</servlet-name>
     <url-pattern>*.gupld</url-pattern>
+    
   </servlet-mapping>
+  
+  <!--  <servlet>
+		<servlet-name>profileServlet</servlet-name>
+		<servlet-class>com.jkt.donateme.server.PatientDetailServiceImpl</servlet-class>
+	</servlet> 
+  <servlet-mapping>
+    <servlet-name>profileServlet</servlet-name>
+    <url-pattern>/donateme_gwt/profile</url-pattern>
+  </servlet-mapping>
+   -->
   <!-- Default page to serve -->
   <welcome-file-list>
     <welcome-file>DonateMe_GWT.html</welcome-file>
