@@ -1,0 +1,2 @@
+serviceClass: com.jkt.donateme.client.rpc.SignUpService
+path: F18F3E2CE4B7CA2B8B2AC05BAD724A14.gwt.rpc
