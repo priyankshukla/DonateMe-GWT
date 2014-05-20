@@ -1,2 +1,4 @@
 # Module donateme_gwt
 # RPC service class, partial path of RPC policy file
+com.jkt.donateme.client.rpc.PatientDetailService, EE2788789C02FDA7FD361BCDA25A358F.gwt.rpc
+com.jkt.donateme.client.rpc.SignUpService, 3330079B4BC5CC949177CEB132B2D2DE.gwt.rpc
