@@ -30,7 +30,7 @@ public class BeneficiaryDetailsView extends Composite implements Display {
 
 	private FormPanel formPanel;
 	private VerticalPanel beneficiaryDetailpanel;
-	//beneficiary details part
+	// beneficiary details part
 	private VerticalPanel relationToBeneficiaryPanel;
 	private VerticalPanel firstNamePanel;
 	private VerticalPanel lastNamePanel;
@@ -47,8 +47,10 @@ public class BeneficiaryDetailsView extends Composite implements Display {
 	private HorizontalPanel signCaptionPanel;
 	private HorizontalPanel profileDetailCaptionPanel;
 	private HorizontalPanel beneficiaryDetailCaptionPanel;
-	private HorizontalPanel namePanel ;
-	
+	private HorizontalPanel namePanel;
+	private HorizontalPanel areaPanel;
+
+
 	private Label relationToBeneficiaryLabel;
 	private Label firstNameLabel;
 	private Label lastNameLabel;
@@ -68,10 +70,11 @@ public class BeneficiaryDetailsView extends Composite implements Display {
 	private Label stateErrorLabel;
 	private Label zipErrorLabel;
 	private Label phoneNumberErrorLabel;
+	private Label realtionToBeneficiaryErrorLabel;
 	private Label signupCaptionLabel;
 	private Label profileDetailCaptionLabel;
 	private Label beneficiaryDetailCaptionLabel;
-	
+
 	private ListBox relationToBeneficiaryListBox;
 	private TextBox lastNameTextBox;
 	private TextBox emailTextBox;
@@ -83,9 +86,9 @@ public class BeneficiaryDetailsView extends Composite implements Display {
 	private TextBox addressLine1TextBox;
 	private TextBox addressLine2TextBox;
 
-	//payment mode part
-	
-	private VerticalPanel paymentModePanel ;
+	// payment mode part
+
+	private VerticalPanel paymentModePanel;
 	private HorizontalPanel radioButtonPanel;
 	private Label paymentModeLabel;
 	private Label recepientLabel;
@@ -95,8 +98,7 @@ public class BeneficiaryDetailsView extends Composite implements Display {
 	private Label ifscLabel;
 	private Label cityLabelForPayment;
 	private Label stateLabelForPayment;
-	
-	
+
 	private Label chequeErrorLabel;
 	private Label accNoErrorLabel;
 	private Label bankNameErrorLabel;
@@ -105,15 +107,15 @@ public class BeneficiaryDetailsView extends Composite implements Display {
 	private Label cityErrorLabelForPayment;
 	private Label stateErrorLabelForPayment;
 	private Label paymentErrorLabel;
-	
-	private RadioButton chequeButton ;
+
+	private RadioButton chequeButton;
 	private RadioButton wireTransferButton;
 	private VerticalPanel chequePanel;
 	private TextBox chequeTextBox;
 	private TextBox accNoTextBox;
 	private TextBox bankNameTextBox;
 	private TextBox holderNameTextBox;
-	private TextBox ifscTextBox ;
+	private TextBox ifscTextBox;
 	private TextBox cityTextBoxForPayment;
 	private TextBox stateTextBoxForPayment;
 	private VerticalPanel wireTarnsferPanel;
@@ -126,65 +128,47 @@ public class BeneficiaryDetailsView extends Composite implements Display {
 	private VerticalPanel bankNamePanel;
 	private VerticalPanel ifscPanel;
 	private VerticalPanel statePanelForPayment;
-	private HorizontalPanel  ButtonPanel;
-	//private Button testButton;
-	//ankita
-	
+
 	MultiUploader defaultUploader = new MultiUploader();
-	
-	//private VerticalPanel beneficiaryDetailpanel;
-	private VerticalPanel upload ;
+
+	private VerticalPanel upload;
 	private VerticalPanel doctorHospitalVerticalPanel;
 	private VerticalPanel doctorNameVerticalPanel;
 	private VerticalPanel diseaseNameVerticalPanel;
-	
+
 	private HorizontalPanel medicalDetailsPanel;
 	private HorizontalPanel doctorsPanel;
 	private HorizontalPanel diseaseNameHorizontalPanel;
 	private HorizontalPanel ckeckboxPanel;
-	
-	
+
 	private HorizontalPanel uploadYourProfilePicturePanel;
 	private HorizontalPanel nextButtonPanel;
-	
-//	private HorizontalPanel captionPanel;
-	//private HorizontalPanel signCaptionPanel;
-	//private HorizontalPanel profileDetailCaptionPanel;
-	//private HorizontalPanel beneficiaryDetailCaptionPanel;
 
 	private Label MedicalDetailsLabel;
 	private Label doctorNameLabel;
 	private Label hospitalNameLabel;
 	private Label diseaseNameLabel;
-	
-	private Label uploadLabel ;
-//	private Label signupCaptionLabel;
-	///private Label profileDetailCaptionLabel;
-	//private Label beneficiaryDetailCaptionLabel;
-	
+
+	private Label uploadLabel;
+
 	private Label doctorNameErrorLabel;
 	private Label diseaseNameErrorLabel;
 	private Label hospitalNameErrorLabel;
 	private Label checkUploaderrorLabel;
-	
-	
-	
+
 	private TextBox doctorNameTextBox;
 	private TextBox hospitalNameTextBox;
 	private TextBox diseaseNameTextBox;
-	
+
 	private Button nextButton;
 	private Button secondButton;
-	
-	
+
 	public UploadedInfo info;
 	// A panel where the thumbnails of uploaded images will be shown
-	  private FlowPanel panelImages = new FlowPanel();
-	
+	private FlowPanel panelImages = new FlowPanel();
+
 	Date date = new Date();
-	
-	
-	
+
 	/**
 	 * Constructor for the SignUp View That gets the FormPanel.
 	 */
@@ -193,42 +177,40 @@ public class BeneficiaryDetailsView extends Composite implements Display {
 		getBeneficiaryDetailView();
 
 	}
-	// Load the image in the document and in the case of success attach it to the viewer
-	  private IUploader.OnFinishUploaderHandler onFinishUploaderHandler = new IUploader.OnFinishUploaderHandler() {
-	    @SuppressWarnings("deprecation")
+
+	// Load the image in the document and in the case of success attach it to
+	// the viewer
+	private IUploader.OnFinishUploaderHandler onFinishUploaderHandler = new IUploader.OnFinishUploaderHandler() {
+		@SuppressWarnings("deprecation")
 		public void onFinish(IUploader uploader) {
-	      if (uploader.getStatus() == Status.SUCCESS) {
-	    	  checkUploaderrorLabel.removeStyleName("invalid");
+			if (uploader.getStatus() == Status.SUCCESS) {
+				checkUploaderrorLabel.removeStyleName("invalid");
 				checkUploaderrorLabel.setVisible(false);
-	        new PreloadedImage(uploader.fileUrl(), showImage);
-	        
-	        // The server sends useful information to the client by default
-	        info = uploader.getServerInfo();
-	        System.out.println("File name " + info.name);
-	        System.out.println("File content-type " + info.ctype);
-	        System.out.println("File size " + info.size);
+				new PreloadedImage(uploader.fileUrl(), showImage);
 
-	        // You can send any customized message and parse it 
-	        System.out.println("Server message" + info.message);
-	      }
-	     
-	      
+				// The server sends useful information to the client by default
+				info = uploader.getServerInfo();
+				System.out.println("File name " + info.name);
+				System.out.println("File content-type " + info.ctype);
+				System.out.println("File size " + info.size);
 
-	    }
-	  };
-	  
-	  
-	  // Attach an image to the pictures viewer
-	  private OnLoadPreloadedImageHandler showImage = new OnLoadPreloadedImageHandler() {
-	   		public void onLoad(PreloadedImage image) {
-			image.setWidth("55px");
-		      panelImages.add(image);
-			
+				// You can send any customized message and parse it
+				System.out.println("Server message" + info.message);
+			}
+
 		}
-	  };
-	  
-	  
-	  public UploadedInfo getUploadInfo() {
+	};
+
+	// Attach an image to the pictures viewer
+	private OnLoadPreloadedImageHandler showImage = new OnLoadPreloadedImageHandler() {
+		public void onLoad(PreloadedImage image) {
+			image.setWidth("55px");
+			panelImages.add(image);
+
+		}
+	};
+
+	public UploadedInfo getUploadInfo() {
 		return info;
 	}
 
@@ -276,10 +258,8 @@ public class BeneficiaryDetailsView extends Composite implements Display {
 		beneficiaryDetailCaptionPanel.add(beneficiaryDetailCaptionLabel);
 		captionPanel.add(beneficiaryDetailCaptionPanel);
 		beneficiaryDetailpanel.add(captionPanel);
-		
-		
-		
-		//Beneficiary details part
+
+		// Beneficiary details part
 		HTML htmlforrelation = new HTML("*");
 		htmlforrelation.setStyleName("relationhtmlstyle");
 		relationToBeneficiaryPanel = new VerticalPanel();
@@ -296,6 +276,7 @@ public class BeneficiaryDetailsView extends Composite implements Display {
 
 		relationToBeneficiaryListBox.setName("relationToBeneficiary");
 		relationToBeneficiaryListBox.addStyleName("styletextbox");
+		//relationToBeneficiaryListBox.addItem("--Select Relation--");
 		relationToBeneficiaryListBox.addItem("Self");
 
 		relationToBeneficiaryListBox.addItem("Friend");
@@ -303,11 +284,14 @@ public class BeneficiaryDetailsView extends Composite implements Display {
 		relationToBeneficiaryListBox.addItem("Family");
 		relationToBeneficiaryListBox.addItem("Spouse");
 		relationToBeneficiaryListBox.addItem("Caregiver");
-		relationToBeneficiaryListBox.addItem(" Random do-good");
+		relationToBeneficiaryListBox.addItem("Random do-good");
 
 		relationToBeneficiaryListBox.addStyleName("stylelistbox");
 		relationToBeneficiaryPanel.add(relationToBeneficiaryListBox);
 		relationToBeneficiaryLabel.setVisible(false);
+		/*realtionToBeneficiaryErrorLabel = new Label();
+		realtionToBeneficiaryErrorLabel.setVisible(false);
+		relationToBeneficiaryPanel.add(realtionToBeneficiaryErrorLabel);*/
 
 		firstNamePanel = new VerticalPanel();
 		firstNameLabel = new Label("First Name");
@@ -324,6 +308,7 @@ public class BeneficiaryDetailsView extends Composite implements Display {
 		firstNameErrorLabel = new Label();
 		firstNameErrorLabel.setVisible(false);
 		firstNamePanel.add(firstNameErrorLabel);
+		
 		lastNamePanel = new VerticalPanel();
 		lastNameLabel = new Label("Last Name");
 		lastNameLabel.addStyleName("fieldlabel");
@@ -338,8 +323,8 @@ public class BeneficiaryDetailsView extends Composite implements Display {
 		lastNameErrorLabel = new Label();
 		lastNameErrorLabel.setVisible(false);
 		lastNamePanel.add(lastNameErrorLabel);
-		
-		namePanel= new HorizontalPanel();
+
+		namePanel = new HorizontalPanel();
 		namePanel.addStyleName("stylehorizontalpanel");
 		namePanel.add(firstNamePanel);
 		namePanel.add(lastNamePanel);
@@ -365,7 +350,7 @@ public class BeneficiaryDetailsView extends Composite implements Display {
 		addressLine2Panel = new VerticalPanel();
 		addressLine2Label = new Label("Address Line2");
 		addressLine2Label.addStyleName("fieldlabel");
-		HTML addressLine2Html = new HTML(addressLine2Label + "" );
+		HTML addressLine2Html = new HTML(addressLine2Label + "");
 		addressLine2Html.setStyleName("mandatoryhtmlpanel");
 		addressLine2Panel.add(addressLine2Html);
 		addressLine2TextBox = new TextBox();
@@ -407,6 +392,7 @@ public class BeneficiaryDetailsView extends Composite implements Display {
 		stateTextBox = new ListBox();
 		stateTextBox.addStyleName("toppageForArea");
 		stateTextBox.setName("state");
+		stateTextBox.addItem("--Select State-- ");
 		stateTextBox.addItem("Andaman and Nicobar Islands ");
 		stateTextBox.addItem("Andhra Pradesh ");
 		stateTextBox.addItem("Arunachal Pradesh ");
@@ -416,7 +402,7 @@ public class BeneficiaryDetailsView extends Composite implements Display {
 		stateTextBox.addItem("Chhattisgarh ");
 		stateTextBox.addItem("Dadra and Nagar Haveli ");
 		stateTextBox.addItem("Daman and Diu ");
-		stateTextBox.addItem("National Capital Territory of Delhi  ");
+		stateTextBox.addItem("Delhi ");
 		stateTextBox.addItem("Goa ");
 		stateTextBox.addItem("Gujarat ");
 		stateTextBox.addItem("Haryana ");
@@ -463,7 +449,7 @@ public class BeneficiaryDetailsView extends Composite implements Display {
 		zipErrorLabel.setVisible(false);
 		zipPanel.add(zipErrorLabel);
 
-		HorizontalPanel areaPanel = new HorizontalPanel();
+		areaPanel = new HorizontalPanel();
 		areaPanel.addStyleName("stylehorizontalpanel");
 		areaPanel.add(cityPanel);
 		areaPanel.add(statePanel);
@@ -486,7 +472,7 @@ public class BeneficiaryDetailsView extends Composite implements Display {
 		emailErrorLabel.setVisible(false);
 		emailPanel.add(emailErrorLabel);
 		emailPanel.setVisible(false);
-	
+
 		phoneNumberPanel = new VerticalPanel();
 		phoneNumberLabel = new Label("Phone Number");
 		phoneNumberLabel.addStyleName("fieldlabel");
@@ -507,10 +493,11 @@ public class BeneficiaryDetailsView extends Composite implements Display {
 		contactPanel.add(emailPanel);
 		contactPanel.add(phoneNumberPanel);
 		beneficiaryDetailpanel.add(contactPanel);
-//payment mode 
+		// payment mode
 		paymentModePanel = new VerticalPanel();
 		paymentModePanel.addStyleName("stylehorizontalpanel");
-		paymentModeLabel = new Label("How would you like to receive the donation");
+		paymentModeLabel = new Label(
+				"How would you like to receive the donation");
 		paymentModeLabel.addStyleName("paymentModeLabel");
 		paymentModePanel.add(paymentModeLabel);
 		radioButtonPanel = new HorizontalPanel();
@@ -525,17 +512,16 @@ public class BeneficiaryDetailsView extends Composite implements Display {
 		paymentErrorLabel = new Label();
 		paymentErrorLabel.setVisible(false);
 		paymentModePanel.add(paymentErrorLabel);
-		
-		
+
 		beneficiaryDetailpanel.add(paymentModePanel);
-		
+
 		chequePanel = new VerticalPanel();
 		chequePanel.addStyleName("stylehorizontalpanel");
-		recepientLabel =  new Label("Enter the name of recepient");
+		recepientLabel = new Label("Enter the name of recepient");
 		recepientLabel.addStyleName("fieldlabel");
 		HTML recepientHtml = new HTML(recepientLabel + "" + html);
 		chequePanel.add(recepientHtml);
-		
+
 		chequeTextBox = new TextBox();
 		chequeTextBox.setName("chequeTextBox");
 		chequeTextBox.addStyleName("paymenttextbox");
@@ -543,16 +529,16 @@ public class BeneficiaryDetailsView extends Composite implements Display {
 		chequeErrorLabel = new Label();
 		chequeErrorLabel.setVisible(false);
 		chequePanel.add(chequeErrorLabel);
-		
+
 		beneficiaryDetailpanel.add(chequePanel);
 		chequePanel.setVisible(false);
-		
+
 		wireTarnsferPanel = new VerticalPanel();
-		//wireTarnsferPanel.addStyleName("stylehorizontalpanel");
+		// wireTarnsferPanel.addStyleName("stylehorizontalpanel");
 		wireFirstRowPanel = new HorizontalPanel();
 		wireFirstRowPanel.addStyleName("stylehorizontalpanel");
 		acccountNoPanel = new VerticalPanel();
-		//leftPanel1.addStyleName("left1panel");
+		// leftPanel1.addStyleName("left1panel");
 		accountNumberLabel = new Label("Account Number");
 		accountNumberLabel.addStyleName("fieldlabel");
 		HTML accountNumberHtml = new HTML(accountNumberLabel + "" + html);
@@ -565,10 +551,8 @@ public class BeneficiaryDetailsView extends Composite implements Display {
 		accNoErrorLabel = new Label();
 		accNoErrorLabel.setVisible(false);
 		acccountNoPanel.add(accNoErrorLabel);
-		
-		
+
 		bankNamePanel = new VerticalPanel();
-		//rightPanel1.addStyleName("left1panel");
 		bankNameLabel = new Label("Enter the bank name");
 		bankNameLabel.addStyleName("fieldlabel");
 		HTML bankNameHtml = new HTML(bankNameLabel + "" + html);
@@ -580,11 +564,11 @@ public class BeneficiaryDetailsView extends Composite implements Display {
 		bankNameErrorLabel = new Label();
 		bankNameErrorLabel.setVisible(false);
 		bankNamePanel.add(bankNameErrorLabel);
-		
+
 		wireFirstRowPanel.add(acccountNoPanel);
 		wireFirstRowPanel.add(bankNamePanel);
 		wireTarnsferPanel.add(wireFirstRowPanel);
-		
+
 		wireSecondRowPanel = new HorizontalPanel();
 		wireSecondRowPanel.addStyleName("stylehorizontalpanel");
 		holderNamePanel = new VerticalPanel();
@@ -599,8 +583,7 @@ public class BeneficiaryDetailsView extends Composite implements Display {
 		holderNameErrorLabel = new Label();
 		holderNameErrorLabel.setVisible(false);
 		holderNamePanel.add(holderNameErrorLabel);
-		
-		
+
 		ifscPanel = new VerticalPanel();
 		ifscLabel = new Label("Enter branch or IFSC code");
 		ifscLabel.addStyleName("fieldlabel");
@@ -614,11 +597,11 @@ public class BeneficiaryDetailsView extends Composite implements Display {
 		ifscErrorLabel = new Label();
 		ifscErrorLabel.setVisible(false);
 		ifscPanel.add(ifscErrorLabel);
-		
+
 		wireSecondRowPanel.add(holderNamePanel);
 		wireSecondRowPanel.add(ifscPanel);
 		wireTarnsferPanel.add(wireSecondRowPanel);
-		
+
 		wireThirdRowPanel = new HorizontalPanel();
 		wireThirdRowPanel.addStyleName("stylehorizontalpanel");
 		cityPanelForPayment = new VerticalPanel();
@@ -630,11 +613,11 @@ public class BeneficiaryDetailsView extends Composite implements Display {
 		cityTextBoxForPayment.addStyleName("paymenttextbox");
 		cityTextBoxForPayment.setName("cityTextBox");
 		cityPanelForPayment.add(cityTextBoxForPayment);
-		
+
 		cityErrorLabelForPayment = new Label();
 		cityErrorLabelForPayment.setVisible(false);
 		cityPanelForPayment.add(cityErrorLabelForPayment);
-		
+
 		statePanelForPayment = new VerticalPanel();
 		stateLabelForPayment = new Label("State");
 		stateLabelForPayment.addStyleName("fieldlabel");
@@ -647,44 +630,33 @@ public class BeneficiaryDetailsView extends Composite implements Display {
 		stateErrorLabelForPayment = new Label();
 		stateErrorLabelForPayment.setVisible(false);
 		statePanelForPayment.add(stateErrorLabelForPayment);
-		
-		
+
 		wireThirdRowPanel.add(cityPanelForPayment);
 		wireThirdRowPanel.add(statePanelForPayment);
 		wireTarnsferPanel.add(wireThirdRowPanel);
-				
+
 		beneficiaryDetailpanel.add(wireTarnsferPanel);
 		wireTarnsferPanel.setVisible(false);
 
-	//	ButtonPanel = new HorizontalPanel();
-	//	ButtonPanel.addStyleName("stylehorizontalpanel");
-		//testButton = new Button("test");
+		// medical details
 
-	//	testButton.addStyleName("getStartedButton");
-	//	ButtonPanel.add(testButton);
-	//	beneficiaryDetailpanel.add(ButtonPanel);
-		//ankita 
-		
 		medicalDetailsPanel = new HorizontalPanel();
 		medicalDetailsPanel.addStyleName("stylehorizontalpanel");
 		beneficiaryDetailpanel.add(medicalDetailsPanel);
 		MedicalDetailsLabel = new Label("Medical Details");
 		MedicalDetailsLabel.addStyleName("feildmedicallabel");
 		medicalDetailsPanel.add(MedicalDetailsLabel);
-		
-		
-		
-		//doctor panel, label,doctors textbox
+
+		// doctor panel, label,doctors textbox
 		doctorsPanel = new HorizontalPanel();
 		doctorsPanel.addStyleName("stylehorizontalpanel");
 		beneficiaryDetailpanel.add(doctorsPanel);
-		
+
 		doctorNameLabel = new Label("Current Doctor's Name");
 		doctorNameLabel.addStyleName("fieldlabel");
 		HTML lastName2Html = new HTML(doctorNameLabel + "" + html);
 		lastName2Html.setStyleName("mandatoryhtmlpanelinprofiledetailpage");
-		
-		
+
 		doctorNameVerticalPanel = new VerticalPanel();
 		doctorNameTextBox = new TextBox();
 		doctorNameTextBox.setName("doctorNameTextBox");
@@ -696,17 +668,15 @@ public class BeneficiaryDetailsView extends Composite implements Display {
 		doctorNameErrorLabel = new Label();
 		doctorNameErrorLabel.setVisible(false);
 		beneficiaryDetailpanel.add(doctorNameErrorLabel);
-			
-		
-		
-		//Hospital  panel,label,hospital textbox
+
+		// Hospital panel,label,hospital textbox
 		doctorHospitalVerticalPanel = new VerticalPanel();
-		
+
 		hospitalNameLabel = new Label("Current Hospital Name");
 		hospitalNameLabel.addStyleName("fieldlabel");
 		HTML hospitalNameHtml = new HTML(hospitalNameLabel + "" + html);
 		hospitalNameHtml.setStyleName("mandatoryhtmlpanelinprofiledetailpage");
-		
+
 		hospitalNameTextBox = new TextBox();
 		hospitalNameTextBox.setName("hospitalNameTextBox");
 		hospitalNameTextBox.addStyleName("styledoctorstextbox");
@@ -714,24 +684,23 @@ public class BeneficiaryDetailsView extends Composite implements Display {
 		doctorHospitalVerticalPanel.add(hospitalNameHtml);
 		doctorHospitalVerticalPanel.add(hospitalNameTextBox);
 		doctorsPanel.add(doctorHospitalVerticalPanel);
-		
+
 		hospitalNameErrorLabel = new Label();
 		hospitalNameErrorLabel.setVisible(false);
 		beneficiaryDetailpanel.add(hospitalNameErrorLabel);
-		
-		
-		//disease name
+
+		// disease name
 		diseaseNameHorizontalPanel = new HorizontalPanel();
 		diseaseNameHorizontalPanel.addStyleName("stylehorizontalpanel");
 		beneficiaryDetailpanel.add(diseaseNameHorizontalPanel);
-		
+
 		diseaseNameVerticalPanel = new VerticalPanel();
 		diseaseNameLabel = new Label("Disease Name");
 		diseaseNameLabel.addStyleName("fieldlabel");
 		HTML emai2lHtml = new HTML(diseaseNameLabel + "" + html);
 		emai2lHtml.setStyleName("mandatoryhtmlpanelinprofiledetailpage");
 		diseaseNameVerticalPanel.add(emai2lHtml);
-		
+
 		diseaseNameTextBox = new TextBox();
 		diseaseNameTextBox.setMaxLength(80);
 		diseaseNameTextBox.setName("diseaseNameTextBox");
@@ -741,105 +710,93 @@ public class BeneficiaryDetailsView extends Composite implements Display {
 		diseaseNameErrorLabel = new Label();
 		diseaseNameErrorLabel.setVisible(false);
 		beneficiaryDetailpanel.add(diseaseNameErrorLabel);
-		
-		
-		
-		
-		
-		
-		//file Upload
-		
+
+		// file Upload
+
 		uploadYourProfilePicturePanel = new HorizontalPanel();
 		// Create a new uploader panel and attach it to the document
 
-	    defaultUploader.addStyleName("uploadwidget");
-	    defaultUploader.setMultipleSelection(false);
-	    // Add a finish handler which will load the image once the upload finishes
-	    defaultUploader.addOnFinishUploadHandler(onFinishUploaderHandler);
+		defaultUploader.addStyleName("uploadwidget");
+		defaultUploader.setMultipleSelection(false);
+		// Add a finish handler which will load the image once the upload
+		// finishes
+		defaultUploader.addOnFinishUploadHandler(onFinishUploaderHandler);
 
-	  
-	  //upload vertical panel   
-	    upload = new VerticalPanel();
-	    uploadLabel = new Label("Upload your medical report");
-	    uploadLabel.addStyleName("uploadreportLabel");
-	    upload.add(uploadLabel);
-	    upload.add(defaultUploader);
-	    uploadYourProfilePicturePanel.add(upload);
+		// upload vertical panel
+		upload = new VerticalPanel();
+		uploadLabel = new Label("Upload your medical report");
+		uploadLabel.addStyleName("uploadreportLabel");
+		upload.add(uploadLabel);
+		upload.add(defaultUploader);
+		uploadYourProfilePicturePanel.add(upload);
 		beneficiaryDetailpanel.add(uploadYourProfilePicturePanel);
 
-		
 		checkUploaderrorLabel = new Label();
 		checkUploaderrorLabel.setVisible(false);
-	    upload.add(checkUploaderrorLabel);
+		upload.add(checkUploaderrorLabel);
 
-		
-		//checkBox panel
+		// checkBox panel
 		ckeckboxPanel = new HorizontalPanel();
 		ckeckboxPanel.addStyleName("checkboxstylepanel");
 		CheckBox checkBox1 = new CheckBox(" I agree to the");
 		checkBox1.setValue(false);
 		ckeckboxPanel.add(checkBox1);
-		//terms and conditions button
+		// terms and conditions button
 		Button button = new Button("terms and conditions");
 		button.addStyleName("termsandconditionsButton");
 		ckeckboxPanel.add(button);
 		beneficiaryDetailpanel.add(ckeckboxPanel);
-		
-		
+
 		nextButtonPanel = new HorizontalPanel();
 		nextButton = new Button("Finish");
 		nextButton.addStyleName("finishButton");
-		
+
 		secondButton = new Button("Back");
 		secondButton.addStyleName("backButton");
-		//add button
-        nextButtonPanel.add(secondButton);
-        beneficiaryDetailpanel.add(nextButtonPanel);
-        nextButtonPanel.add(nextButton);
+		// add button
+		nextButtonPanel.add(secondButton);
+		beneficiaryDetailpanel.add(nextButtonPanel);
+		nextButtonPanel.add(nextButton);
 		beneficiaryDetailpanel.add(nextButtonPanel);
 		return formPanel;
 
 	}
 
+	public void setMode(boolean cheque, boolean wireTransfer) {
 
-			
-	
-public void setMode(boolean cheque , boolean wireTransfer){
-		
-		if(cheque){
+		if (cheque) {
 			wireTarnsferPanel.setVisible(false);
 			chequePanel.setVisible(true);
-			
-		}else if(wireTransfer){
+
+		} else if (wireTransfer) {
 			chequePanel.setVisible(false);
 			wireTarnsferPanel.setVisible(true);
-			
-			
-		}else{
+
+		} else {
 			chequePanel.setVisible(false);
 			wireTarnsferPanel.setVisible(false);
-			
+
 		}
-		
+
 	}
-public void reInitialisePayment(boolean cheque){
-	
-	if(cheque){
-		
-		chequeTextBox.setText(null);
-		
-	}else{
-		accNoTextBox.setText(null);
-		bankNameTextBox.setText(null);
-		holderNameTextBox.setText(null);
-		ifscTextBox.setText(null);
-		cityTextBoxForPayment.setText(null);
-		stateTextBoxForPayment.setText(null);
-		
+
+	public void reInitialisePayment(boolean cheque) {
+
+		if (cheque) {
+
+			chequeTextBox.setText(null);
+
+		} else {
+			accNoTextBox.setText(null);
+			bankNameTextBox.setText(null);
+			holderNameTextBox.setText(null);
+			ifscTextBox.setText(null);
+			cityTextBoxForPayment.setText(null);
+			stateTextBoxForPayment.setText(null);
+
+		}
+
 	}
-	
-	
-}
 
 	/**
 	 * @return emailTextBox Getter HasValue for
@@ -849,7 +806,32 @@ public void reInitialisePayment(boolean cheque){
 	}
 
 	public void setStatus(String id, boolean isNull, boolean isInValid) {
-		if (id.equals("firstNameTextBox")) {
+		/*if (id.equals("relationToBeneficiary")) {
+
+			if (relationToBeneficiaryListBox.isItemSelected(0)) {
+				
+
+				relationToBeneficiaryListBox.addStyleName("invalid");
+				realtionToBeneficiaryErrorLabel.setVisible(true);
+				realtionToBeneficiaryErrorLabel.setText("Select a relationship or Self");
+				stateErrorLabel
+						.addStyleName("responselabelerrorforbeneficiarypage");
+
+			} else if (isInValid) {
+				stateTextBox.addStyleName("invalid");
+				stateErrorLabel.setVisible(true);
+				stateErrorLabel
+						.setText(" Please enter the state in correct format ");
+				stateErrorLabel
+						.addStyleName("responselabelerrorforbeneficiarypage");
+			} else {
+
+				relationToBeneficiaryListBox.removeStyleName("invalid");
+				realtionToBeneficiaryErrorLabel.setVisible(false);
+			}
+
+		}
+		else*/ if (id.equals("firstNameTextBox")) {
 
 			if (isNull) {
 				firstNameTextBox.addStyleName("invalid");
@@ -971,21 +953,23 @@ public void reInitialisePayment(boolean cheque){
 
 		if (id.equals("state")) {
 
-			if (isNull) {
+			if (stateTextBox.isItemSelected(0)) {
+				
+
 				stateTextBox.addStyleName("invalid");
 				stateErrorLabel.setVisible(true);
-				stateErrorLabel.setText("You can't leave this empty ");
+				stateErrorLabel.setText("Please select the state");
 				stateErrorLabel
 						.addStyleName("responselabelerrorforbeneficiarypage");
 
-			} else if (isInValid) {
+			}/* else if (isInValid) {
 				stateTextBox.addStyleName("invalid");
 				stateErrorLabel.setVisible(true);
 				stateErrorLabel
 						.setText(" Please enter the state in correct format ");
 				stateErrorLabel
 						.addStyleName("responselabelerrorforbeneficiarypage");
-			} else {
+			} */else {
 
 				stateTextBox.removeStyleName("invalid");
 				stateErrorLabel.setVisible(false);
@@ -1062,21 +1046,22 @@ public void reInitialisePayment(boolean cheque){
 				phoneNumberErrorLabel.setVisible(false);
 			}
 
-		}
-		else if (id.equals("chequeTextBox")) {
+		} else if (id.equals("chequeTextBox")) {
 
 			if (isNull) {
 				chequeTextBox.addStyleName("invalid");
 				chequeErrorLabel.setVisible(true);
 				chequeErrorLabel.setText("You can't leave this empty ");
-				chequeErrorLabel.addStyleName("responselabelerrorforbeneficiary");
+				chequeErrorLabel
+						.addStyleName("responselabelerrorforbeneficiary");
 
 			} else if (isInValid) {
 				chequeTextBox.addStyleName("invalid");
 				chequeErrorLabel.setVisible(true);
 				chequeErrorLabel
 						.setText(" Please enter the recepient's name in correct format ");
-				chequeErrorLabel.addStyleName("responselabelerrorforbeneficiary");
+				chequeErrorLabel
+						.addStyleName("responselabelerrorforbeneficiary");
 			} else {
 
 				chequeTextBox.removeStyleName("invalid");
@@ -1090,7 +1075,8 @@ public void reInitialisePayment(boolean cheque){
 				accNoTextBox.addStyleName("invalid");
 				accNoErrorLabel.setVisible(true);
 				accNoErrorLabel.setText("You can't leave this empty ");
-				accNoErrorLabel.addStyleName("responselabelerrorforbeneficiary");
+				accNoErrorLabel
+						.addStyleName("responselabelerrorforbeneficiary");
 
 			} else if (isInValid) {
 
@@ -1098,7 +1084,8 @@ public void reInitialisePayment(boolean cheque){
 				accNoErrorLabel.setVisible(true);
 				accNoErrorLabel
 						.setText(" Please enter the account number correctly ");
-				accNoErrorLabel.addStyleName("responselabelerrorforbeneficiary");
+				accNoErrorLabel
+						.addStyleName("responselabelerrorforbeneficiary");
 
 			} else {
 				accNoTextBox.removeStyleName("invalid");
@@ -1106,14 +1093,15 @@ public void reInitialisePayment(boolean cheque){
 
 			}
 
-		}else if (id.equalsIgnoreCase("bankNameTextBox")) {
+		} else if (id.equalsIgnoreCase("bankNameTextBox")) {
 
 			if (isNull) {
 
 				bankNameTextBox.addStyleName("invalid");
 				bankNameErrorLabel.setVisible(true);
 				bankNameErrorLabel.setText("You can't leave this empty ");
-				bankNameErrorLabel.addStyleName("responselabelerrorforbeneficiary");
+				bankNameErrorLabel
+						.addStyleName("responselabelerrorforbeneficiary");
 
 			} else if (isInValid) {
 
@@ -1121,7 +1109,8 @@ public void reInitialisePayment(boolean cheque){
 				bankNameErrorLabel.setVisible(true);
 				bankNameErrorLabel
 						.setText(" Please enter the bank name in correct format ");
-				bankNameErrorLabel.addStyleName("responselabelerrorforbeneficiary");
+				bankNameErrorLabel
+						.addStyleName("responselabelerrorforbeneficiary");
 
 			} else {
 				bankNameTextBox.removeStyleName("invalid");
@@ -1129,14 +1118,15 @@ public void reInitialisePayment(boolean cheque){
 
 			}
 
-		}else if (id.equalsIgnoreCase("holderNameTextBox")) {
+		} else if (id.equalsIgnoreCase("holderNameTextBox")) {
 
 			if (isNull) {
 
 				holderNameTextBox.addStyleName("invalid");
 				holderNameErrorLabel.setVisible(true);
 				holderNameErrorLabel.setText("You can't leave this empty ");
-				holderNameErrorLabel.addStyleName("responselabelerrorforbeneficiary");
+				holderNameErrorLabel
+						.addStyleName("responselabelerrorforbeneficiary");
 
 			} else if (isInValid) {
 
@@ -1144,7 +1134,8 @@ public void reInitialisePayment(boolean cheque){
 				holderNameErrorLabel.setVisible(true);
 				holderNameErrorLabel
 						.setText(" Please enter the account holder's name in correct format");
-				holderNameErrorLabel.addStyleName("responselabelerrorforbeneficiary");
+				holderNameErrorLabel
+						.addStyleName("responselabelerrorforbeneficiary");
 
 			} else {
 				holderNameTextBox.removeStyleName("invalid");
@@ -1152,7 +1143,7 @@ public void reInitialisePayment(boolean cheque){
 
 			}
 
-		}else if (id.equalsIgnoreCase("ifscTextBox")) {
+		} else if (id.equalsIgnoreCase("ifscTextBox")) {
 
 			if (isNull) {
 
@@ -1175,14 +1166,15 @@ public void reInitialisePayment(boolean cheque){
 
 			}
 
-		}else if (id.equalsIgnoreCase("cityTextBox")) {
+		} else if (id.equalsIgnoreCase("cityTextBox")) {
 
 			if (isNull) {
 
 				cityTextBoxForPayment.addStyleName("invalid");
 				cityErrorLabelForPayment.setVisible(true);
 				cityErrorLabelForPayment.setText("You can't leave this empty ");
-				cityErrorLabelForPayment.addStyleName("responselabelerrorforbeneficiary");
+				cityErrorLabelForPayment
+						.addStyleName("responselabelerrorforbeneficiary");
 
 			} else if (isInValid) {
 
@@ -1190,7 +1182,8 @@ public void reInitialisePayment(boolean cheque){
 				cityErrorLabelForPayment.setVisible(true);
 				cityErrorLabelForPayment
 						.setText(" Please enter the city correctly ");
-				cityErrorLabelForPayment.addStyleName("responselabelerrorforbeneficiary");
+				cityErrorLabelForPayment
+						.addStyleName("responselabelerrorforbeneficiary");
 
 			} else {
 				cityTextBoxForPayment.removeStyleName("invalid");
@@ -1198,14 +1191,16 @@ public void reInitialisePayment(boolean cheque){
 
 			}
 
-		}else if (id.equalsIgnoreCase("stateTextBox")) {
+		} else if (id.equalsIgnoreCase("stateTextBox")) {
 
 			if (isNull) {
 
 				stateTextBoxForPayment.addStyleName("invalid");
 				stateErrorLabelForPayment.setVisible(true);
-				stateErrorLabelForPayment.setText("You can't leave this empty ");
-				stateErrorLabelForPayment.addStyleName("responselabelerrorforbeneficiary");
+				stateErrorLabelForPayment
+						.setText("You can't leave this empty ");
+				stateErrorLabelForPayment
+						.addStyleName("responselabelerrorforbeneficiary");
 
 			} else if (isInValid) {
 
@@ -1213,7 +1208,8 @@ public void reInitialisePayment(boolean cheque){
 				stateErrorLabelForPayment.setVisible(true);
 				stateErrorLabelForPayment
 						.setText(" Please enter the state correctly ");
-				stateErrorLabelForPayment.addStyleName("responselabelerrorforbeneficiary");
+				stateErrorLabelForPayment
+						.addStyleName("responselabelerrorforbeneficiary");
 
 			} else {
 				stateTextBoxForPayment.removeStyleName("invalid");
@@ -1222,44 +1218,7 @@ public void reInitialisePayment(boolean cheque){
 			}
 
 		}
-		
-		else {
 
-			if (isNull) {
-
-				paymentErrorLabel.setVisible(true);
-				paymentErrorLabel.setText("Please select the payment mode");
-				paymentErrorLabel.addStyleName("responselabelerrorforbeneficiary");
-
-			} else {
-
-				paymentErrorLabel.setVisible(false);
-			}
-		}
-		
-		//
-		if (id.equals("titleOfYourPageTextBox")) {/*
-
-			if (isNull) {
-				titleOfYourPageTextBox.addStyleName("invalid");
-				titleOfYourPageErrorLabel.setVisible(true);
-				titleOfYourPageErrorLabel.setText("You can't leave this empty ");
-				titleOfYourPageErrorLabel.addStyleName("responselabelerrorforProfiledetailpage");
-
-			} else if (isInValid) {
-				titleOfYourPageTextBox.addStyleName("invalid");
-				titleOfYourPageErrorLabel.setVisible(true);
-				titleOfYourPageErrorLabel
-						.setText(" Please enter the Title in a correct format ");
-				titleOfYourPageErrorLabel.addStyleName("responselabelerrorforProfiledetailpage");
-			} else {
-
-				titleOfYourPageTextBox.removeStyleName("invalid");
-				titleOfYourPageErrorLabel.setVisible(false);
-			}
-
-		*/} 
-		//starting
 		else if (id.equalsIgnoreCase("doctorNameTextBox")) {
 
 			if (isNull) {
@@ -1323,42 +1282,60 @@ public void reInitialisePayment(boolean cheque){
 				hospitalNameTextBox.removeStyleName("invalid");
 				hospitalNameErrorLabel.setVisible(false);
 			}
-		} 
-		
-		
+		}
+
 		else if (id.equalsIgnoreCase("checkuploadFile")) {
-			
-			if(isNull){
+
+			if (isNull) {
 				checkUploaderrorLabel.setVisible(true);
 				checkUploaderrorLabel.setText("Please upload your reports");
-				checkUploaderrorLabel.addStyleName("checkuploadfileerrornamelabel");
-			}else if (isInValid) {
+				checkUploaderrorLabel
+						.addStyleName("checkuploadfileerrornamelabel");
+			} else if (isInValid) {
 				checkUploaderrorLabel.removeStyleName("invalid");
 				checkUploaderrorLabel.setVisible(false);
 			}
-			
+
+		} else if(id.equalsIgnoreCase("paymentMode")) {
+
+			if (isNull) {
+
+				paymentErrorLabel.setVisible(true);
+				paymentErrorLabel.setText("Please select the payment mode");
+				paymentErrorLabel
+						.addStyleName("responselabelerrorforbeneficiary");
+
+			} else {
+
+				paymentErrorLabel.setVisible(false);
+			}
 		}
-			
-			
+
 	}
-	
 
 	public void setRelationToBeneficiaryListBox(boolean value) {
 		if (value) {
 			namePanel.setVisible(false);
 			emailPanel.setVisible(false);
+
+			firstNameTextBox.setValue(null);
+			lastNameTextBox.setValue(null);
+			emailTextBox.setValue(null);
+			//addressPanel.setVisible(true);
+		//	phoneNumberPanel.setVisible(true);
+			
 			//contactPanel.setVisible(true);
 			//phoneNumberPanel.setVisible(true);
 		}
 	}
-public void resetItems(){
-		
+
+	public void resetItems() {
+
 		namePanel.setVisible(true);
 		emailPanel.setVisible(true);
-		//contactPanel.setVisible(true);
-		//phoneNumberPanel.setVisible(true);
-		
+
 	}
+
 	public HasValue<String> getAddressLine1TextBox() {
 		return addressLine1TextBox;
 	}
@@ -1366,8 +1343,6 @@ public void resetItems(){
 	public HasValue<String> getAddressLine2TextBox() {
 		return addressLine2TextBox;
 	}
-
-
 
 	public HasValue<String> getZipTextBox() {
 		return zipTextBox;
@@ -1380,6 +1355,7 @@ public void resetItems(){
 	public ListBox getRelationToBeneficiaryListBox() {
 		return relationToBeneficiaryListBox;
 	}
+
 	public VerticalPanel getEmailPanel() {
 		return emailPanel;
 	}
@@ -1401,6 +1377,7 @@ public void resetItems(){
 	public HasValue<String> getlastNameTextBox() {
 		return lastNameTextBox;
 	}
+
 	public HorizontalPanel getNamePanel() {
 		return namePanel;
 	}
@@ -1408,6 +1385,7 @@ public void resetItems(){
 	public void setNamePanel(HorizontalPanel namePanel) {
 		this.namePanel = namePanel;
 	}
+
 	public HorizontalPanel getAddressPanel() {
 		return addressPanel;
 	}
@@ -1423,7 +1401,8 @@ public void resetItems(){
 	public void setContacPanel(HorizontalPanel contacPanel) {
 		this.contactPanel = contacPanel;
 	}
-	//payment mode 
+
+	// payment mode
 	public RadioButton getChequeButton() {
 		return chequeButton;
 	}
@@ -1435,43 +1414,39 @@ public void resetItems(){
 	public HasValue<String> getChequeTextBox() {
 		return chequeTextBox;
 	}
-	
+
 	public HasValue<String> getAccNoTextBox() {
 		return accNoTextBox;
 	}
-	
+
 	public HasValue<String> getBankNameTextBox() {
 		return bankNameTextBox;
 	}
-	
+
 	public HasValue<String> getHolderNameTextBox() {
 		return holderNameTextBox;
 	}
-	
+
 	public HasValue<String> getIfscTextBox() {
 		return ifscTextBox;
 	}
 
 	public HasValue<String> getCityTextBox() {
-		// TODO Auto-generated method stub
 		return cityTextBox;
 	}
 
 	public ListBox getStateTextBox() {
-		// TODO Auto-generated method stub
 		return stateTextBox;
 	}
 
 	public HasValue<String> getCityTextBoxForPayment() {
-		// TODO Auto-generated method stub
 		return cityTextBoxForPayment;
 	}
 
 	public HasValue<String> getStateTextBoxForPayment() {
-		// TODO Auto-generated method stub
 		return stateTextBoxForPayment;
 	}
-	
+
 	/**
 	 * @return emailTextBox Getter HasValue for
 	 */
@@ -1492,30 +1467,25 @@ public void resetItems(){
 	public HasValue<String> gethospitalNameTextBox() {
 		return hospitalNameTextBox;
 	}
-	
-	public MultiUploader getcheckuploadValidate(){
-		
+
+	public MultiUploader getcheckuploadValidate() {
+
 		return defaultUploader;
 	}
 
-	/**
-	 * @return confirmPasswordTextBox Getter HasValue for
-	 */
-
-	
-
-	
-	public  HasClickHandlers getbackButton() {
+	public HasClickHandlers getbackButton() {
 		return secondButton;
 	}
+
 	/**
 	 * @return getStartedButton Getter HasValue for
 	 */
 	public HasClickHandlers getnextButton() {
 		return nextButton;
 	}
-	
 
-
+	public void setNextButtonDisable() {
+		secondButton.setEnabled(false);
+	}
 
 }

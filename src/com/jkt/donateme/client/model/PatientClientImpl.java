@@ -81,6 +81,27 @@ public class PatientClientImpl {
 		System.out.println("flag " + clientResponseStatusCode);
 		return clientResponseStatusCode;
 	}
+	
+	public BeneficiaryDetailsFields createPatientProfile(final BeneficiaryDetailsFields beneficiaryDetailsFields){
+
+		final ClientResponse clientResponse = service.path("donateme")
+				.path("patient2").path("profile").accept(MediaType.TEXT_XML)
+				.post(ClientResponse.class, beneficiaryDetailsFields);
+		System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>"
+				+ clientResponse);
+		System.out.println(">>>>>>>>>>>>" + clientResponse.getStatus());
+		System.out.println(">>>>>>>>>>>>inputStremfor real service "
+				+ clientResponse.getEntityInputStream());
+		System.out.println(">>>>>>>>>>>>Tag for real service "
+				+ clientResponse.getEntityTag());
+		System.out.println(">>>>>>>>>>>>class for real service"
+				+ clientResponse.getEntity(String.class));
+
+		
+		return beneficiaryDetailsFields;
+		
+	}
+	
 
 	/**
 	 * This method contains the URI for the service.

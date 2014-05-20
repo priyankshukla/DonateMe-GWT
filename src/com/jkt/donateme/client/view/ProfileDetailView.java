@@ -27,7 +27,6 @@ import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.datepicker.client.DateBox;
 import com.google.gwt.user.datepicker.client.DateBox.DefaultFormat;
-import com.jkt.donateme.client.calendar.DatePickerWithYearSelectorNew;
 import com.jkt.donateme.client.presenter.ProfileDetailPresenter.Display;
 
 public class ProfileDetailView extends Composite implements Display {
@@ -75,6 +74,8 @@ public class ProfileDetailView extends Composite implements Display {
 	private TextArea confirmPasswordTextBox;
 	private DateBox dateBox;
 	
+	private  MultiUploader defaultUploader;
+	
 	DateTimeFormat dateTimeFormat;
 	DefaultFormat defaultFormat;
 	ClickHandler doBImageClickhandler;
@@ -100,7 +101,7 @@ public class ProfileDetailView extends Composite implements Display {
 		      if (uploader.getStatus() == Status.SUCCESS) {
 
 		        new PreloadedImage(uploader.fileUrl(), showImage);
-		        
+		    	  
 		        // The server sends useful information to the client by default
 		        UploadedInfo info = uploader.getServerInfo();
 		        System.out.println("File name " + info.name);
@@ -292,7 +293,8 @@ captionPanel = new HorizontalPanel();
 
 		uploadYourProfilePicturePanel = new HorizontalPanel();
 		// Create a new uploader panel and attach it to the document
-	    MultiUploader defaultUploader = new MultiUploader();
+	    defaultUploader = new MultiUploader();
+	    
 	    defaultUploader.addStyleName("uploadwidget");
 	   // SingleUploader defaultUploader = new SingleUploader();
 	    defaultUploader.avoidRepeatFiles(true);
@@ -301,8 +303,12 @@ captionPanel = new HorizontalPanel();
 	    defaultUploader.setMultipleSelection(false);
 	    defaultUploader.setValidExtensions("jpeg","jpg","gif","png","bmp");
 	    // Add a finish handler which will load the image once the upload finishes
-	    defaultUploader.addOnFinishUploadHandler(onFinishUploaderHandler);
-	    
+	   defaultUploader.addOnFinishUploadHandler(onFinishUploaderHandler);
+	    System.out.println("upload " +defaultUploader.getFileInput());
+	    System.out.println("upload2 " +defaultUploader.getElement());
+	    System.out.println("upload3 " +defaultUploader.getStatus());
+	    //System.out.println("upload4 " +defaultUploader.get);
+
 	    upload = new VerticalPanel();
 	    uploadLabel = new Label("Upload your profile picture");
 	    uploadLabel.addStyleName("uploadLabel");
@@ -481,6 +487,14 @@ captionPanel = new HorizontalPanel();
 			}
 
 		} 
+	}
+
+	public MultiUploader getuploadOfSecondScreen() {
+		return defaultUploader;
+		
+	//	String defaultUploader;
+		// TODO Auto-generated method stub
+		
 	}
 
 	

@@ -1,11 +1,11 @@
 package com.jkt.donateme.client.model;
+import java.io.Serializable;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
-import com.google.gwt.user.client.rpc.IsSerializable;
 @XmlRootElement(name = "profile")
 
-public class BeneficiaryDetailsFields implements IsSerializable {
+public class BeneficiaryDetailsFields implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	private String relationToBeneficiary;	
@@ -24,8 +24,8 @@ public class BeneficiaryDetailsFields implements IsSerializable {
 	private String containerId;
 	private String valueHolder;
 	private String reasonsforRaisingFunds;
-	private boolean isCheque ;
-	private boolean isWireTransfer ;
+	//private boolean isCheque ;
+	//private boolean isWireTransfer ;
 	private String cheque ;
 	private String accNumber;
 	private String bankName ;
@@ -33,20 +33,60 @@ public class BeneficiaryDetailsFields implements IsSerializable {
 	private String ifscCode ;
 	private String cityName ;
 	private String stateName ;
-	//medical details
-	private String doctorName;
 	
+	//medical details
+	private String doctorName;	
 	private String hospitalName;
 	private String diseaseName;
 	private String uploadYourProfilePicturePanel;
+	
 	private String titleOfYourPagePanel;
 	private String donationNeededPanel;
 	private String reasonForRaisingFundsPanel;
 	private String profileSummaryPanel;
 	private String endCollectingMoneyOnPanel;
+	//private String uploadYourProfilePicturePanel;
 	
-	
-	
+	public String getTitleOfYourPagePanel() {
+		return titleOfYourPagePanel;
+	}
+	public void setTitleOfYourPagePanel(String titleOfYourPagePanel) {
+		this.titleOfYourPagePanel = titleOfYourPagePanel;
+	}
+	public String getDonationNeededPanel() {
+		return donationNeededPanel;
+	}
+	public void setDonationNeededPanel(String donationNeededPanel) {
+		this.donationNeededPanel = donationNeededPanel;
+	}
+	public String getReasonForRaisingFundsPanel() {
+		return reasonForRaisingFundsPanel;
+	}
+	public void setReasonForRaisingFundsPanel(String reasonForRaisingFundsPanel) {
+		this.reasonForRaisingFundsPanel = reasonForRaisingFundsPanel;
+	}
+	public String getProfileSummaryPanel() {
+		return profileSummaryPanel;
+	}
+	public void setProfileSummaryPanel(String profileSummaryPanel) {
+		this.profileSummaryPanel = profileSummaryPanel;
+	}
+	public String getEndCollectingMoneyOnPanel() {
+		return endCollectingMoneyOnPanel;
+	}
+	public void setEndCollectingMoneyOnPanel(String endCollectingMoneyOnPanel) {
+		this.endCollectingMoneyOnPanel = endCollectingMoneyOnPanel;
+	}
+	/*public String getUploadYourProfilePicturePanel() {
+		return uploadYourProfilePicturePanel;
+	}
+	public void setUploadYourProfilePicturePanel(
+			String uploadYourProfilePicturePanel) {
+		this.uploadYourProfilePicturePanel = uploadYourProfilePicturePanel;
+	}
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}*/
 	
 	public String getTitleOfYourPage() {
 		return titleOfYourPage;
@@ -179,7 +219,7 @@ public class BeneficiaryDetailsFields implements IsSerializable {
 			String uploadYourProfilePicturePanel) {
 		this.uploadYourProfilePicturePanel = uploadYourProfilePicturePanel;
 	}
-	public boolean isCheque() {
+	/*public boolean isCheque() {
 		return isCheque;
 	}
 	public void setCheque(boolean isCheque) {
@@ -190,7 +230,7 @@ public class BeneficiaryDetailsFields implements IsSerializable {
 	}
 	public void setWireTransfer(boolean isWireTransfer) {
 		this.isWireTransfer = isWireTransfer;
-	}
+	}*/
 	public String getCheque() {
 		return cheque;
 	}
@@ -233,52 +273,4 @@ public class BeneficiaryDetailsFields implements IsSerializable {
 	public void setStateName(String stateName) {
 		this.stateName = stateName;
 	}
-	
-	
-	//pro
-	
-	//private static final long serialVersionUID = 1L;
-	
-	//private String uploadYourProfilePicturePanel;
-	
-	public String getTitleOfYourPagePanel() {
-		return titleOfYourPagePanel;
-	}
-	public void setTitleOfYourPagePanel(String titleOfYourPagePanel) {
-		this.titleOfYourPagePanel = titleOfYourPagePanel;
-	}
-	public String getDonationNeededPanel() {
-		return donationNeededPanel;
-	}
-	public void setDonationNeededPanel(String donationNeededPanel) {
-		this.donationNeededPanel = donationNeededPanel;
-	}
-	public String getReasonForRaisingFundsPanel() {
-		return reasonForRaisingFundsPanel;
-	}
-	public void setReasonForRaisingFundsPanel(String reasonForRaisingFundsPanel) {
-		this.reasonForRaisingFundsPanel = reasonForRaisingFundsPanel;
-	}
-	public String getProfileSummaryPanel() {
-		return profileSummaryPanel;
-	}
-	public void setProfileSummaryPanel(String profileSummaryPanel) {
-		this.profileSummaryPanel = profileSummaryPanel;
-	}
-	public String getEndCollectingMoneyOnPanel() {
-		return endCollectingMoneyOnPanel;
-	}
-	public void setEndCollectingMoneyOnPanel(String endCollectingMoneyOnPanel) {
-		this.endCollectingMoneyOnPanel = endCollectingMoneyOnPanel;
-	}
-	/*public String getUploadYourProfilePicturePanel() {
-		return uploadYourProfilePicturePanel;
-	}
-	public void setUploadYourProfilePicturePanel(
-			String uploadYourProfilePicturePanel) {
-		this.uploadYourProfilePicturePanel = uploadYourProfilePicturePanel;
-	}
-	public static long getSerialversionuid() {
-		return serialVersionUID;
-	}*/
 }
