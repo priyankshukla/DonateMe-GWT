@@ -98,6 +98,7 @@ public class BeneficiaryDetailsView extends Composite implements Display {
 	private Label ifscLabel;
 	private Label cityLabelForPayment;
 	private Label stateLabelForPayment;
+	private Label pageTagLabel;
 
 	private Label chequeErrorLabel;
 	private Label accNoErrorLabel;
@@ -225,6 +226,11 @@ public class BeneficiaryDetailsView extends Composite implements Display {
 		beneficiaryDetailpanel.addStyleName("signUpPanel");
 		formPanel.add(beneficiaryDetailpanel);
 		initWidget(formPanel);
+		
+		
+		pageTagLabel = new Label("Create Patient Profile");
+		pageTagLabel.addStyleName("howitworkpagetaglabel");
+		beneficiaryDetailpanel.add(pageTagLabel);
 
 		captionPanel = new HorizontalPanel();
 
