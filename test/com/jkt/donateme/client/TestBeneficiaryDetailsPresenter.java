@@ -1,4 +1,4 @@
-package com.jkt.donateme.client;
+/*package com.jkt.donateme.client;
 
 import net.customware.gwt.presenter.client.EventBus;
 
@@ -255,3 +255,4 @@ public  class TestBeneficiaryDetailsPresenter extends GWTTestCase{
 	
 
 }
+*/

@@ -46,7 +46,8 @@ public class ProfileDetailView extends Composite implements Display {
 	private HorizontalPanel signCaptionPanel;
 	private HorizontalPanel profileDetailCaptionPanel;
 	private HorizontalPanel beneficiaryDetailCaptionPanel;
-
+	
+	private Label pageTagLabel ;
 	private Label titleOfYourPageLabel;
 	private Label donationNeededLabel;
 	private Label reasonForRaisingFundsLabel;
@@ -151,6 +152,11 @@ public class ProfileDetailView extends Composite implements Display {
 		patientDetailPanel.addStyleName("signUpPanel");
 		formPanel.add(patientDetailPanel);
 		initWidget(formPanel);
+		
+		
+		pageTagLabel = new Label("Create Patient Profile");
+		pageTagLabel.addStyleName("howitworkpagetaglabel");
+		patientDetailPanel.add(pageTagLabel);
 		
 		
 captionPanel = new HorizontalPanel();

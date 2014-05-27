@@ -46,6 +46,7 @@ public class SignUpView extends Composite implements Display {
 	private HorizontalPanel beneficiaryDetailCaptionPanel;
 	private VerticalPanel serviceDownPanel;
 	
+	private Label pageTagLabel;
 	private Label firstNameLabel;
 	private Label lastNameLabel;
 	private Label emailLabel;
@@ -120,6 +121,12 @@ public class SignUpView extends Composite implements Display {
 		signUpFieldsPanel.addStyleName("signUpPanel");
 		formPanel.add(signUpFieldsPanel);
 		initWidget(formPanel);
+		
+		
+		pageTagLabel = new Label("Create Patient Profile");
+		pageTagLabel.addStyleName("howitworkpagetaglabel");
+		signUpFieldsPanel.add(pageTagLabel);
+		
 		
 		captionPanel = new HorizontalPanel();
 		
