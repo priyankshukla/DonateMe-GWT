@@ -1749,6 +1749,36 @@ height: 35px !important;
 .pagelabel{
 	font: bold 15px MyriadProRegular;
 	color:#e95325;
+
+	height:25px;
+	padding-top:24px;
+}
+.pagelabelForAboutUs{
+	font: bold 15px MyriadProRegular;
+
+	height:25px;
+	padding-top:24px;
+}
+
+.contentLabelForAboutUs{
+	font: bold;
+	height:50px;
+	
+}
+
+.createPatientContentForAboutUs{
+	padding-bottom: 17px
+}
+.pageContentForAboutUs{
+	padding-bottom: 10px
+	
+}
+
+///////
+
+.pagelabel{
+	font: bold 15px MyriadProRegular;
+	color:#e95325;
 	height:30px;
 }
 
@@ -1765,6 +1795,7 @@ height: 35px !important;
 	height:45px
 	
 }
+
 .imagestyleforhowitworks{
 	
 	margin-left:100px;
