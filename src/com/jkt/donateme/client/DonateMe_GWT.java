@@ -5,7 +5,9 @@ import net.customware.gwt.presenter.client.EventBus;
 
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.user.client.ui.RootPanel;
+import com.jkt.donateme.client.presenter.ContactUsPresenter;
 import com.jkt.donateme.client.presenter.SignUpPresenter;
+import com.jkt.donateme.client.view.ContactUsView;
 import com.jkt.donateme.client.view.SignUpView;
 
 
@@ -25,6 +27,8 @@ public class DonateMe_GWT implements EntryPoint {
 
 		SignUpView display = new SignUpView();
 		SignUpPresenter presenter = new SignUpPresenter(display, eventBus);
+		/*ContactUsView display = new ContactUsView();
+		ContactUsPresenter presenter = new ContactUsPresenter(display, eventBus);*/
 		
 		/*ProfileDetailView display = new ProfileDetailView();
 		ProfileDetailPresenter presenter = new ProfileDetailPresenter(display, eventBus);*/
