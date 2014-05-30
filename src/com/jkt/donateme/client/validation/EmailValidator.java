@@ -7,7 +7,7 @@ public class EmailValidator extends Validator {
 	private final static String integer_VALIDATION_REGEX = "^(0|[1-9][0-9]*)$";
 
 	private final static String ifsc_VALIDATION_REGEX = "^[a-zA-Z]{4}[0]{1}[a-zA-Z0-9]{6}";
-	private final static String alphaNumeric_VALIDATION_REGEX = "^[a-zA-Z0-9]*";
+	private final static String alphaNumeric_VALIDATION_REGEX = "^[a-zA-Z0-9\\s]*";
 
 	public boolean validate(String value) {
 		if (value.matches("^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$")) {

@@ -244,7 +244,7 @@ captionPanel = new HorizontalPanel();
 		emailHtml.setStyleName("mandatoryhtmlpanelinprofiledetailpage");
 		reasonForRaisingFundsPanel.add(emailHtml);
 		reasonForRaisingFundsTextBox = new TextBox();
-		reasonForRaisingFundsTextBox.setMaxLength(40);
+		reasonForRaisingFundsTextBox.setMaxLength(70);
 		reasonForRaisingFundsTextBox.setName("reasonForRaisingFundsTextBox");
 		reasonForRaisingFundsTextBox.addStyleName("styletextbox");
 		reasonForRaisingFundsPanel.add(reasonForRaisingFundsTextBox);
@@ -262,7 +262,7 @@ captionPanel = new HorizontalPanel();
 		passwordHtml.setStyleName("mandatoryhtmlpanel");
 		profileSummaryPanel.add(passwordHtml);
 		profileSummaryTextArea = new TextArea();
-		profileSummaryTextArea.getElement().setAttribute("maxlength", "70");
+		profileSummaryTextArea.getElement().setAttribute("maxlength", "120");
 		profileSummaryTextArea.setName("profileSummaryTextArea");
 		profileSummaryTextArea.addStyleName("styletextarea");
 		profileSummaryPanel.add(profileSummaryTextArea);
@@ -400,7 +400,7 @@ captionPanel = new HorizontalPanel();
 				titleOfYourPageTextBox.addStyleName("invalid");
 				titleOfYourPageErrorLabel.setVisible(true);
 				titleOfYourPageErrorLabel
-						.setText(" Please enter the Title in a correct format ");
+						.setText(" Please enter the title in a correct format ");
 				titleOfYourPageErrorLabel.addStyleName("responselabelerrorforProfiledetailpage");
 			} else {
 

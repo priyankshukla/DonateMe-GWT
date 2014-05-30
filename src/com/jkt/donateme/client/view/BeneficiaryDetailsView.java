@@ -449,7 +449,7 @@ public class BeneficiaryDetailsView extends Composite implements Display {
 		zipTextBox = new TextBox();
 		zipTextBox.addStyleName("toppageForArea");
 		zipTextBox.setName("zip");
-		zipTextBox.setMaxLength(8);
+		zipTextBox.setMaxLength(6);
 		zipPanel.add(zipTextBox);
 		zipErrorLabel = new Label();
 		zipErrorLabel.setVisible(false);
@@ -509,8 +509,10 @@ public class BeneficiaryDetailsView extends Composite implements Display {
 		radioButtonPanel = new HorizontalPanel();
 		radioButtonPanel.addStyleName("beneficiaryradiopanel");
 		chequeButton = new RadioButton("paymentMode", " Cheque");
+		chequeButton.addStyleName("fontRadioSelect");
 		chequeButton.setName("paymentMode");
 		wireTransferButton = new RadioButton("paymentMode", " Wire Transfer");
+		wireTransferButton.addStyleName("fontRadioSelect");
 		wireTransferButton.setName("paymentMode");
 		radioButtonPanel.add(chequeButton);
 		radioButtonPanel.add(wireTransferButton);
@@ -898,7 +900,7 @@ public class BeneficiaryDetailsView extends Composite implements Display {
 				addressLine1TextBox.addStyleName("invalid");
 				addressLine1ErrorLabel.setVisible(true);
 				addressLine1ErrorLabel
-						.setText(" Please enter the address Line 1 in correct format ");
+						.setText(" Please enter the address line 1 in correct format ");
 				addressLine1ErrorLabel
 						.addStyleName("responselabelerrorforbeneficiarypage");
 			} else {
@@ -909,7 +911,7 @@ public class BeneficiaryDetailsView extends Composite implements Display {
 
 		}
 
-		if (id.equals("addressLine2")) {
+		/*if (id.equals("addressLine2")) {
 
 			if (isNull) {
 				addressLine2TextBox.addStyleName("invalid");
@@ -922,7 +924,7 @@ public class BeneficiaryDetailsView extends Composite implements Display {
 				addressLine2TextBox.addStyleName("invalid");
 				addressLine2ErrorLabel.setVisible(true);
 				addressLine2ErrorLabel
-						.setText(" Please enter the address line 2in correct format ");
+						.setText(" Please enter the address line 2 in correct format ");
 				addressLine2ErrorLabel
 						.addStyleName("responselabelerrorforbeneficiarypage");
 			} else {
@@ -931,7 +933,7 @@ public class BeneficiaryDetailsView extends Composite implements Display {
 				addressLine2ErrorLabel.setVisible(false);
 			}
 
-		}
+		}*/
 
 		if (id.equals("city")) {
 
@@ -1163,7 +1165,7 @@ public class BeneficiaryDetailsView extends Composite implements Display {
 				ifscTextBox.addStyleName("invalid");
 				ifscErrorLabel.setVisible(true);
 				ifscErrorLabel
-						.setText(" Please enter the IFSC code correct format ");
+						.setText(" Please enter the ifsc code correct format ");
 				ifscErrorLabel.addStyleName("responselabelerrorforbeneficiary");
 
 			} else {
