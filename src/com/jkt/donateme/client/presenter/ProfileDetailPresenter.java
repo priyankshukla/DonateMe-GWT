@@ -192,6 +192,7 @@ public class ProfileDetailPresenter extends
 				.addFocusHandler(focusHandler);
 		((FocusWidget) display.getProfileSummaryTextArea())
 				.addFocusHandler(focusHandlerTextArea);
+		date.setDate(date.getDate() -1);
 
 	}
 
@@ -272,7 +273,7 @@ public class ProfileDetailPresenter extends
 	@SuppressWarnings("deprecation")
 	public void doValidation(String[] id) {
 
-		date.setDate(date.getDate() -1);
+		
 
 		profileDetails = new ProfileDetailsFields();
 

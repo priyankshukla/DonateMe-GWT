@@ -238,8 +238,10 @@ public class SignUpView extends Composite implements Display {
 		genderRadioPanel = new HorizontalPanel();
 		genderRadioPanel.addStyleName("styleradiopanel");
 		mRadioButton = new RadioButton("Gender", "  Male");
+		mRadioButton.addStyleName("fontRadioSelect");
 		genderRadioPanel.add(mRadioButton);
 		fmRadioButton = new RadioButton("Gender", "  Female");
+		fmRadioButton.addStyleName("fontRadioSelect");
 		genderRadioPanel.add(fmRadioButton);
 		genderPanel.add(genderRadioPanel);
 		signUpFieldsPanel.add(genderPanel);
@@ -409,7 +411,7 @@ public class SignUpView extends Composite implements Display {
 				lastNameTextBox.addStyleName("invalid");
 				lastNameErrorLabel.setVisible(true);
 				lastNameErrorLabel
-						.setText(" Please enter the Last name in correct format ");
+						.setText(" Please enter the last name in correct format ");
 				lastNameErrorLabel.addStyleName("responselabelerror");
 
 			} else {
@@ -479,7 +481,7 @@ public class SignUpView extends Composite implements Display {
 				passwordTextBox.addStyleName("invalid");
 				confirmPasswordTextBox.addStyleName("invalid");
 				passwordErrorLabel.setVisible(true);
-				passwordErrorLabel.setText("Password is too Long");
+				passwordErrorLabel.setText("Password is too long");
 				passwordErrorLabel.addStyleName("responselabelerror");
 
 			} else {
