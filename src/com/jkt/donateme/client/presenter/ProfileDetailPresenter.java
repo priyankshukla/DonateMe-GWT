@@ -348,7 +348,7 @@ public class ProfileDetailPresenter extends
 					isInValid = false;
 					display.setStatus(valueHolder, isNull, isInValid);
 
-				} else if (validemail.stringValidate(reasonsforRaisingFunds) == false) {
+				} else if (validemail.reasonValidate(reasonsforRaisingFunds) == false) {
 					isInValid = true;
 					isNull = false;
 					display.setStatus(valueHolder, isNull, isInValid);
