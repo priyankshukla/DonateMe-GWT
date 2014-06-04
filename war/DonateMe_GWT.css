@@ -1346,7 +1346,7 @@ a:focus{outline:none;}
 .col-left{ float:left;width:700px !important; margin-left:-145px; }
 .col-right{ width:220px; float:right; padding-top:80px;}
 .content{ width:950px; margin-bottom:40px;}
-.box{ width:670px; background:#e5eef3 url(./images/wrap-bg.jpg) top repeat-x; /* height:600px;  */margin-top:95px; border-radius:10px;-moz-border-radius:10px;-webkit-border-radius:10px;box-shadow: 1px 1px 10px 3px #e0e2e1;padding:40px 0px 25px 30px;}
+.box{ width:670px; background:#e5eef3 url(./images/wrap-bg.jpg) top repeat-x; /* height:600px;  */ border-radius:10px;-moz-border-radius:10px;-webkit-border-radius:10px;box-shadow: 1px 1px 10px 3px #e0e2e1;padding:40px 0px 25px 30px;margin:0px auto;margin-top:100px;}
 .steps ul{  margin:0px; list-style:none; padding-bottom:20px;}
 .steps ul li{ padding:0px; margin:0px; list-style:none; display:inline-block;}
 .steps ul li a{ padding:0px; margin:0px 10px; font:normal 20px MyriadProRegular; color:#000;}
@@ -1737,7 +1737,7 @@ height: 35px !important;
 .howitworkpagetaglabel{
 	font: normal 30px MyriadProRegular bold;
 	width:331px;
-	margin-top:-100px;
+	margin-top:-112px;
 	margin-left:-20px ;
 	
 }
@@ -1910,6 +1910,35 @@ margin-top: 175px;
 	
 	font-size: 15px;
 	
+}
+
+.donateMeStyle{
+	font: bold 30px lehri;
+color: #e95325;
+margin-top: 25px;
+margin-left: 81px;
+}
+.styletopbuttonspanel{
+	margin-bottom:15px;
+}
+.pageLinksStyle{
+	margin-top: 62px;
+margin-left: 84px;
+	
+}
+.signInStyle{
+	margin-left: 7px;
+	margin-right: 7px;
+}
+.headerrightpanelstyle{
+	margin-left: 378px;
+}
+.advancedSearchstyle{
+	margin-top: 2px;
+	font:  9px lehri;
+}
+searchStyle{
+	margin-top: 17px;
 }
 }
 }

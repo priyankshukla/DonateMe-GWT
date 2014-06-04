@@ -152,7 +152,8 @@ public class ContactUsView extends Composite implements Display {
 		contactUsPanel.addStyleName("stylehorizontalpanel");
 		signUpFieldsPanel.add(contactUsPanel);
 		contactUsLabel = new Label("Contact us");
-		contactUsLabel.addStyleName("contactuslabel");
+		/*contactUsLabel.addStyleName("contactuslabel");*/
+		contactUsLabel.addStyleName("howitworkpagetaglabel");
 		contactUsPanel.add(contactUsLabel);
 		
 		feedbackTextPanel = new HorizontalPanel();
