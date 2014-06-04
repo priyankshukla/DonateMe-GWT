@@ -6,8 +6,10 @@ import net.customware.gwt.presenter.client.EventBus;
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.jkt.donateme.client.presenter.ContactUsPresenter;
+import com.jkt.donateme.client.presenter.HomePagePresenter;
 import com.jkt.donateme.client.presenter.SignUpPresenter;
 import com.jkt.donateme.client.view.ContactUsView;
+import com.jkt.donateme.client.view.HomePageView;
 import com.jkt.donateme.client.view.SignUpView;
 
 
@@ -25,8 +27,10 @@ public class DonateMe_GWT implements EntryPoint {
 
 		EventBus eventBus = new DefaultEventBus();
 
-		SignUpView display = new SignUpView();
-		SignUpPresenter presenter = new SignUpPresenter(display, eventBus);
+		HomePageView display = new HomePageView();
+		HomePagePresenter presenter = new HomePagePresenter(display, eventBus);
+		/*SignUpView display = new SignUpView();
+		SignUpPresenter presenter = new SignUpPresenter(display, eventBus);*/
 		/*ContactUsView display = new ContactUsView();
 		ContactUsPresenter presenter = new ContactUsPresenter(display, eventBus);*/
 		
@@ -42,7 +46,8 @@ public class DonateMe_GWT implements EntryPoint {
 		//AboutUsPresenter presenter = new AboutUsPresenter(display, eventBus);
 		presenter.bind();
 
-		RootPanel.get("top").add(presenter.getDisplay().asWidget());
+		/*RootPanel.get("top").add(presenter.getDisplay().asWidget());*/
 
+		RootPanel.get("Home").add(presenter.getDisplay().asWidget());
 	}
 }
